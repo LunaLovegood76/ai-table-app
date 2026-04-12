@@ -1,4 +1,4 @@
-z/**
+/**
  * 钉钉 AI 表格学习产品 — 主应用逻辑
  * 包含路由、状态管理、UI 渲染、游戏化系统
  */
@@ -339,9 +339,7 @@ function renderLessonStep() {
 }
 
 function renderKnowledgeCard(card) {
-  let html = `<div class="knowledge-card">`;
-  html += `<div class="card-mascot"><img src="assets/kawaii/table-buddy-thinking.svg" alt="思考中" class="card-mascot-img"></div>`;
-  html += `<h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
+  let html = `<div class="knowledge-card"><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
     html += `<table class="comparison-table">
@@ -795,10 +793,9 @@ function showFeedback(isCorrect, explanation) {
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
-  const feedbackMascot = isCorrect ? 'assets/kawaii/table-buddy-celebrate.svg' : 'assets/kawaii/table-buddy-sad.svg';
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <img src="${feedbackMascot}" alt="${isCorrect ? '庆祝' : '加油'}" class="feedback-mascot">
+      <span class="feedback-icon"><i data-lucide="${isCorrect ? 'party-popper' : 'refresh-cw'}"></i></span>
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
