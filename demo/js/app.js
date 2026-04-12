@@ -339,7 +339,9 @@ function renderLessonStep() {
 }
 
 function renderKnowledgeCard(card) {
-  let html = `<div class="knowledge-card"><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
+  let html = `<div class="knowledge-card">`;
+  html += `<div class="card-mascot"><img src="assets/kawaii/table-buddy-thinking.svg" alt="思考中" class="card-mascot-img"></div>`;
+  html += `<h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
     html += `<table class="comparison-table">
@@ -793,9 +795,10 @@ function showFeedback(isCorrect, explanation) {
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
+  const feedbackMascot = isCorrect ? 'assets/kawaii/table-buddy-celebrate.svg' : 'assets/kawaii/table-buddy-sad.svg';
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <span class="feedback-icon"><i data-lucide="${isCorrect ? 'party-popper' : 'refresh-cw'}"></i></span>
+      <img src="${feedbackMascot}" alt="${isCorrect ? '庆祝' : '加油'}" class="feedback-mascot">
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
@@ -875,8 +878,10 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
   app.innerHTML = `
     <div class="main-content" style="padding-top:100px">
       <div class="lesson-complete">
-        <div class="complete-icon"><img src="assets/kawaii/table-buddy-celebrate.svg" alt="庆祝" class="complete-mascot-img"></div>
-        <h2>${completeTitle}</h2>        <div class="complete-stats">
+        <div class="complete-icon"><i data-lucide="party-popper"></i></div>
+        <h2>课程完成！</h2>
+        <p class="complete-subtitle">${lesson.title}</p>
+        <div class="complete-stats">
           <div class="complete-stat">
             <span class="stat-number xp-earned">+${xpEarned}</span>
             <span class="stat-label">经验值</span>
