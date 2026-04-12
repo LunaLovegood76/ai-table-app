@@ -1,4 +1,4 @@
-/**
+z/**
  * 钉钉 AI 表格学习产品 — 主应用逻辑
  * 包含路由、状态管理、UI 渲染、游戏化系统
  */
@@ -291,7 +291,7 @@ function startLesson(lessonId, isReview) {
 
 function renderLessonStep() {
   const app = document.getElementById('app');
-  const { lesson, currentStep, totalSteps, isReview } = lessonState;
+  const { lesson, currentStep, totalSteps } = lessonState;
   const progress = ((currentStep) / totalSteps) * 100;
 
   const isCard = currentStep < lesson.cards.length;
@@ -313,9 +313,8 @@ function renderLessonStep() {
       <div style="display:flex;align-items:center;gap:16px;flex:1;padding:0 20px">
         <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
         <div class="progress-bar-container">
-          <div class="progress-bar-fill ${isReview ? 'review-fill' : ''}" style="width:${progress}%"></div>
+          <div class="progress-bar-fill" style="width:${progress}%"></div>
         </div>
-        ${isReview ? '<span class="review-badge">复习模式</span>' : ''}
       </div>
       <div class="top-bar-stats" style="visibility:hidden">.</div>
     </div>
@@ -828,35 +827,30 @@ function nextStep() {
 }
 
 function completeLesson() {
-  const { lesson, correctCount, totalQuestions, startTime, isReview } = lessonState;
+  const { lesson, correctCount, totalQuestions, startTime } = lessonState;
   const accuracy = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 100;
   const isPerfect = accuracy === 100;
   const timeSpent = Math.round((Date.now() - startTime) / 1000);
   const isSpeed = timeSpent < 60;
 
-  let xpEarned = 0;
+  let xpEarned = lesson.xpReward || 10;
+  if (isPerfect) xpEarned += 5;
 
-  if (!isReview) {
-    // 首次学习才给 XP
-    xpEarned = lesson.xpReward || 10;
-    if (isPerfect) xpEarned += 5;
-
-    if (!appState.completedLessons.includes(lesson.id)) {
-      appState.completedLessons.push(lesson.id);
-      appState.totalXP += xpEarned;
-    }
-
-    if (isPerfect && (!appState.perfectLessons || !appState.perfectLessons.includes(lesson.id))) {
-      if (!appState.perfectLessons) appState.perfectLessons = [];
-      appState.perfectLessons.push(lesson.id);
-    }
-
-    if (isSpeed) appState.speedComplete = true;
+  if (!appState.completedLessons.includes(lesson.id)) {
+    appState.completedLessons.push(lesson.id);
+    appState.totalXP += xpEarned;
   }
+
+  if (isPerfect && (!appState.perfectLessons || !appState.perfectLessons.includes(lesson.id))) {
+    if (!appState.perfectLessons) appState.perfectLessons = [];
+    appState.perfectLessons.push(lesson.id);
+  }
+
+  if (isSpeed) appState.speedComplete = true;
 
   updateStreak();
   checkAndUnlockLevels();
-  const newBadges = isReview ? [] : checkNewBadges();
+  const newBadges = checkNewBadges();
   saveState(appState);
 
   showConfetti();
@@ -865,8 +859,6 @@ function completeLesson() {
 
 function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
   const app = document.getElementById('app');
-  const isReview = lessonState.isReview;
-
   let badgesHtml = '';
   if (newBadges.length > 0) {
     badgesHtml = `<div class="complete-badges">`;
@@ -880,24 +872,15 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
     badgesHtml += `</div>`;
   }
 
-  const completeTitle = isReview ? '复习完成！' : '课程完成！';
-  const completeIcon = isReview ? 'book-check' : 'party-popper';
-  const buttonText = isReview ? '返回课程列表' : '继续学习';
-  const buttonAction = isReview ? "navigateTo('path')" : 'navigateToNextLesson()';
-
   app.innerHTML = `
     <div class="main-content" style="padding-top:100px">
-      <div class="lesson-complete ${isReview ? 'review-complete' : ''}">
-        <div class="complete-icon"><i data-lucide="${completeIcon}"></i></div>
-        <h2>${completeTitle}</h2>
-        <p class="complete-subtitle">${lesson.title}</p>
-        ${isReview ? '<p class="review-hint">复习模式不重复获得经验值</p>' : ''}
-        <div class="complete-stats">
-          ${!isReview ? `
+      <div class="lesson-complete">
+        <div class="complete-icon"><img src="assets/kawaii/table-buddy-celebrate.svg" alt="庆祝" class="complete-mascot-img"></div>
+        <h2>${completeTitle}</h2>        <div class="complete-stats">
           <div class="complete-stat">
             <span class="stat-number xp-earned">+${xpEarned}</span>
             <span class="stat-label">经验值</span>
-          </div>` : ''}
+          </div>
           <div class="complete-stat">
             <span class="stat-number accuracy-stat">${accuracy}%</span>
             <span class="stat-label">正确率</span>
@@ -908,8 +891,8 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
           </div>
         </div>
         ${badgesHtml}
-        <button class="action-btn btn-primary" onclick="${buttonAction}" style="margin-top:16px">
-          ${buttonText}
+        <button class="action-btn btn-primary" onclick="navigateToNextLesson()" style="margin-top:16px">
+          继续学习
         </button>
       </div>
     </div>`;
@@ -921,73 +904,6 @@ function navigateToNextLesson() {
 }
 
 function exitLesson() {
-  // 如果是复习模式，直接退出不弹浮层
-  if (lessonState.isReview) {
-    doExitLesson();
-    return;
-  }
-  // 如果已经在最后一步（完成页），直接退出
-  if (lessonState.currentStep >= lessonState.totalSteps) {
-    doExitLesson();
-    return;
-  }
-  // 弹出挽留浮层
-  showExitConfirm();
-}
-
-function showExitConfirm() {
-  // 移除已有的反馈条
-  const existingFeedback = document.querySelector('.feedback-bar');
-  if (existingFeedback) existingFeedback.remove();
-
-  const overlay = document.createElement('div');
-  overlay.className = 'exit-overlay';
-  overlay.id = 'exit-confirm-overlay';
-  overlay.onclick = (e) => { if (e.target === overlay) closeExitConfirm(); };
-
-  const sheet = document.createElement('div');
-  sheet.className = 'exit-sheet';
-  sheet.innerHTML = `
-    <div class="exit-sheet-handle"></div>
-    <div class="exit-sheet-emoji">😢</div>
-    <div class="exit-sheet-title">别走，只差几分钟就能完成这个单元了！</div>
-    <div class="exit-sheet-progress">
-      <span>当前进度：${lessonState.currentStep} / ${lessonState.totalSteps}</span>
-      <div class="exit-progress-bar">
-        <div class="exit-progress-fill" style="width:${(lessonState.currentStep / lessonState.totalSteps) * 100}%"></div>
-      </div>
-    </div>
-    <div class="exit-sheet-buttons">
-      <button class="action-btn btn-primary exit-btn-continue" onclick="closeExitConfirm()">继续努力</button>
-      <button class="action-btn exit-btn-quit" onclick="doExitLesson()">退出</button>
-    </div>
-  `;
-
-  overlay.appendChild(sheet);
-  document.body.appendChild(overlay);
-
-  // 动画：延迟一帧后添加 show 类
-  requestAnimationFrame(() => {
-    overlay.classList.add('show');
-    sheet.classList.add('show');
-  });
-}
-
-function closeExitConfirm() {
-  const overlay = document.getElementById('exit-confirm-overlay');
-  if (overlay) {
-    const sheet = overlay.querySelector('.exit-sheet');
-    overlay.classList.remove('show');
-    if (sheet) sheet.classList.remove('show');
-    setTimeout(() => overlay.remove(), 300);
-  }
-}
-
-function doExitLesson() {
-  // 关闭挽留浮层
-  const overlay = document.getElementById('exit-confirm-overlay');
-  if (overlay) overlay.remove();
-  // 移除反馈条
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
   currentPage = 'path';
