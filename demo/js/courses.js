@@ -3,7 +3,7 @@
  * L1 入门篇 8 课 + L2-L5 级别引用
  */
 
-const COURSES = {
+var COURSES = {
   levels: [
     {
       id: 'L1',
@@ -414,7 +414,7 @@ const COURSES = {
       color: '#FF9600',
       icon: 'palette',
       unlocked: false,
-      lessons: L3_LESSONS
+      lessons: l3Nodes
     },
     {
       id: 'L4',
@@ -423,7 +423,7 @@ const COURSES = {
       color: '#FF4B4B',
       icon: 'settings',
       unlocked: false,
-      lessons: L4_LESSONS
+      lessons: l4Nodes
     },
     {
       id: 'L5',
@@ -432,7 +432,7 @@ const COURSES = {
       color: '#A560E8',
       icon: 'building',
       unlocked: false,
-      lessons: L5_LESSONS
+      lessons: l5Nodes
     }
   ]
 };

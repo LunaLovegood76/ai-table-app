@@ -3,7 +3,7 @@
  * L4 高级篇 10 课（含毕业挑战）
  */
 
-const l4Nodes = [
+var l4Nodes = [
   { id: "L4-1", title: "自动化是什么", icon: "zap", xpReward: 25,
     cards: [
       { type: "knowledge", title: "自动化工作流", content: "<strong>自动化</strong>可以让 AI 表格在满足条件时自动执行操作。\n\n<strong>核心逻辑：</strong>当 <strong>触发条件</strong> 满足时 \u2192 自动执行 <strong>动作</strong>\n\n<strong>常见触发条件：</strong>\n\u2022 新增记录时\n\u2022 记录更新时\n\u2022 定时触发（每天/每周/每月）\n\u2022 按钮点击时\n\n<strong>常见动作：</strong>\n\u2022 发送消息通知\n\u2022 创建待办/日程\n\u2022 发起审批\n\u2022 更新记录\n\u2022 调用 Webhook", highlight: "触发条件 + 动作 = 自动化工作流" },
