@@ -1102,6 +1102,7 @@ function showModal(title, message) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="modal-content">
+      <button class="modal-close-btn" onclick="this.closest('.modal-overlay').remove()">&times;</button>
       <h3>${title}</h3>
       <p>${message}</p>
       <button class="action-btn btn-primary" onclick="this.closest('.modal-overlay').remove()">知道了</button>
@@ -1135,6 +1136,7 @@ function showLockedLessonTooltip(lessonId) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="locked-tooltip">
+      <button class="modal-close-btn" onclick="this.closest('.locked-tooltip-overlay').remove()">&times;</button>
       <div class="tooltip-lock"><i data-lucide="lock"></i></div>
       <div class="tooltip-title">${lessonData.title}</div>
       ${briefContent ? '<div class="tooltip-desc">' + briefContent + '</div>' : ''}
