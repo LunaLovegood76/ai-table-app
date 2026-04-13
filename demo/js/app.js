@@ -305,6 +305,47 @@ function renderPathPage(container) {
 
   container.innerHTML = html;
 
+  // 吸顶 Level 条
+  let stickyBar = document.getElementById('sticky-level-bar');
+  if (!stickyBar) {
+    stickyBar = document.createElement('div');
+    stickyBar.id = 'sticky-level-bar';
+    stickyBar.className = 'sticky-level-bar';
+    document.body.appendChild(stickyBar);
+  }
+
+  const levelSections = container.querySelectorAll('.level-section');
+  const levelHeaders = container.querySelectorAll('.level-header');
+
+  const stickyObserver = new IntersectionObserver((entries) => {
+    let currentVisible = null;
+    levelSections.forEach((section, idx) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < 80 && rect.bottom > 80) {
+        currentVisible = idx;
+      }
+    });
+
+    if (currentVisible !== null) {
+      const header = levelHeaders[currentVisible];
+      const bg = header.style.background;
+      const info = header.querySelector('.level-info');
+      const progress = header.querySelector('.level-progress');
+      stickyBar.style.background = bg;
+      stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
+        '<span class="level-progress">' + progress.textContent + '</span>';
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
+  }, { threshold: [0, 0.1, 0.5, 1] });
+
+  levelSections.forEach(section => stickyObserver.observe(section));
+
+  // 也用 scroll 事件作为补充
+  window.removeEventListener('scroll', handleStickyScroll);
+  window.addEventListener('scroll', handleStickyScroll);
+
   // 回到顶部按钮
   let backToTopBtn = document.getElementById('back-to-top-btn');
   if (!backToTopBtn) {
@@ -329,6 +370,34 @@ function handleBackToTopScroll() {
     btn.classList.remove('visible');
   }
   refreshIcons();
+}
+
+function handleStickyScroll() {
+  const stickyBar = document.getElementById('sticky-level-bar');
+  if (!stickyBar) return;
+  const sections = document.querySelectorAll('.level-section');
+  const headers = document.querySelectorAll('.level-header');
+  let currentVisible = null;
+
+  sections.forEach((section, idx) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < 80 && rect.bottom > 80) {
+      currentVisible = idx;
+    }
+  });
+
+  if (currentVisible !== null && headers[currentVisible]) {
+    const header = headers[currentVisible];
+    const bg = header.style.background;
+    const info = header.querySelector('.level-info');
+    const progress = header.querySelector('.level-progress');
+    stickyBar.style.background = bg;
+    stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
+      '<span class="level-progress">' + progress.textContent + '</span>';
+    stickyBar.classList.add('visible');
+  } else {
+    stickyBar.classList.remove('visible');
+  }
 }
 
 /* ============ 学习页面 ============ */

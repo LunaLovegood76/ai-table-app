@@ -232,9 +232,6 @@ body {
   border-radius: var(--radius);
   color: var(--white);
   margin-bottom: 20px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 .level-icon {
@@ -2088,4 +2085,51 @@ body {
 
 .locked-tooltip {
   position: relative;
+}
+
+/* 吸顶 Level 条 */
+.sticky-level-bar {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
+  color: var(--white);
+  max-width: 640px;
+  margin: 0 auto;
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sticky-level-bar.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sticky-level-bar .level-info h3 {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sticky-level-bar .level-info p {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.sticky-level-bar .level-progress {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 800;
+  background: rgba(255,255,255,0.25);
+  padding: 3px 10px;
+  border-radius: 20px;
 }
