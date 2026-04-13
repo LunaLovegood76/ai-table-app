@@ -271,7 +271,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 20px 40px;
 }
 
 .lesson-row {
@@ -286,7 +286,6 @@ body {
 
 .level-scene-illustration {
   position: absolute;
-  top: -20px;
   pointer-events: auto;
   cursor: pointer;
 }
