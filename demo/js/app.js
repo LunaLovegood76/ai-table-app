@@ -202,11 +202,11 @@ function renderPathPage(container) {
   // 插画数据
   let sceneIlluIndex = 0;
   const levelIllustrations = {
-    'l1': 'assets/kawaii/level-l1-sprout.svg',
-    'l2': 'assets/kawaii/level-l2-wrench.svg',
-    'l3': 'assets/kawaii/level-l3-ai-bot.svg',
-    'l4': 'assets/kawaii/level-l4-lightning.svg',
-    'l5': 'assets/kawaii/level-l5-architect.svg'
+    'L1': 'assets/kawaii/level-l1-sprout.svg',
+    'L2': 'assets/kawaii/level-l2-wrench.svg',
+    'L3': 'assets/kawaii/level-l3-ai-bot.svg',
+    'L4': 'assets/kawaii/level-l4-lightning.svg',
+    'L5': 'assets/kawaii/level-l5-architect.svg'
   };
   const sceneIllustrations = [
     'assets/kawaii/savy-love.svg',
