@@ -286,7 +286,8 @@ body {
 
 .level-scene-illustration {
   position: absolute;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .level-scene-illustration.left {
