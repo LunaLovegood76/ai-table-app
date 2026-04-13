@@ -235,8 +235,7 @@ function renderPathPage(container) {
     html += `<div class="level-section">`;
     html += `
       <div class="level-header" style="background: ${level.color}">
-        <span class="level-icon"><i data-lucide="${level.icon}"></i></span>
-        <div class="level-info">
+        <div class="level-info" style="padding-left:4px">
           <h3>${level.title}</h3>
           <p>${level.subtitle} · ${totalCount} 课</p>
         </div>
@@ -305,6 +304,31 @@ function renderPathPage(container) {
   }
 
   container.innerHTML = html;
+
+  // 回到顶部按钮
+  let backToTopBtn = document.getElementById('back-to-top-btn');
+  if (!backToTopBtn) {
+    backToTopBtn = document.createElement('button');
+    backToTopBtn.id = 'back-to-top-btn';
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '<i data-lucide="arrow-up"></i>';
+    backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.appendChild(backToTopBtn);
+  }
+
+  window.removeEventListener('scroll', handleBackToTopScroll);
+  window.addEventListener('scroll', handleBackToTopScroll);
+}
+
+function handleBackToTopScroll() {
+  const btn = document.getElementById('back-to-top-btn');
+  if (!btn) return;
+  if (window.scrollY > window.innerHeight) {
+    btn.classList.add('visible');
+  } else {
+    btn.classList.remove('visible');
+  }
+  refreshIcons();
 }
 
 /* ============ 学习页面 ============ */
