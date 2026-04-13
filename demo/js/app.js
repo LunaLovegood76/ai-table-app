@@ -199,6 +199,7 @@ function navigateTo(page, scrollToLessonId) {
 
 /* ============ 课程路径页 ============ */
 function renderPathPage(container) {
+  let sceneIlluIndex = 0;
   let html = `
     <div class="path-header">
       <h2>钉钉 AI 表格学习之旅</h2>
@@ -235,7 +236,7 @@ function renderPathPage(container) {
         /* 竖线连接器已移除 */
       }
 
-      // 在第3个节点(i===2)旁边插入Level场景插画（参考多邻国）
+      // Level场景插画（第3个节点 i===2）
       const levelIllustrations = {
         'L1': 'assets/kawaii/level-l1-sprout.svg',
         'L2': 'assets/kawaii/level-l2-wrench.svg',
@@ -243,12 +244,43 @@ function renderPathPage(container) {
         'L4': 'assets/kawaii/level-l4-lightning.svg',
         'L5': 'assets/kawaii/level-l5-architect.svg'
       };
+
+      // 新增场景插画池
+      const sceneIllustrations = [
+        'assets/kawaii/savy-love.svg',
+        'assets/kawaii/savy-angry.svg',
+        'assets/kawaii/savy-gaze.svg',
+        'assets/kawaii/savy-yawn.svg',
+        'assets/kawaii/savy-wink.svg',
+        'assets/kawaii/savy-reading.svg',
+        'assets/kawaii/savy-trophy.svg',
+        'assets/kawaii/savy-rocket.svg',
+        'assets/kawaii/savy-chart.svg',
+        'assets/kawaii/savy-coffee.svg'
+      ];
+
+      // 判断当前节点是否需要插画
+      let showIllustration = false;
+      let illustrationSrc = '';
+      let illustrationSide = '';
+
       if (i === 2 && levelIllustrations[level.id]) {
-        const illuSrc = levelIllustrations[level.id];
-        const illuSide = offset >= 0 ? 'left' : 'right';
+        // Level插画：放在第3个节点(i=2)，插画放节点对侧
+        showIllustration = true;
+        illustrationSrc = levelIllustrations[level.id];
+        illustrationSide = offset >= 0 ? 'left' : 'right';
+      } else if (i >= 5 && (i - 5) % 4 === 0) {
+        // 场景插画：放在 i=5,9,13... 位置，插画放节点对侧
+        showIllustration = true;
+        illustrationSrc = sceneIllustrations[sceneIlluIndex % sceneIllustrations.length];
+        illustrationSide = offset >= 0 ? 'left' : 'right';
+        sceneIlluIndex++;
+      }
+
+      if (showIllustration) {
         html += `<div class="lesson-row illustration-row" style="transform: translateX(${offset}px)">
-          <div class="level-scene-illustration ${illuSide}">
-            <img src="${illuSrc}" alt="${level.title}" class="scene-illustration-img">
+          <div class="level-scene-illustration ${illustrationSide}">
+            <img src="${illustrationSrc}" alt="scene" class="scene-illustration-img">
           </div>
           <div style="display:flex;flex-direction:column;align-items:center">`;
       } else {
@@ -357,9 +389,7 @@ function renderLessonStep() {
 }
 
 function renderKnowledgeCard(card) {
-  let html = `<div class="knowledge-card">`;
-  html += `<div class="card-mascot"><img src="assets/kawaii/savy-thinking.svg" alt="思考中" class="card-mascot-img"></div>`;
-  html += `<h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
+  let html = `<div class="knowledge-card"><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
     html += `<table class="comparison-table">
@@ -815,7 +845,7 @@ function showFeedback(isCorrect, explanation) {
 
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <img src="${isCorrect ? 'assets/kawaii/savy-celebrate.svg' : 'assets/kawaii/savy-sad.svg'}" alt="${isCorrect ? '庆祝' : '加油'}" class="feedback-mascot">
+      <span class="feedback-icon"><i data-lucide="${isCorrect ? 'party-popper' : 'refresh-cw'}"></i></span>
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
@@ -895,7 +925,7 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
   app.innerHTML = `
     <div class="main-content" style="padding-top:100px">
       <div class="lesson-complete">
-        <div class="complete-icon"><img src="assets/kawaii/savy-celebrate.svg" alt="庆祝" class="complete-mascot-img"></div>
+        <div class="complete-icon"><i data-lucide="party-popper"></i></div>
         <h2>课程完成！</h2>
         <p class="complete-subtitle">${lesson.title}</p>
         <div class="complete-stats">

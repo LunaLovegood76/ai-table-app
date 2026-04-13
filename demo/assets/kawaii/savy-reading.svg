@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- 看书鸭鸭 — 坐着看书，眼镜低垂认真阅读 -->
+  <defs>
+    <linearGradient id="duckBodyRead" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 书本 -->
+  <rect x="35" y="82" width="70" height="50" rx="4" fill="#E3F2FD" stroke="#42A5F5" stroke-width="2"/>
+  <line x1="70" y1="82" x2="70" y2="132" stroke="#90CAF9" stroke-width="1.5"/>
+  <path d="M38 85 Q54 90 68 85" stroke="#90CAF9" stroke-width="1" fill="none"/>
+  <path d="M72 85 Q86 90 102 85" stroke="#90CAF9" stroke-width="1" fill="none"/>
+  <path d="M38 95 Q54 100 68 95" stroke="#BBDEFB" stroke-width="1" fill="none"/>
+  <path d="M72 95 Q86 100 102 95" stroke="#BBDEFB" stroke-width="1" fill="none"/>
+  <path d="M38 105 Q54 110 68 105" stroke="#BBDEFB" stroke-width="1" fill="none"/>
+  <path d="M72 105 Q86 110 102 105" stroke="#BBDEFB" stroke-width="1" fill="none"/>
+  <!-- 鸭鸭双手捧书 -->
+  <ellipse cx="34" cy="90" rx="9" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="106" cy="90" rx="9" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭身体（坐姿） -->
+  <ellipse cx="70" cy="78" rx="22" ry="14" fill="url(#duckBodyRead)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 鸭鸭头 -->
+  <circle cx="70" cy="42" r="26" fill="url(#duckBodyRead)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="70" cy="17" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="48" cy="48" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <circle cx="92" cy="48" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <!-- 眼镜（微低，认真看书） -->
+  <circle cx="58" cy="42" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="82" cy="42" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="68" y1="42" x2="72" y2="42" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="48" y1="42" x2="43" y2="40" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="92" y1="42" x2="97" y2="40" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛（低头看书，瞳孔偏下） -->
+  <circle cx="58" cy="43" r="3.8" fill="#1a1a2e"/>
+  <circle cx="82" cy="43" r="3.8" fill="#1a1a2e"/>
+  <circle cx="59.5" cy="42" r="1.5" fill="white"/>
+  <circle cx="83.5" cy="42" r="1.5" fill="white"/>
+  <!-- 鸭嘴 — 专注微抿 -->
+  <ellipse cx="70" cy="54" rx="9" ry="4.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <line x1="63" y1="54.5" x2="77" y2="54.5" stroke="#E07030" stroke-width="1"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M50 60 Q70 68 90 60" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="65" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="70" cy="65" r="1.5" fill="#A08030"/>
+  <!-- 知识光点 -->
+  <circle cx="18" cy="30" r="3" fill="#42A5F5">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-8;0,0" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="122" cy="25" r="2.5" fill="#FFC107" opacity="0.4"/>
+  <polygon points="12,55 14,49 16,55 10,52 18,52" fill="#42A5F5" opacity="0.35"/>
+  <!-- 灯泡（读书灵感） -->
+  <circle cx="115" cy="15" r="8" fill="#FFF9C4" stroke="#FFC107" stroke-width="1.5">
+    <animate attributeName="opacity" values="0.1;1;0.1" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="7;12;7" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <line x1="115" y1="24" x2="115" y2="28" stroke="#FFC107" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="108" y1="10" x2="104" y2="7" stroke="#FFC107" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="122" y1="10" x2="126" y2="7" stroke="#FFC107" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+</svg>

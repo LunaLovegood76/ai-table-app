@@ -6,10 +6,13 @@
       <stop offset="100%" stop-color="#FFD93D"/>
     </linearGradient>
   </defs>
-  <!-- 火箭尾焰 -->
+  <!-- 火箭尾焰（闪烁） -->
+  <g>
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="0.3s" repeatCount="indefinite"/>
   <path d="M47 145 Q58 125 54 112" stroke="#FF9800" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.7"/>
   <path d="M58 148 Q67 128 63 115" stroke="#FFC107" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
   <path d="M70 145 Q74 128 70 117" stroke="#FF5722" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+  </g>
   <!-- 火箭 -->
   <path d="M38 110 Q38 72 60 50 L64 50 Q86 72 86 110 Z" fill="#FF4B4B" stroke="#C62828" stroke-width="2.5"/>
   <path d="M45 107 Q45 78 60 55 L63 55 Q74 78 74 107" fill="#FF8A80" stroke="none"/>
@@ -51,14 +54,22 @@
   <path d="M80 44 L94 32" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
   <ellipse cx="96" cy="30" rx="5" ry="4" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
   <!-- 闪电装饰 -->
-  <polygon points="112,40 116,53 112,53 118,67 108,53 112,53" fill="#FFC107" stroke="#FF9800" stroke-width="1"/>
-  <polygon points="15,55 18,63 15,63 20,73 12,63 15,63" fill="#FFC107" stroke="#FF9800" stroke-width="0.8" opacity="0.7"/>
+  <polygon points="112,40 116,53 112,53 118,67 108,53 112,53" fill="#FFC107" stroke="#FF9800" stroke-width="1">
+    <animate attributeName="opacity" values="1;0.2;1" dur="0.6s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="15,55 18,63 15,63 20,73 12,63 15,63" fill="#FFC107" stroke="#FF9800" stroke-width="0.8">
+    <animate attributeName="opacity" values="0.7;0;0.7" dur="0.8s" repeatCount="indefinite"/>
+  </polygon>
   <!-- 速度线 -->
   <line x1="5" y1="70" x2="18" y2="70" stroke="#FF4B4B" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
   <line x1="2" y1="80" x2="12" y2="80" stroke="#FF4B4B" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
   <line x1="115" y1="75" x2="130" y2="75" stroke="#FF4B4B" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
   <line x1="120" y1="85" x2="135" y2="85" stroke="#FF4B4B" stroke-width="1.5" opacity="0.3" stroke-linecap="round"/>
   <!-- 小星星 -->
-  <polygon points="125,18 127,13 129,18 124,15 130,15" fill="#FFC107" opacity="0.6"/>
-  <polygon points="8,30 10,25 12,30 8,28 12,28" fill="#FFC107" opacity="0.5"/>
+  <polygon points="125,18 127,13 129,18 124,15 130,15" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="8,30 10,25 12,30 8,28 12,28" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+  </polygon>
 </svg>

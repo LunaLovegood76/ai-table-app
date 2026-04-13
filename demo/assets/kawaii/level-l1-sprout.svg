@@ -47,9 +47,18 @@
   <circle cx="70" cy="63" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
   <circle cx="70" cy="63" r="1.5" fill="#A08030"/>
   <!-- 头顶问号 -->
-  <text x="100" y="18" font-size="22" font-weight="800" fill="#58CC02" font-family="Nunito, sans-serif">?</text>
+  <text x="100" y="18" font-size="22" font-weight="800" fill="#58CC02" font-family="Nunito, sans-serif">?
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-8;0,0" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+  </text>
   <!-- 小星星装饰 -->
-  <polygon points="18,22 20,16 22,22 16,19 24,19" fill="#FFC107" opacity="0.6"/>
-  <polygon points="120,55 122,51 124,55 120,53 124,53" fill="#FFC107" opacity="0.5"/>
-  <polygon points="130,20 132,16 134,20 130,18 134,18" fill="#58CC02" opacity="0.4"/>
+  <polygon points="18,22 20,16 22,22 16,19 24,19" fill="#FFC107">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1.8s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="120,55 122,51 124,55 120,53 124,53" fill="#FFC107">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.2s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="130,20 132,16 134,20 130,18 134,18" fill="#58CC02">
+    <animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+  </polygon>
 </svg>

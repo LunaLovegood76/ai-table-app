@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- 喝咖啡鸭鸭 — 双手捧咖啡杯，眯眼享受，热气腾腾 -->
+  <defs>
+    <linearGradient id="duckBodyCoffee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 小脚 -->
+  <ellipse cx="57" cy="106" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="83" cy="106" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭身体 -->
+  <ellipse cx="70" cy="84" rx="24" ry="20" fill="url(#duckBodyCoffee)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 咖啡杯 -->
+  <rect x="52" y="68" width="36" height="28" rx="5" fill="#EFEBE9" stroke="#8D6E63" stroke-width="2"/>
+  <path d="M88 76 Q98 76 98 86 Q98 94 88 94" stroke="#8D6E63" stroke-width="2" fill="none"/>
+  <!-- 咖啡液面 -->
+  <ellipse cx="70" cy="74" rx="15" ry="4" fill="#6D4C41" opacity="0.6"/>
+  <!-- 爱心拉花 -->
+  <path d="M67 76 Q67 74 69 74 Q70 74 70 76 Q70 74 71 74 Q73 74 73 76 Q73 78 71 79 L70 80 L69 79 Q67 78 67 76Z" fill="#EFEBE9" opacity="0.7"/>
+  <!-- 热气 -->
+  <path d="M60 64 Q58 58 62 54" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-3,-14;0,0" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M70 62 Q68 56 72 52" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-16;0,0" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M80 64 Q78 58 82 54" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;3,-12;0,0" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <!-- 双手捧杯 -->
+  <ellipse cx="48" cy="80" rx="8" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="92" cy="80" rx="8" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭头 -->
+  <circle cx="70" cy="45" r="27" fill="url(#duckBodyCoffee)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="70" cy="19" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红（更红，享受状） -->
+  <circle cx="47" cy="52" r="10" fill="#FF8FAB" opacity="0.7"/>
+  <circle cx="93" cy="52" r="10" fill="#FF8FAB" opacity="0.7"/>
+  <!-- 眼镜 -->
+  <circle cx="58" cy="44" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="82" cy="44" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="68" y1="44" x2="72" y2="44" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="48" y1="44" x2="43" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="92" y1="44" x2="97" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛（眯眼享受） -->
+  <path d="M52 43 Q58 39 64 43" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M76 43 Q82 39 88 43" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 满足微笑 -->
+  <ellipse cx="70" cy="56" rx="9" ry="5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M63 56 Q70 61 77 56" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M48 62 Q70 70 92 62" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="67" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="70" cy="67" r="1.5" fill="#A08030"/>
+  <!-- 咖啡豆装饰 -->
+  <ellipse cx="18" cy="110" rx="5" ry="3.5" fill="#6D4C41" opacity="0.3" transform="rotate(30 18 110)"/>
+  <line x1="16" y1="109" x2="20" y2="111" stroke="#5D4037" stroke-width="0.8" opacity="0.3"/>
+  <ellipse cx="125" cy="105" rx="4" ry="3" fill="#6D4C41" opacity="0.25" transform="rotate(-20 125 105)"/>
+  <!-- 小星星 -->
+  <polygon points="15,30 17,24 19,30 13,27 21,27" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="125,30 127,26 129,30 125,28 129,28" fill="#8D6E63" opacity="0.3"/>
+</svg>

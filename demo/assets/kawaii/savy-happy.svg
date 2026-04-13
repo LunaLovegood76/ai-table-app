@@ -41,13 +41,25 @@
   <!-- 左手 — 自然下垂 -->
   <path d="M38 74 L26 82" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
   <ellipse cx="24" cy="84" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
-  <!-- 右手 — 挥手 -->
-  <path d="M82 72 L96 58" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
-  <ellipse cx="98" cy="56" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-10,98,56)"/>
+  <!-- 右手 — 挥手（摆动） -->
+  <g>
+    <path d="M82 72 L96 58" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="98" cy="56" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-10,98,56)"/>
+    <animateTransform attributeName="transform" type="rotate" values="-5 82 72;10 82 72;-5 82 72" dur="0.8s" repeatCount="indefinite"/>
+  </g>
   <!-- 挥手动态线 -->
-  <path d="M104 48 Q108 52 106 56" stroke="#FFC107" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
-  <path d="M108 50 Q112 54 110 58" stroke="#FFC107" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M104 48 Q108 52 106 56" stroke="#FFC107" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0;0.8;0" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <path d="M108 50 Q112 54 110 58" stroke="#FFC107" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <animate attributeName="opacity" values="0;0.6;0" dur="1.2s" repeatCount="indefinite"/>
+  </path>
+  <!-- 右手挥动 -->
   <!-- 小星星 -->
-  <polygon points="14,30 16,25 18,30 13,27 19,27" fill="#FFC107" opacity="0.5"/>
-  <polygon points="105,28 107,23 109,28 104,26 110,26" fill="#58CC02" opacity="0.4"/>
+  <polygon points="14,30 16,25 18,30 13,27 19,27" fill="#FFC107">
+    <animate attributeName="opacity" values="0.1;1;0.1" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="105,28 107,23 109,28 104,26 110,26" fill="#58CC02">
+    <animate attributeName="opacity" values="0.1;1;0.1" dur="2s" repeatCount="indefinite"/>
+  </polygon>
 </svg>

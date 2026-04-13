@@ -29,9 +29,15 @@
   <circle cx="70" cy="43" r="5" fill="#1a1a2e"/>
   <circle cx="52" cy="41" r="2" fill="white"/>
   <circle cx="72" cy="41" r="2" fill="white"/>
-  <!-- 泪珠 -->
-  <ellipse cx="44" cy="52" rx="2.5" ry="3.5" fill="#87CEEB" opacity="0.7"/>
-  <ellipse cx="76" cy="53" rx="2" ry="3" fill="#87CEEB" opacity="0.6"/>
+  <!-- 泪珠（滑落动画） -->
+  <ellipse cx="44" cy="52" rx="2.5" ry="3.5" fill="#87CEEB">
+    <animate attributeName="cy" values="52;65;52" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="76" cy="53" rx="2" ry="3" fill="#87CEEB">
+    <animate attributeName="cy" values="53;64;53" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.7;0.7;0" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
   <!-- 眉毛 — 八字眉（委屈） -->
   <path d="M42 36 Q46 33 54 35" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
   <path d="M66 35 Q74 33 78 36" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
@@ -47,12 +53,24 @@
   <ellipse cx="26" cy="92" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
   <path d="M81 76 L92 90" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
   <ellipse cx="94" cy="92" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
-  <!-- 小乌云装饰 -->
-  <ellipse cx="22" cy="18" rx="10" ry="6" fill="#B0BEC5" opacity="0.4"/>
-  <ellipse cx="30" cy="16" rx="7" ry="5" fill="#B0BEC5" opacity="0.35"/>
-  <ellipse cx="16" cy="16" rx="6" ry="4" fill="#B0BEC5" opacity="0.3"/>
-  <!-- 小雨滴 -->
-  <line x1="18" y1="25" x2="17" y2="30" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
-  <line x1="24" y1="26" x2="23" y2="31" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
-  <line x1="30" y1="24" x2="29" y2="29" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+  <!-- 小乌云装饰（飘动） -->
+  <g>
+    <ellipse cx="22" cy="18" rx="10" ry="6" fill="#B0BEC5" opacity="0.4"/>
+    <ellipse cx="30" cy="16" rx="7" ry="5" fill="#B0BEC5" opacity="0.35"/>
+    <ellipse cx="16" cy="16" rx="6" ry="4" fill="#B0BEC5" opacity="0.3"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;4,0;0,0" dur="3s" repeatCount="indefinite"/>
+  </g>
+  <!-- 小雨滴（飘落动画） -->
+  <line x1="18" y1="25" x2="17" y2="30" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0.6;0" dur="1.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-1,12;0,0" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <line x1="24" y1="26" x2="23" y2="31" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.5;0.5;0" dur="1.8s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,14;0,0" dur="1.8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="30" y1="24" x2="29" y2="29" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.4;0.4;0" dur="2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;1,10;0,0" dur="2s" repeatCount="indefinite"/>
+  </line>
 </svg>

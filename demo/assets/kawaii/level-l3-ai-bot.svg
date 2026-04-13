@@ -48,17 +48,33 @@
   <line x1="100" y1="75" x2="120" y2="40" stroke="#7B1FA2" stroke-width="4" stroke-linecap="round"/>
   <polygon points="120,40 125,32 115,32" fill="#FFC107" stroke="#FFA000" stroke-width="1"/>
   <!-- 魔法棒光点 -->
-  <circle cx="128" cy="28" r="3" fill="#FFC107" opacity="0.8"/>
-  <circle cx="132" cy="38" r="2" fill="#FF9600" opacity="0.6"/>
-  <circle cx="118" cy="24" r="2" fill="#FFC107" opacity="0.5"/>
-  <circle cx="112" cy="30" r="1.5" fill="#FFE082" opacity="0.7"/>
+  <circle cx="128" cy="28" r="3" fill="#FFC107">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="2;5;2" dur="0.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="132" cy="38" r="2" fill="#FF9600">
+    <animate attributeName="opacity" values="0;0.9;0" dur="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="1;4;1" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="118" cy="24" r="2" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-3,-5;0,0" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="30" r="1.5" fill="#FFE082">
+    <animate attributeName="opacity" values="0;0.8;0" dur="1.8s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-2,-4;0,0" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
   <!-- 小脚 -->
   <ellipse cx="57" cy="108" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
   <ellipse cx="83" cy="108" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
   <!-- AI 光点装饰 -->
   <circle cx="15" cy="40" r="3.5" fill="#FF9600" opacity="0.4"/>
   <circle cx="10" cy="65" r="2.5" fill="#FFC107" opacity="0.3"/>
-  <text x="8" y="55" font-size="10" font-weight="800" fill="#FF9600" opacity="0.5" font-family="Nunito, sans-serif">AI</text>
+  <text x="8" y="55" font-size="10" font-weight="800" fill="#FF9600" font-family="Nunito, sans-serif">AI
+    <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2s" repeatCount="indefinite"/>
+  </text>
   <!-- 小星星 -->
-  <polygon points="22,20 24,14 26,20 20,17 28,17" fill="#FF9600" opacity="0.5"/>
+  <polygon points="22,20 24,14 26,20 20,17 28,17" fill="#FF9600">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
 </svg>
