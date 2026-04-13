@@ -1123,8 +1123,8 @@ const DUCK_CHEER_QUOTES = [
 
 function showUnlockedIllustrationCheer() {
   const randomQuote = DUCK_CHEER_QUOTES[Math.floor(Math.random() * DUCK_CHEER_QUOTES.length)];
-  const message = randomQuote + '<br><br>🦆 你的前进路上，欢乐鸭鸭都会一直陪伴你 💛';
-  showModal('🦆 鸭鸭想对你说', message);
+  const message = randomQuote + '<br><br>你的前进路上，欢乐鸭鸭都会一直陪伴你 💛';
+  showModal('鸭鸭想对你说', message);
 }
 /* ============ Lucide 图标刷新 ============ */
 function refreshIcons() {
