@@ -199,7 +199,28 @@ function navigateTo(page, scrollToLessonId) {
 
 /* ============ 课程路径页 ============ */
 function renderPathPage(container) {
+  // 插画数据
   let sceneIlluIndex = 0;
+  const levelIllustrations = {
+    'l1': 'assets/kawaii/level-l1-sprout.svg',
+    'l2': 'assets/kawaii/level-l2-wrench.svg',
+    'l3': 'assets/kawaii/level-l3-ai-bot.svg',
+    'l4': 'assets/kawaii/level-l4-lightning.svg',
+    'l5': 'assets/kawaii/level-l5-architect.svg'
+  };
+  const sceneIllustrations = [
+    'assets/kawaii/savy-love.svg',
+    'assets/kawaii/savy-reading.svg',
+    'assets/kawaii/savy-coffee.svg',
+    'assets/kawaii/savy-trophy.svg',
+    'assets/kawaii/savy-rocket.svg',
+    'assets/kawaii/savy-chart.svg',
+    'assets/kawaii/savy-wink.svg',
+    'assets/kawaii/savy-yawn.svg',
+    'assets/kawaii/savy-gaze.svg',
+    'assets/kawaii/savy-angry.svg'
+  ];
+
   let html = `
     <div class="path-header">
       <h2>钉钉 AI 表格学习之旅</h2>
@@ -236,33 +257,10 @@ function renderPathPage(container) {
         /* 竖线连接器已移除 */
       }
 
-      // Level场景插画（第3个节点 i===2）
-      const levelIllustrations = {
-        'L1': 'assets/kawaii/level-l1-sprout.svg',
-        'L2': 'assets/kawaii/level-l2-wrench.svg',
-        'L3': 'assets/kawaii/level-l3-ai-bot.svg',
-        'L4': 'assets/kawaii/level-l4-lightning.svg',
-        'L5': 'assets/kawaii/level-l5-architect.svg'
-      };
-
-      // 新增场景插画池
-      const sceneIllustrations = [
-        'assets/kawaii/savy-love.svg',
-        'assets/kawaii/savy-angry.svg',
-        'assets/kawaii/savy-gaze.svg',
-        'assets/kawaii/savy-yawn.svg',
-        'assets/kawaii/savy-wink.svg',
-        'assets/kawaii/savy-reading.svg',
-        'assets/kawaii/savy-trophy.svg',
-        'assets/kawaii/savy-rocket.svg',
-        'assets/kawaii/savy-chart.svg',
-        'assets/kawaii/savy-coffee.svg'
-      ];
-
-      // 判断当前节点是否需要插画
+      // 插画逻辑
       let showIllustration = false;
       let illustrationSrc = '';
-      let illustrationSide = '';
+      let illustrationSide = 'left';
 
       if (i === 2 && levelIllustrations[level.id]) {
         showIllustration = true;
@@ -280,8 +278,8 @@ function renderPathPage(container) {
 
       if (showIllustration) {
         const lockedClass = isLevelUnlocked ? '' : ' illustration-locked';
-        const clickHandler = isLevelUnlocked ? '' : ' onclick="showLockedIllustrationHint()"';
-        const pointerStyle = isLevelUnlocked ? '' : 'cursor:pointer;';
+        const clickHandler = isLevelUnlocked ? ' onclick="showUnlockedIllustrationCheer()"' : ' onclick="showLockedIllustrationHint()"';
+        const pointerStyle = 'cursor:pointer;';
         html += `<div class="lesson-row illustration-row" style="transform: translateX(${offset}px)">
           <div class="level-scene-illustration ${illustrationSide}${lockedClass}"${clickHandler} style="${pointerStyle}">
             <img src="${illustrationSrc}" alt="scene" class="scene-illustration-img">
@@ -1090,18 +1088,44 @@ function showLockedIllustrationHint() {
   showModal('🔒 鸭鸭还在等你', '想解锁这个可爱的鸭鸭，就在学习路线上继续前进吧 💪');
 }
 
-function showStreakModal() {
-  showModal(`连续学习 ${appState.streak} 天`, `太棒了！保持每天学习的习惯，你的连续天数会越来越长！\n\n连续 3 天 → 三日连续徽章\n连续 7 天 → 一周达人徽章`);
-}
+const DUCK_CHEER_QUOTES = [
+  '🌟 "千里之行，始于足下。" —— 你已经迈出了最重要的一步！',
+  '🎬 "生活就像一盒巧克力，你永远不知道下一颗是什么味道。" —— 《阿甘正传》',
+  '📖 "不积跬步，无以至千里。" —— 每一次学习都在积累你的力量！',
+  '🌈 "只要你肯努力，全世界都会为你让路。"',
+  '🎯 "成功不是终点，失败也不是终结，唯有继续前行的勇气才最重要。" —— 丘吉尔',
+  '🚀 "To infinity and beyond!" —— 《玩具总动员》巴斯光年',
+  '💪 "你比你想象的更勇敢，比你看起来更强大。" —— 《小熊维尼》',
+  '🌻 "每一个优秀的人，都有一段沉默的时光。" —— 你正在默默变强！',
+  '⭐ "星光不问赶路人，时光不负有心人。" —— 你的努力终将闪耀！',
+  '🎵 "Let it go, let it go!" —— 放下焦虑，享受学习的快乐吧！',
+  '🏆 "我不是天生的赢家，但我可以成为不断进步的人。"',
+  '📚 "书山有路勤为径，学海无涯苦作舟。" —— 但有鸭鸭陪你就不苦啦！',
+  '🌸 "所有的努力都不会被辜负，时间会给你最好的答案。"',
+  '🎪 "After all, tomorrow is another day!" —— 《乱世佳人》斯嘉丽',
+  '🔥 "你今天的坚持，是明天的底气。" —— 继续加油！',
+  '🐣 "慢慢来，比较快。" —— 学习不急，扎实最重要！',
+  '🌊 "乘风破浪会有时，直挂云帆济沧海。" —— 李白也在为你加油！',
+  '💎 "每个人都是自己人生的主角。" —— 你的故事正在精彩上演！',
+  '🎭 "Do, or do not. There is no try." —— 《星球大战》尤达大师',
+  '🍀 "越努力，越幸运。" —— 你的好运正在路上！',
+  '🌙 "今天的你，比昨天的你更厉害了！" —— 这就是进步的意义',
+  '🎈 "人生没有白走的路，每一步都算数。"',
+  '🦋 "破茧成蝶需要时间，但你一定会飞起来的！"',
+  '🏔️ "山再高，往上攀，总能登顶；路再长，走下去，定能到达。"',
+  '🎸 "Yesterday is history, tomorrow is a mystery, but today is a gift." —— 《功夫熊猫》乌龟大师',
+  '🌞 "你的笑容就是最好的正能量，继续保持！"',
+  '🍎 "Stay hungry, stay foolish." —— 乔布斯说的，保持好奇心！',
+  '🎯 "不要因为走得太远，而忘记为什么出发。" —— 你的初心很棒！',
+  '🌺 "种一棵树最好的时间是十年前，其次是现在。" —— 你正在种下知识的种子！',
+  '🎪 "It always seems impossible until it is done." —— 曼德拉'
+];
 
-function resetProgress() {
-  if (confirm('确定要重置所有学习进度吗？此操作不可撤销。')) {
-    localStorage.removeItem('ai_table_learn_state');
-    appState = { ...DEFAULT_STATE };
-    navigateTo('path');
-  }
+function showUnlockedIllustrationCheer() {
+  const randomQuote = DUCK_CHEER_QUOTES[Math.floor(Math.random() * DUCK_CHEER_QUOTES.length)];
+  const message = randomQuote + '\n\n🦆 你的前进路上，欢乐鸭鸭都会一直陪伴你 💛';
+  showModal('🦆 鸭鸭想对你说', message);
 }
-
 /* ============ Lucide 图标刷新 ============ */
 function refreshIcons() {
   if (typeof lucide !== 'undefined') {
