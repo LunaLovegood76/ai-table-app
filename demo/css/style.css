@@ -238,6 +238,15 @@ body {
   font-size: 32px;
 }
 
+.level-illustration {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  padding: 4px;
+  flex-shrink: 0;
+}
+
 .level-info h3 {
   font-size: 16px;
   font-weight: 800;
@@ -269,6 +278,30 @@ body {
   display: flex;
   align-items: center;
   transition: var(--transition);
+}
+
+.illustration-row {
+  position: relative;
+}
+
+.level-scene-illustration {
+  position: absolute;
+  pointer-events: none;
+}
+
+.level-scene-illustration.left {
+  right: calc(100% - 60px);
+}
+
+.level-scene-illustration.right {
+  left: calc(100% - 60px);
+}
+
+.scene-illustration-img {
+  width: 180px;
+  height: 180px;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
 }
 
 .lesson-connector {

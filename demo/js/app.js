@@ -235,8 +235,26 @@ function renderPathPage(container) {
         /* 竖线连接器已移除 */
       }
 
-      html += `<div class="lesson-row" style="transform: translateX(${offset}px)">`;
-      html += `<div style="display:flex;flex-direction:column;align-items:center">`;
+      // 在第3个节点(i===2)旁边插入Level场景插画（参考多邻国）
+      const levelIllustrations = {
+        'L1': 'assets/kawaii/level-l1-sprout.svg',
+        'L2': 'assets/kawaii/level-l2-wrench.svg',
+        'L3': 'assets/kawaii/level-l3-ai-bot.svg',
+        'L4': 'assets/kawaii/level-l4-lightning.svg',
+        'L5': 'assets/kawaii/level-l5-architect.svg'
+      };
+      if (i === 2 && levelIllustrations[level.id]) {
+        const illuSrc = levelIllustrations[level.id];
+        const illuSide = offset >= 0 ? 'left' : 'right';
+        html += `<div class="lesson-row illustration-row" style="transform: translateX(${offset}px)">
+          <div class="level-scene-illustration ${illuSide}">
+            <img src="${illuSrc}" alt="${level.title}" class="scene-illustration-img">
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center">`;
+      } else {
+        html += `<div class="lesson-row" style="transform: translateX(${offset}px)">`;
+        html += `<div style="display:flex;flex-direction:column;align-items:center">`;
+      }
 
       if (status === 'completed') {
         html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
@@ -340,7 +358,7 @@ function renderLessonStep() {
 
 function renderKnowledgeCard(card) {
   let html = `<div class="knowledge-card">`;
-  html += `<div class="card-mascot"><img src="assets/kawaii/table-buddy-thinking.svg" alt="思考中" class="card-mascot-img"></div>`;
+  html += `<div class="card-mascot"><img src="assets/kawaii/savy-thinking.svg" alt="思考中" class="card-mascot-img"></div>`;
   html += `<h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
@@ -795,10 +813,9 @@ function showFeedback(isCorrect, explanation) {
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
-  const feedbackMascot = isCorrect ? 'assets/kawaii/table-buddy-celebrate.svg' : 'assets/kawaii/table-buddy-sad.svg';
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <img src="${feedbackMascot}" alt="${isCorrect ? '庆祝' : '加油'}" class="feedback-mascot">
+      <img src="${isCorrect ? 'assets/kawaii/savy-celebrate.svg' : 'assets/kawaii/savy-sad.svg'}" alt="${isCorrect ? '庆祝' : '加油'}" class="feedback-mascot">
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
@@ -878,7 +895,7 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
   app.innerHTML = `
     <div class="main-content" style="padding-top:100px">
       <div class="lesson-complete">
-        <div class="complete-icon"><img src="assets/kawaii/table-buddy-celebrate.svg" alt="庆祝" class="complete-mascot-img"></div>
+        <div class="complete-icon"><img src="assets/kawaii/savy-celebrate.svg" alt="庆祝" class="complete-mascot-img"></div>
         <h2>课程完成！</h2>
         <p class="complete-subtitle">${lesson.title}</p>
         <div class="complete-stats">

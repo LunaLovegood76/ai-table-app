@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Savy 表情预览</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Nunito', sans-serif; background: #FFFBEB; padding: 40px; min-height: 100vh; }
+    h1 { text-align: center; color: #333; margin-bottom: 8px; font-size: 28px; }
+    .subtitle { text-align: center; color: #888; margin-bottom: 12px; font-size: 14px; }
+    .design-note {
+      max-width: 700px; margin: 0 auto 40px; background: white; border-radius: 16px;
+      padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 13px; color: #666; line-height: 1.8;
+    }
+    .design-note h3 { color: #D4A017; font-size: 14px; margin-bottom: 8px; }
+    .design-note ul { padding-left: 18px; }
+    .design-note li { margin-bottom: 4px; }
+    .design-note code { background: #FFF3CD; padding: 1px 5px; border-radius: 4px; font-size: 12px; color: #856404; }
+
+    .grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 50px; }
+    .card {
+      background: white; border-radius: 20px; padding: 28px 24px 20px;
+      width: 240px; text-align: center;
+      box-shadow: 0 4px 0 #f0e6c8, 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card img { width: 140px; height: 140px; margin-bottom: 12px; }
+    .card h3 { font-size: 16px; color: #333; margin-bottom: 4px; }
+    .card .emotion-tag {
+      display: inline-block; padding: 3px 12px; border-radius: 20px;
+      color: white; font-size: 12px; font-weight: 700; margin-bottom: 10px;
+    }
+    .card .desc { font-size: 12px; color: #999; line-height: 1.6; }
+    .card .usage { font-size: 11px; color: #aaa; margin-top: 8px; font-style: italic; }
+
+    .ref-section { max-width: 900px; margin: 0 auto; }
+    .ref-title { text-align: center; font-size: 18px; font-weight: 800; color: #888; margin-bottom: 20px; }
+    .ref-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .ref-grid img {
+      width: 100px; height: 100px; border-radius: 12px; object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .ref-caption { text-align: center; font-size: 11px; color: #bbb; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>🐥 Savy 表情设计预览</h1>
+  <p class="subtitle">基于玻尿酸鸭设计规范，用于课程节点内表达情绪状态</p>
+
+  <div class="design-note">
+    <h3>📐 设计规范</h3>
+    <ul>
+      <li><strong>统一角色</strong>：玻尿酸鸭（Lalafanfan Duck）— 黄色圆头、粉色腮红、橙色鸭嘴、金色圆框眼镜、粉色项圈+金色铃铛</li>
+      <li><strong>表情差异</strong>：通过眼睛形态（眯眼/大眼/泪眼）、嘴巴形态（大笑/微笑/嘟嘴/抿嘴）、手臂动作（举手/挥手/垂下/托腮）、装饰元素（彩纸/星星/乌云/问号）来区分情绪</li>
+      <li><strong>参考原版</strong>：跳跃开心、困打哈欠、睁大眼睛、抱臂思考等经典玻尿酸鸭表情</li>
+      <li><strong>文件命名</strong>：<code>savy-{emotion}.svg</code>，尺寸 <code>120×120</code>（celebrate 为 <code>120×130</code>）</li>
+    </ul>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <span class="emotion-tag" style="background:#58CC02">🎉 Celebrate</span>
+      <br>
+      <img src="assets/kawaii/savy-celebrate.svg" alt="celebrate">
+      <h3>庆祝</h3>
+      <div class="desc">跳跃腾空 + 眯眼大笑 + 双手举起欢呼<br>周围撒花彩纸 + 小星星</div>
+      <div class="usage">用于：答对题目、完成课程、达成成就</div>
+    </div>
+    <div class="card">
+      <span class="emotion-tag" style="background:#1CB0F6">😊 Happy</span>
+      <br>
+      <img src="assets/kawaii/savy-happy.svg" alt="happy">
+      <h3>开心</h3>
+      <div class="desc">睁大亮晶晶眼睛 + 微笑鸭嘴<br>右手挥手打招呼 + 动态线</div>
+      <div class="usage">用于：欢迎页、正确反馈、鼓励提示</div>
+    </div>
+    <div class="card">
+      <span class="emotion-tag" style="background:#FF6B8A">😢 Sad</span>
+      <br>
+      <img src="assets/kawaii/savy-sad.svg" alt="sad">
+      <h3>伤心</h3>
+      <div class="desc">泪汪汪大眼 + 八字委屈眉 + 嘟嘴<br>双手垂下 + 头顶小乌云下雨</div>
+      <div class="usage">用于：答错题目、连续失败、超时未完成</div>
+    </div>
+    <div class="card">
+      <span class="emotion-tag" style="background:#FF9600">🤔 Thinking</span>
+      <br>
+      <img src="assets/kawaii/savy-thinking.svg" alt="thinking">
+      <h3>思考</h3>
+      <div class="desc">眼镜推到头顶 + 一眯一睁 + 抿嘴<br>右手托腮 + 思考泡泡问号 + 小齿轮</div>
+      <div class="usage">用于：等待作答、提示思考、加载中</div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px dashed #f0e6c8;margin:30px 0;">
+
+  <div class="ref-section">
+    <div class="ref-title">📷 原版玻尿酸鸭参考</div>
+    <div class="ref-grid">
+      <img src="../../玻尿酸鸭/56214F27-FDB9-4742-A361-5565B2F7E4B5.png" alt="跳跃">
+      <img src="../../玻尿酸鸭/3637B310-21CF-43C2-ADD4-FE19D41A16CC.png" alt="正面">
+      <img src="../../玻尿酸鸭/992EEC77-AD0C-4078-9015-A71E3A24AFEA.png" alt="打哈欠">
+      <img src="../../玻尿酸鸭/未命名.png" alt="抱臂">
+      <img src="../../玻尿酸鸭/E0C836D8-2905-4F76-B32B-0916192AFBFB.png" alt="生气">
+      <img src="../../玻尿酸鸭/ECEABDB1-85F4-4F57-8936-03704DD033B2.png" alt="眨眼">
+      <img src="../../玻尿酸鸭/D48B9E55-EF3F-4873-8E34-7F6916CDD1F5.png" alt="侧脸">
+      <img src="../../玻尿酸鸭/8E364979-5EC4-4C40-A1BB-477860758B12.png" alt="爱心眼">
+      <img src="../../玻尿酸鸭/1F6E7133-CF54-464A-9C87-D247A2A6720F.png" alt="微笑">
+    </div>
+    <div class="ref-caption">↑ 原版玻尿酸鸭表情参考，SVG 设计基于这些表情特征提取</div>
+  </div>
+</body>
+</html>

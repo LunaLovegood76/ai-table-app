@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- L3 AI智能助手 — 玻尿酸鸭戴魔法帽挥魔法棒 -->
+  <defs>
+    <linearGradient id="duckBody3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 魔法光圈底座 -->
+  <ellipse cx="70" cy="125" rx="45" ry="10" fill="#FFF3E0" stroke="#FF9600" stroke-width="1.5" opacity="0.5"/>
+  <!-- 鸭鸭身体 -->
+  <ellipse cx="70" cy="90" rx="24" ry="18" fill="url(#duckBody3)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 鸭鸭头 -->
+  <circle cx="70" cy="50" r="26" fill="url(#duckBody3)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="70" cy="25" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 魔法帽 -->
+  <path d="M44 42 L70 2 L96 42" fill="#7B1FA2" stroke="#4A148C" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="40" y="40" width="60" height="6" rx="3" fill="#7B1FA2" stroke="#4A148C" stroke-width="1.5"/>
+  <!-- 帽子上的星星 -->
+  <polygon points="70,14 73,22 81,22 75,27 77,35 70,31 63,35 65,27 59,22 67,22" fill="#FFC107"/>
+  <!-- 帽子上的月亮 -->
+  <path d="M82 18 Q88 12 84 8 Q92 10 88 18 Z" fill="#FFC107" opacity="0.7"/>
+  <!-- 腮红 -->
+  <circle cx="48" cy="56" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <circle cx="92" cy="56" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <!-- 眼镜 -->
+  <circle cx="60" cy="48" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="80" cy="48" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="70" y1="48" x2="70" y2="48" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="50" y1="48" x2="45" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="90" y1="48" x2="95" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛 — 灵动眨眼 -->
+  <circle cx="60" cy="47" r="4" fill="#1a1a2e"/>
+  <circle cx="80" cy="47" r="4" fill="#1a1a2e"/>
+  <circle cx="62" cy="45.5" r="1.5" fill="white"/>
+  <circle cx="82" cy="45.5" r="1.5" fill="white"/>
+  <!-- 鸭嘴 — 微笑 -->
+  <ellipse cx="70" cy="60" rx="10" ry="5.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M63 60 Q70 65 77 60" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M50 68 Q70 76 90 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="73" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="70" cy="73" r="1.5" fill="#A08030"/>
+  <!-- 左手 -->
+  <ellipse cx="40" cy="90" rx="8" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 右手拿魔法棒 -->
+  <line x1="100" y1="75" x2="120" y2="40" stroke="#7B1FA2" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="120,40 125,32 115,32" fill="#FFC107" stroke="#FFA000" stroke-width="1"/>
+  <!-- 魔法棒光点 -->
+  <circle cx="128" cy="28" r="3" fill="#FFC107" opacity="0.8"/>
+  <circle cx="132" cy="38" r="2" fill="#FF9600" opacity="0.6"/>
+  <circle cx="118" cy="24" r="2" fill="#FFC107" opacity="0.5"/>
+  <circle cx="112" cy="30" r="1.5" fill="#FFE082" opacity="0.7"/>
+  <!-- 小脚 -->
+  <ellipse cx="57" cy="108" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="83" cy="108" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- AI 光点装饰 -->
+  <circle cx="15" cy="40" r="3.5" fill="#FF9600" opacity="0.4"/>
+  <circle cx="10" cy="65" r="2.5" fill="#FFC107" opacity="0.3"/>
+  <text x="8" y="55" font-size="10" font-weight="800" fill="#FF9600" opacity="0.5" font-family="Nunito, sans-serif">AI</text>
+  <!-- 小星星 -->
+  <polygon points="22,20 24,14 26,20 20,17 28,17" fill="#FF9600" opacity="0.5"/>
+</svg>
