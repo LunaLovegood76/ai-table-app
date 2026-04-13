@@ -302,6 +302,20 @@ body {
   height: 180px;
   opacity: 0.85;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.08));
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.illustration-locked .scene-illustration-img {
+  filter: grayscale(100%) drop-shadow(0 2px 6px rgba(0,0,0,0.05));
+  opacity: 0.45;
+}
+
+.illustration-locked:hover .scene-illustration-img {
+  opacity: 0.55;
+}
+
+.illustration-locked {
+  pointer-events: auto;
 }
 
 .lesson-connector {

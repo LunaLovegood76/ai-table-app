@@ -265,21 +265,25 @@ function renderPathPage(container) {
       let illustrationSide = '';
 
       if (i === 2 && levelIllustrations[level.id]) {
-        // Level插画：放在第3个节点(i=2)，插画放节点对侧
         showIllustration = true;
         illustrationSrc = levelIllustrations[level.id];
         illustrationSide = offset >= 0 ? 'left' : 'right';
       } else if (i >= 5 && (i - 5) % 4 === 0) {
-        // 场景插画：放在 i=5,9,13... 位置，插画放节点对侧
         showIllustration = true;
         illustrationSrc = sceneIllustrations[sceneIlluIndex % sceneIllustrations.length];
         illustrationSide = offset >= 0 ? 'left' : 'right';
         sceneIlluIndex++;
       }
 
+      // 判断当前 Level 是否已解锁
+      const isLevelUnlocked = level.unlocked;
+
       if (showIllustration) {
+        const lockedClass = isLevelUnlocked ? '' : ' illustration-locked';
+        const clickHandler = isLevelUnlocked ? '' : ' onclick="showLockedIllustrationHint()"';
+        const pointerStyle = isLevelUnlocked ? '' : 'cursor:pointer;';
         html += `<div class="lesson-row illustration-row" style="transform: translateX(${offset}px)">
-          <div class="level-scene-illustration ${illustrationSide}">
+          <div class="level-scene-illustration ${illustrationSide}${lockedClass}"${clickHandler} style="${pointerStyle}">
             <img src="${illustrationSrc}" alt="scene" class="scene-illustration-img">
           </div>
           <div style="display:flex;flex-direction:column;align-items:center">`;
@@ -1080,6 +1084,10 @@ function showModal(title, message) {
       <button class="action-btn btn-primary" onclick="this.closest('.modal-overlay').remove()">知道了</button>
     </div>`;
   document.body.appendChild(overlay);
+}
+
+function showLockedIllustrationHint() {
+  showModal('🔒 鸭鸭还在等你', '想解锁这个可爱的鸭鸭，就在学习路线上继续前进吧 💪');
 }
 
 function showStreakModal() {
