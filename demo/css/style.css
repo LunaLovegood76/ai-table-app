@@ -286,6 +286,7 @@ body {
 
 .level-scene-illustration {
   position: absolute;
+  top: -20px;
   pointer-events: auto;
   cursor: pointer;
 }
@@ -1952,4 +1953,69 @@ body {
   color: var(--gray-400);
   margin-top: 4px;
   margin-bottom: 8px;
+}
+
+/* 未解锁课程 tooltip */
+.locked-tooltip-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.locked-tooltip {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  animation: popIn 0.3s ease;
+}
+
+.locked-tooltip .tooltip-lock {
+  width: 48px;
+  height: 48px;
+  background: var(--gray-100);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  color: var(--gray-400);
+}
+
+.locked-tooltip .tooltip-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gray-600);
+  margin-bottom: 8px;
+}
+
+.locked-tooltip .tooltip-desc {
+  font-size: 14px;
+  color: var(--gray-400);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.locked-tooltip .tooltip-status {
+  display: inline-block;
+  background: var(--gray-100);
+  color: var(--gray-400);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.locked-tooltip .tooltip-hint {
+  font-size: 12px;
+  color: var(--gray-300);
 }

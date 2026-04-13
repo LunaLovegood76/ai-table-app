@@ -295,7 +295,7 @@ function renderPathPage(container) {
       } else if (status === 'current') {
         html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')"><i data-lucide="${lesson.icon}"></i></div>`;
       } else {
-        html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
+        html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}" onclick="showLockedLessonTooltip('${lesson.id}')"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
       }
 
       html += `<div class="lesson-label ${status === 'completed' ? 'completed-label' : ''}">${lesson.title}</div>`;
@@ -391,7 +391,7 @@ function renderLessonStep() {
 }
 
 function renderKnowledgeCard(card) {
-  let html = `<div class="knowledge-card"><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
+  let html = `<div class="knowledge-card"><div class="card-mascot"><img src="assets/kawaii/savy-happy.svg" class="card-mascot-img" alt="mascot"></div><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
     html += `<table class="comparison-table">
@@ -845,9 +845,10 @@ function showFeedback(isCorrect, explanation) {
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
+  const mascotSrc = isCorrect ? 'assets/kawaii/savy-celebrate.svg' : 'assets/kawaii/savy-sad.svg';
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <span class="feedback-icon"><i data-lucide="${isCorrect ? 'party-popper' : 'refresh-cw'}"></i></span>
+      <img src="${mascotSrc}" class="feedback-mascot" alt="mascot">
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
@@ -1082,6 +1083,42 @@ function showModal(title, message) {
       <button class="action-btn btn-primary" onclick="this.closest('.modal-overlay').remove()">知道了</button>
     </div>`;
   document.body.appendChild(overlay);
+}
+
+
+function showLockedLessonTooltip(lessonId) {
+  let lessonData = null;
+  let levelData = null;
+  for (const level of COURSES.levels) {
+    for (const lesson of level.lessons) {
+      if (lesson.id === lessonId) {
+        lessonData = lesson;
+        levelData = level;
+        break;
+      }
+    }
+    if (lessonData) break;
+  }
+  if (!lessonData) return;
+
+  const firstCard = lessonData.cards && lessonData.cards[0];
+  const briefContent = firstCard
+    ? (firstCard.highlight || firstCard.content || '').replace(/<[^>]*>/g, '').substring(0, 60)
+    : '';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'locked-tooltip-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="locked-tooltip">
+      <div class="tooltip-lock"><i data-lucide="lock"></i></div>
+      <div class="tooltip-title">${lessonData.title}</div>
+      ${briefContent ? '<div class="tooltip-desc">' + briefContent + '</div>' : ''}
+      <div class="tooltip-status">\u672a\u89e3\u9501</div>
+      <div class="tooltip-hint">\u5b8c\u6210\u4ee5\u4e0a\u5168\u90e8\u7b49\u7ea7\u624d\u53ef\u4ee5\u89e3\u9501\u54e6\uff01</div>
+    </div>`;
+  document.body.appendChild(overlay);
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 function showLockedIllustrationHint() {
