@@ -12,7 +12,10 @@ const DEFAULT_STATE = {
   completedLessons: [],
   perfectLessons: [],
   earnedBadges: [],
-  speedComplete: false
+  speedComplete: false,
+  previousStreak: 0,
+  streakBrokenShown: false,
+  milestoneShown: []
 };
 
 function loadState() {
@@ -68,7 +71,9 @@ function updateStreak() {
     if (diffDays === 1) {
       appState.streak += 1;
     } else if (diffDays > 1) {
+      appState.previousStreak = appState.streak;
       appState.streak = 1;
+      appState.streakBrokenShown = false;
     }
     appState.lastStudyDate = today;
     saveState(appState);
@@ -1258,6 +1263,115 @@ function showUnlockedIllustrationCheer() {
   const message = randomQuote + '<br><br>你的前进路上，欢乐鸭鸭都会一直陪伴你 💛';
   showModal('鸭鸭想对你说', message);
 }
+/* ============ 连续打卡情感化 ============ */
+const STREAK_MILESTONES = [
+  { days: 3,   mascot: 'savy-happy.svg',     title: '🔥 三天连续！',   subtitle: '好的开始是成功的一半！',                     confetti: false, glow: false },
+  { days: 7,   mascot: 'savy-celebrate.svg',  title: '🔥 一周达人！',   subtitle: '连续 7 天，你太棒了！',                      confetti: true,  glow: false },
+  { days: 14,  mascot: 'savy-celebrate.svg',  title: '🔥 两周坚持！',   subtitle: '习惯正在养成，继续加油！',                    confetti: true,  glow: false },
+  { days: 30,  mascot: 'savy-trophy.svg',     title: '🏆 月度传奇！',   subtitle: '连续 30 天！你是真正的学习达人！',            confetti: true,  glow: true },
+  { days: 60,  mascot: 'savy-trophy.svg',     title: '🏆 双月之星！',   subtitle: '60 天不间断，这份毅力令人敬佩！',            confetti: true,  glow: true },
+  { days: 100, mascot: 'savy-rocket.svg',     title: '🚀 百日传说！',   subtitle: '100 天连续学习！你已经超越了 99% 的人！',    confetti: true,  glow: true },
+  { days: 365, mascot: 'savy-love.svg',       title: '💎 年度王者！',   subtitle: '整整一年！你是传说中的存在！',                confetti: true,  glow: true },
+];
+
+/** 在 app 初始化时检测断签/里程碑，延迟弹出弹窗 */
+function checkStreakEvents() {
+  if (appState.previousStreak > 1 && !appState.streakBrokenShown) {
+    setTimeout(() => {
+      showStreakBrokenModal(appState.previousStreak);
+      appState.streakBrokenShown = true;
+      saveState(appState);
+    }, 600);
+    return;
+  }
+
+  if (!appState.milestoneShown) appState.milestoneShown = [];
+  const milestone = STREAK_MILESTONES.find(
+    m => appState.streak >= m.days && !appState.milestoneShown.includes(m.days)
+  );
+  if (milestone) {
+    setTimeout(() => {
+      showStreakMilestoneModal(milestone);
+      appState.milestoneShown.push(milestone.days);
+      saveState(appState);
+    }, 600);
+  }
+}
+
+/** 断签弹窗 */
+function showStreakBrokenModal(previousDays) {
+  const overlay = document.createElement('div');
+  overlay.className = 'streak-modal-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="streak-modal streak-broken">
+      <div class="streak-modal-mascot">
+        <img src="assets/kawaii/savy-sad.svg" alt="savy sad">
+      </div>
+      <h3 class="streak-modal-title">哎呀，连续记录断了…</h3>
+      <p class="streak-modal-subtitle">你之前已经连续学习了 <strong>${previousDays} 天</strong>！</p>
+      <p class="streak-modal-desc">没关系，重新开始也很棒！今天学一课就能开启新的连续记录 🔥</p>
+      <div class="streak-modal-counter">
+        <span class="streak-fire-icon">🔥</span>
+        <span class="streak-counter-num">1</span>
+      </div>
+      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">重新出发！</button>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
+/** 里程碑庆祝弹窗 */
+function showStreakMilestoneModal(milestone) {
+  const overlay = document.createElement('div');
+  overlay.className = 'streak-modal-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="streak-modal streak-milestone${milestone.glow ? ' streak-glow' : ''}">
+      <div class="streak-modal-mascot">
+        <img src="assets/kawaii/${milestone.mascot}" alt="savy milestone">
+      </div>
+      <h3 class="streak-modal-title">${milestone.title}</h3>
+      <p class="streak-modal-subtitle">${milestone.subtitle}</p>
+      <div class="streak-modal-counter">
+        <span class="streak-fire-icon">🔥</span>
+        <span class="streak-counter-num">${milestone.days}</span>
+      </div>
+      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">继续学习！</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  if (milestone.confetti) showConfetti();
+}
+
+/** 顶栏 streak 点击弹窗（展示当前连续天数） */
+function showStreakModal() {
+  const currentMilestone = [...STREAK_MILESTONES].reverse().find(m => appState.streak >= m.days);
+  const nextMilestone = STREAK_MILESTONES.find(m => appState.streak < m.days);
+  const mascot = currentMilestone ? currentMilestone.mascot : 'savy-happy.svg';
+  const progressText = nextMilestone
+    ? `距离下一个里程碑（${nextMilestone.days} 天）还差 ${nextMilestone.days - appState.streak} 天`
+    : '你已经达成了所有里程碑！🎉';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'streak-modal-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="streak-modal streak-info">
+      <button class="modal-close-btn" onclick="this.closest('.streak-modal-overlay').remove()">&times;</button>
+      <div class="streak-modal-mascot">
+        <img src="assets/kawaii/${mascot}" alt="savy streak">
+      </div>
+      <h3 class="streak-modal-title">🔥 连续学习</h3>
+      <div class="streak-modal-counter streak-counter-large">
+        <span class="streak-fire-icon">🔥</span>
+        <span class="streak-counter-num">${appState.streak}</span>
+        <span class="streak-counter-label">天</span>
+      </div>
+      <p class="streak-modal-subtitle">${progressText}</p>
+      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">知道了</button>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
 /* ============ Lucide 图标刷新 ============ */
 function refreshIcons() {
   if (typeof lucide !== 'undefined') {
@@ -1278,4 +1392,5 @@ showFeedback = function(a, b) { _origShowFeedback(a, b); refreshIcons(); };
 /* ============ 初始化 ============ */
 document.addEventListener('DOMContentLoaded', () => {
   render();
+  checkStreakEvents();
 });
