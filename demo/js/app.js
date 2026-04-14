@@ -360,7 +360,7 @@ function renderPathPage(container) {
       if (status === 'completed') {
         html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)" style="background:${level.color};border-color:${level.color};box-shadow:0 4px 0 ${level.color}99"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
       } else if (status === 'current') {
-        html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')" style="border-color:${level.color};box-shadow:0 0 0 8px ${level.color}26"><i data-lucide="${lesson.icon}" style="color:${level.color}"></i></div>`;
+        html += `<div class="lesson-node current level-pulse-${level.id}" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')" style="border-color:${level.color}"><i data-lucide="${lesson.icon}" style="color:${level.color}"></i></div>`;
       } else {
         html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}" onclick="showLockedLessonTooltip('${lesson.id}')"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
       }
@@ -372,6 +372,30 @@ function renderPathPage(container) {
   }
 
   container.innerHTML = html;
+
+  // 为每个 level 注入专属脉冲动画（颜色跟随主题色）
+  let dynamicStyle = document.getElementById('level-pulse-style');
+  if (!dynamicStyle) {
+    dynamicStyle = document.createElement('style');
+    dynamicStyle.id = 'level-pulse-style';
+    document.head.appendChild(dynamicStyle);
+  }
+  let pulseCSS = '';
+  for (const level of COURSES.levels) {
+    const color = level.color || '#58CC02';
+    // 将 hex 颜色转为 rgba
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    pulseCSS += `
+      @keyframes pulse-${level.id} {
+        0%, 100% { box-shadow: 0 0 0 8px rgba(${r},${g},${b},0.15); }
+        50% { box-shadow: 0 0 0 14px rgba(${r},${g},${b},0.08); }
+      }
+      .level-pulse-${level.id} { animation: pulse-${level.id} 2s infinite; }
+    `;
+  }
+  dynamicStyle.textContent = pulseCSS;
 
   // 吸顶 Level 条
   let stickyBar = document.getElementById('sticky-level-bar');
