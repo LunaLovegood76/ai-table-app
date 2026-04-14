@@ -437,25 +437,94 @@ var COURSES = {
   ]
 };
 
+/**
+ * 徽章体系 — 参考微信读书勋章设计
+ * category: milestone(课程里程碑/六边形) | cumulative(累计成就/圆形) | habit(习惯养成/盾牌形) | special(特殊挑战/星形)
+ * tier: bronze | silver | gold | purple | diamond — 同系列递进色
+ * number: 徽章中央展示的数字
+ * progress(state): 返回 { current, total } 用于进度条
+ */
+const BADGE_TIERS = {
+  bronze:  { label: '铜', color: '#CD7F32', bg: '#FFF0E0', border: '#D4A574' },
+  silver:  { label: '银', color: '#A8A8A8', bg: '#F5F5F5', border: '#C0C0C0' },
+  gold:    { label: '金', color: '#DAA520', bg: '#FFFDF0', border: '#FFD700' },
+  purple:  { label: '紫', color: '#8B5CF6', bg: '#F5F0FF', border: '#A560E8' },
+  diamond: { label: '钻', color: '#06B6D4', bg: '#F0FDFA', border: '#22D3EE' }
+};
+
 const BADGES = [
-  { id: 'first_lesson', name: '初学者', icon: 'rocket', description: '完成第一课', condition: (state) => state.completedLessons.length >= 1 },
-  { id: 'l1_complete', name: 'L1 毕业生', icon: 'flag', description: '完成 L1 全部课程', condition: (state) => { const l1Lessons = COURSES.levels[0].lessons.map(l => l.id); return l1Lessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'l2_complete', name: 'L2 毕业生', icon: 'flag', description: '完成 L2 全部课程', condition: (state) => { const l2Lessons = COURSES.levels[1].lessons.map(l => l.id); return l2Lessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'lesson_10', name: '十课达人', icon: 'star', description: '累计完成 10 课', condition: (state) => state.completedLessons.length >= 10 },
-  { id: 'lesson_20', name: '学霸之路', icon: 'star', description: '累计完成 20 课', condition: (state) => state.completedLessons.length >= 20 },
-  { id: 'l3_complete', name: 'L3 毕业生', icon: 'flag', description: '完成 L3 全部课程', condition: (state) => { const l3Lessons = COURSES.levels[2].lessons.map(l => l.id); return l3Lessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'xp_1000', name: '千分学霸', icon: 'gem', description: '累计获得 1000 XP', condition: (state) => state.totalXP >= 1000 },
-  { id: 'l4_complete', name: 'L4 毕业生', icon: 'flag', description: '完成 L4 全部课程', condition: (state) => { const l4Lessons = COURSES.levels[3].lessons.map(l => l.id); return l4Lessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'lesson_30', name: '三十课大师', icon: 'crown', description: '累计完成 30 课', condition: (state) => state.completedLessons.length >= 30 },
-  { id: 'l5_complete', name: 'L5 毕业生', icon: 'flag', description: '完成 L5 全部课程', condition: (state) => { const l5Lessons = COURSES.levels[4].lessons.map(l => l.id); return l5Lessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'all_complete', name: '全课程大师', icon: 'trophy', description: '完成 L1-L5 全部课程', condition: (state) => { const allLessons = COURSES.levels.flatMap(level => level.lessons.map(l => l.id)); return allLessons.every(id => state.completedLessons.includes(id)); }},
-  { id: 'xp_2000', name: '学神降临', icon: 'gem', description: '累计获得 2000 XP', condition: (state) => state.totalXP >= 2000 },
-  { id: 'perfect_score', name: '完美答题', icon: 'target', description: '任意一课全部答对', condition: (state) => state.perfectLessons && state.perfectLessons.length > 0 },
-  { id: 'streak_3', name: '三日连续', icon: 'flame', description: '连续学习 3 天', condition: (state) => state.streak >= 3 },
-  { id: 'streak_7', name: '一周达人', icon: 'zap', description: '连续学习 7 天', condition: (state) => state.streak >= 7 },
-  { id: 'xp_100', name: '百分新秀', icon: 'star', description: '累计获得 100 XP', condition: (state) => state.totalXP >= 100 },
-  { id: 'xp_500', name: '五百强者', icon: 'star', description: '累计获得 500 XP', condition: (state) => state.totalXP >= 500 },
-  { id: 'speed_demon', name: '闪电通关', icon: 'timer', description: '60秒内完成一课', condition: (state) => state.speedComplete }
+  // ── 课程里程碑（六边形） ──
+  { id: 'first_lesson', name: '初学者', icon: 'rocket', description: '完成第一课', category: 'milestone', tier: 'bronze', number: 1,
+    condition: (state) => state.completedLessons.length >= 1,
+    progress: (state) => ({ current: Math.min(state.completedLessons.length, 1), total: 1 }) },
+  { id: 'l1_complete', name: 'L1 毕业生', icon: 'flag', description: '完成 L1 全部课程', category: 'milestone', tier: 'silver', number: null,
+    condition: (state) => { const l1 = COURSES.levels[0].lessons.map(l => l.id); return l1.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const l1 = COURSES.levels[0].lessons.map(l => l.id); return { current: l1.filter(id => state.completedLessons.includes(id)).length, total: l1.length }; } },
+  { id: 'l2_complete', name: 'L2 毕业生', icon: 'flag', description: '完成 L2 全部课程', category: 'milestone', tier: 'silver', number: null,
+    condition: (state) => { const l2 = COURSES.levels[1].lessons.map(l => l.id); return l2.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const l2 = COURSES.levels[1].lessons.map(l => l.id); return { current: l2.filter(id => state.completedLessons.includes(id)).length, total: l2.length }; } },
+  { id: 'l3_complete', name: 'L3 毕业生', icon: 'flag', description: '完成 L3 全部课程', category: 'milestone', tier: 'gold', number: null,
+    condition: (state) => { const l3 = COURSES.levels[2].lessons.map(l => l.id); return l3.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const l3 = COURSES.levels[2].lessons.map(l => l.id); return { current: l3.filter(id => state.completedLessons.includes(id)).length, total: l3.length }; } },
+  { id: 'l4_complete', name: 'L4 毕业生', icon: 'flag', description: '完成 L4 全部课程', category: 'milestone', tier: 'purple', number: null,
+    condition: (state) => { const l4 = COURSES.levels[3].lessons.map(l => l.id); return l4.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const l4 = COURSES.levels[3].lessons.map(l => l.id); return { current: l4.filter(id => state.completedLessons.includes(id)).length, total: l4.length }; } },
+  { id: 'l5_complete', name: 'L5 毕业生', icon: 'flag', description: '完成 L5 全部课程', category: 'milestone', tier: 'diamond', number: null,
+    condition: (state) => { const l5 = COURSES.levels[4].lessons.map(l => l.id); return l5.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const l5 = COURSES.levels[4].lessons.map(l => l.id); return { current: l5.filter(id => state.completedLessons.includes(id)).length, total: l5.length }; } },
+  { id: 'all_complete', name: '全课程大师', icon: 'trophy', description: '完成 L1-L5 全部课程', category: 'milestone', tier: 'diamond', number: null,
+    condition: (state) => { const all = COURSES.levels.flatMap(lv => lv.lessons.map(l => l.id)); return all.every(id => state.completedLessons.includes(id)); },
+    progress: (state) => { const all = COURSES.levels.flatMap(lv => lv.lessons.map(l => l.id)); return { current: all.filter(id => state.completedLessons.includes(id)).length, total: all.length }; } },
+
+  // ── 累计成就 · 课数系列（圆形） ──
+  { id: 'lesson_10', name: '十课达人', icon: 'book-open', description: '累计完成 10 课', category: 'cumulative', tier: 'bronze', number: 10,
+    condition: (state) => state.completedLessons.length >= 10,
+    progress: (state) => ({ current: Math.min(state.completedLessons.length, 10), total: 10 }) },
+  { id: 'lesson_20', name: '学霸之路', icon: 'book-open', description: '累计完成 20 课', category: 'cumulative', tier: 'silver', number: 20,
+    condition: (state) => state.completedLessons.length >= 20,
+    progress: (state) => ({ current: Math.min(state.completedLessons.length, 20), total: 20 }) },
+  { id: 'lesson_30', name: '三十课大师', icon: 'book-open', description: '累计完成 30 课', category: 'cumulative', tier: 'gold', number: 30,
+    condition: (state) => state.completedLessons.length >= 30,
+    progress: (state) => ({ current: Math.min(state.completedLessons.length, 30), total: 30 }) },
+
+  // ── 累计成就 · XP 系列（圆形） ──
+  { id: 'xp_100', name: '百分新秀', icon: 'star', description: '累计获得 100 XP', category: 'cumulative', tier: 'bronze', number: 100,
+    condition: (state) => state.totalXP >= 100,
+    progress: (state) => ({ current: Math.min(state.totalXP, 100), total: 100 }) },
+  { id: 'xp_500', name: '五百强者', icon: 'star', description: '累计获得 500 XP', category: 'cumulative', tier: 'silver', number: 500,
+    condition: (state) => state.totalXP >= 500,
+    progress: (state) => ({ current: Math.min(state.totalXP, 500), total: 500 }) },
+  { id: 'xp_1000', name: '千分学霸', icon: 'gem', description: '累计获得 1000 XP', category: 'cumulative', tier: 'gold', number: 1000,
+    condition: (state) => state.totalXP >= 1000,
+    progress: (state) => ({ current: Math.min(state.totalXP, 1000), total: 1000 }) },
+  { id: 'xp_2000', name: '学神降临', icon: 'gem', description: '累计获得 2000 XP', category: 'cumulative', tier: 'purple', number: 2000,
+    condition: (state) => state.totalXP >= 2000,
+    progress: (state) => ({ current: Math.min(state.totalXP, 2000), total: 2000 }) },
+
+  // ── 习惯养成 · 连续打卡系列（盾牌形） ──
+  { id: 'streak_3', name: '三日连续', icon: 'flame', description: '连续学习 3 天', category: 'habit', tier: 'bronze', number: 3,
+    condition: (state) => state.streak >= 3,
+    progress: (state) => ({ current: Math.min(state.streak, 3), total: 3 }) },
+  { id: 'streak_7', name: '一周达人', icon: 'flame', description: '连续学习 7 天', category: 'habit', tier: 'silver', number: 7,
+    condition: (state) => state.streak >= 7,
+    progress: (state) => ({ current: Math.min(state.streak, 7), total: 7 }) },
+  { id: 'streak_14', name: '两周坚持', icon: 'flame', description: '连续学习 14 天', category: 'habit', tier: 'gold', number: 14,
+    condition: (state) => state.streak >= 14,
+    progress: (state) => ({ current: Math.min(state.streak, 14), total: 14 }) },
+  { id: 'streak_30', name: '月度传奇', icon: 'flame', description: '连续学习 30 天', category: 'habit', tier: 'purple', number: 30,
+    condition: (state) => state.streak >= 30,
+    progress: (state) => ({ current: Math.min(state.streak, 30), total: 30 }) },
+  { id: 'streak_100', name: '百日传说', icon: 'flame', description: '连续学习 100 天', category: 'habit', tier: 'diamond', number: 100,
+    condition: (state) => state.streak >= 100,
+    progress: (state) => ({ current: Math.min(state.streak, 100), total: 100 }) },
+
+  // ── 特殊挑战（星形） ──
+  { id: 'perfect_score', name: '完美答题', icon: 'target', description: '任意一课全部答对', category: 'special', tier: 'gold', number: null,
+    condition: (state) => state.perfectLessons && state.perfectLessons.length > 0,
+    progress: (state) => ({ current: (state.perfectLessons && state.perfectLessons.length > 0) ? 1 : 0, total: 1 }) },
+  { id: 'speed_demon', name: '闪电通关', icon: 'zap', description: '60秒内完成一课', category: 'special', tier: 'gold', number: 60,
+    condition: (state) => state.speedComplete,
+    progress: (state) => ({ current: state.speedComplete ? 1 : 0, total: 1 }) }
 ];
 
 const RANKS = [

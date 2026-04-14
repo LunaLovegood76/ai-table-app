@@ -140,8 +140,8 @@ function render() {
 
   app.innerHTML = `
     <div class="top-bar">
-      <div class="top-bar-logo" onclick="navigateTo('path')">
-        <span class="logo-icon"><i data-lucide="table-2"></i></span> AI表格学堂
+      <div class="top-bar-logo" onclick="navigateTo('path')" style="color:#333;">
+        HappyDuck AI
       </div>
       <div class="top-bar-stats">
         <div class="stat-item" onclick="showStreakModal()">
@@ -163,15 +163,9 @@ function render() {
     <div class="bottom-nav">
       <div class="nav-item ${currentPage === 'path' ? 'active' : ''}" onclick="navigateTo('path')">
         <span class="nav-icon"><i data-lucide="book-open"></i></span>
-        <span>学习</span>
-      </div>
-      <div class="nav-item ${currentPage === 'leaderboard' ? 'active' : ''}" onclick="navigateTo('leaderboard')">
-        <span class="nav-icon"><i data-lucide="trophy"></i></span>
-        <span>排行榜</span>
       </div>
       <div class="nav-item ${currentPage === 'profile' ? 'active' : ''}" onclick="navigateTo('profile')">
         <span class="nav-icon"><i data-lucide="user"></i></span>
-        <span>我的</span>
       </div>
     </div>
   `;
@@ -179,7 +173,6 @@ function render() {
   const pageContent = document.getElementById('page-content');
   switch (currentPage) {
     case 'path': renderPathPage(pageContent); break;
-    case 'leaderboard': renderLeaderboardPage(pageContent); break;
     case 'profile': renderProfilePage(pageContent); break;
     case 'lesson': break;
     default: renderPathPage(pageContent);
@@ -1069,110 +1062,220 @@ function exitLesson() {
   render();
 }
 
-/* ============ 排行榜页面 ============ */
-function renderLeaderboardPage(container) {
-  const allUsers = [...FAKE_LEADERBOARD];
-  allUsers.push({ name: appState.userName + '（我）', xp: appState.totalXP, avatar: 'user-check', isMe: true });
-  allUsers.sort((a, b) => b.xp - a.xp);
-
-  let html = `
-    <div class="leaderboard-page">
-      <h2><i data-lucide="trophy" class="section-title-icon"></i> 本周排行榜</h2>
-      <div class="league-badge">
-        <span class="league-icon"><i data-lucide="medal"></i></span>
-        <span class="league-name">新手联赛</span>
-      </div>
-      <div class="leaderboard-list">`;
-
-  for (let i = 0; i < allUsers.length; i++) {
-    const user = allUsers[i];
-    const isTop3 = i < 3;
-    html += `
-      <div class="lb-row ${user.isMe ? 'is-me' : ''} ${isTop3 ? 'top-3' : ''}">
-        <span class="lb-rank">${i + 1}</span>
-        <span class="lb-avatar"><i data-lucide="${user.avatar || 'user'}"></i></span>
-        <span class="lb-name">${user.name}</span>
-        <span class="lb-xp">${user.xp} XP</span>
-      </div>`;
-  }
-
-  html += `</div></div>`;
-  container.innerHTML = html;
-}
-
-/* ============ 个人中心页面 ============ */
+/* ============ 个人中心页面（微信读书风格） ============ */
 function renderProfilePage(container) {
   const rank = getCurrentRank(appState.totalXP);
   const nextRank = getNextRank(appState.totalXP);
   const completedCount = appState.completedLessons.length;
   const totalLessons = COURSES.levels.reduce((sum, l) => sum + l.lessons.length, 0);
+  const perfectCount = appState.perfectLessons ? appState.perfectLessons.length : 0;
+  const earnedCount = appState.earnedBadges.length;
 
   let progressPercent = 100;
-  let progressLabel = '已满级';
   if (nextRank) {
     progressPercent = ((appState.totalXP - rank.minXP) / (nextRank.minXP - rank.minXP)) * 100;
-    progressLabel = `${nextRank.minXP - appState.totalXP} XP 升级到 ${nextRank.name}`;
   }
 
-  let badgesHtml = '';
-  for (const badge of BADGES) {
-    const earned = appState.earnedBadges.includes(badge.id);
-    badgesHtml += `
-      <div class="badge-cell ${earned ? 'earned' : 'unearned'}" title="${badge.description}">
-        <span class="bc-icon"><i data-lucide="${badge.icon}"></i></span>
-        <span class="bc-name">${badge.name}</span>
-      </div>`;
+  const studyMinutes = completedCount * 12;
+  const studyHours = Math.floor(studyMinutes / 60);
+  const studyMins = studyMinutes % 60;
+
+  let currentLevel = 'L1 入门篇';
+  for (const level of COURSES.levels) {
+    if (level.unlocked) {
+      const levelCompleted = level.lessons.every(l => appState.completedLessons.includes(l.id));
+      if (!levelCompleted) { currentLevel = level.title; break; }
+    }
   }
 
   container.innerHTML = `
-    <div class="profile-page">
-      <div class="profile-avatar"><i data-lucide="user-circle"></i></div>
-      <div class="profile-name">${appState.userName}</div>
-      <div class="profile-rank" style="color:${rank.color}"><i data-lucide="${rank.icon}" style="width:18px;height:18px;display:inline"></i> ${rank.name}</div>
-
-      <div class="xp-progress-bar">
-        <div class="xp-progress-fill" style="width:${Math.min(progressPercent, 100)}%;background:${rank.color}"></div>
-      </div>
-      <div class="rank-info">
-        <span>${appState.totalXP} XP</span>
-        <span>${progressLabel}</span>
-      </div>
-
-      <div class="profile-stats-grid" style="margin-top:20px">
-        <div class="profile-stat-card">
-          <span class="ps-icon"><i data-lucide="flame"></i></span>
-          <span class="ps-value">${appState.streak}</span>
-          <span class="ps-label">连续天数</span>
-        </div>
-        <div class="profile-stat-card">
-          <span class="ps-icon"><i data-lucide="star"></i></span>
-          <span class="ps-value">${appState.totalXP}</span>
-          <span class="ps-label">总经验值</span>
-        </div>
-        <div class="profile-stat-card">
-          <span class="ps-icon"><i data-lucide="book-open"></i></span>
-          <span class="ps-value">${completedCount}</span>
-          <span class="ps-label">已完成课程</span>
-        </div>
-        <div class="profile-stat-card">
-          <span class="ps-icon"><i data-lucide="award"></i></span>
-          <span class="ps-value">${appState.earnedBadges.length}</span>
-          <span class="ps-label">获得徽章</span>
+    <div class="profile-page-v2">
+      <div class="profile-header">
+        <div class="avatar-circle">${appState.userName.charAt(0)}</div>
+        <div class="avatar-info">
+          <div class="avatar-name">${appState.userName}</div>
+          <div style="margin-top:6px;">
+            <span class="badge-entry" onclick="openBadgeWall()">
+              <i data-lucide="award"></i> <span>${earnedCount}</span>
+            </span>
+          </div>
         </div>
       </div>
 
-      <div class="profile-section">
-        <h3><i data-lucide="award" class="section-title-icon"></i> 成就徽章</h3>
-        <div class="badges-grid">${badgesHtml}</div>
+      <div class="p-card">
+        <div class="p-card-row">
+          <div class="icon-circle" style="background:var(--icon-gold-bg);"><i data-lucide="shield" style="color:var(--icon-gold-fg);"></i></div>
+          <div class="p-card-label">${rank.name}</div>
+          <div class="p-card-value"><div><span class="num-primary">${appState.totalXP}</span> <span class="num-unit">XP</span></div></div>
+        </div>
+        <div class="rank-progress">
+          <div class="rank-progress-bar"><div class="rank-progress-fill" style="width:${Math.min(progressPercent, 100)}%;"></div></div>
+          <div class="rank-progress-text">
+            <span>${rank.name} ${rank.minXP} XP</span>
+            <span>${nextRank ? nextRank.name + ' ' + nextRank.minXP + ' XP' : '已满级'}</span>
+          </div>
+        </div>
       </div>
 
-      <div style="margin-top:20px">
-        <button class="action-btn" style="background:var(--red);color:white;box-shadow:0 4px 0 #CC3333;width:100%"
-                onclick="resetProgress()">
-          重置学习进度
-        </button>
+      <div class="p-card-group">
+        <div class="p-card">
+          <div class="p-card-row">
+            <div class="icon-circle" style="background:var(--icon-orange-bg);"><i data-lucide="flame" style="color:var(--icon-orange-fg);"></i></div>
+            <div><div class="p-card-label">连续打卡</div><div class="num-sub">连续 ${appState.streak} 天</div></div>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-row">
+            <div class="icon-circle" style="background:var(--icon-pink-bg);"><i data-lucide="heart" style="color:var(--icon-pink-fg);"></i></div>
+            <div><div class="p-card-label">满分课程</div><div class="num-sub">${perfectCount} 课满分</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-card" style="margin-top:8px;">
+        <div class="p-card-row">
+          <div class="icon-circle" style="background:var(--icon-pink-bg);"><i data-lucide="clock" style="color:var(--icon-pink-fg);"></i></div>
+          <div class="p-card-label">学习时长</div>
+          <div class="p-card-value"><div><span class="num-primary">${studyHours}</span> <span class="num-unit">小时</span> <span class="num-primary">${studyMins}</span> <span class="num-unit">分钟</span></div></div>
+        </div>
+      </div>
+
+      <div class="grid-2x2">
+        <div class="grid-cell">
+          <div class="icon-circle" style="background:var(--icon-green-bg);"><i data-lucide="play-circle" style="color:var(--icon-green-fg);"></i></div>
+          <div><div class="grid-cell-label">在学</div><div class="grid-cell-sub">${currentLevel}</div></div>
+        </div>
+        <div class="grid-cell">
+          <div class="icon-circle" style="background:var(--icon-blue-bg);"><i data-lucide="check-circle" style="color:var(--icon-blue-fg);"></i></div>
+          <div><div class="grid-cell-label">已完成</div><div class="grid-cell-sub">累计 ${completedCount} 课</div></div>
+        </div>
+        <div class="grid-cell">
+          <div class="icon-circle" style="background:var(--icon-purple-bg);"><i data-lucide="star" style="color:var(--icon-purple-fg);"></i></div>
+          <div><div class="grid-cell-label">总经验</div><div class="grid-cell-sub">${appState.totalXP} XP</div></div>
+        </div>
+        <div class="grid-cell">
+          <div class="icon-circle" style="background:var(--icon-teal-bg);"><i data-lucide="zap" style="color:var(--icon-teal-fg);"></i></div>
+          <div><div class="grid-cell-label">总课程</div><div class="grid-cell-sub">${totalLessons} 课</div></div>
+        </div>
+      </div>
+
+      <div class="p-card" style="margin-top:8px;">
+        <div class="p-card-row" style="cursor:pointer;" onclick="openBadgeWall()">
+          <div class="icon-circle" style="background:var(--icon-indigo-bg);"><i data-lucide="award" style="color:var(--icon-indigo-fg);"></i></div>
+          <div class="p-card-label">勋章</div>
+          <div class="p-card-value">
+            <div><span class="num-primary">${earnedCount}</span> <span class="num-unit">枚</span></div>
+            <div class="num-sub">共 ${BADGES.length} 枚可获得</div>
+          </div>
+        </div>
       </div>
     </div>`;
+
+  ensureBadgeWallOverlay();
+}
+
+/* ============ 勋章墙弹窗 ============ */
+function ensureBadgeWallOverlay() {
+  if (document.getElementById('badgeWallOverlay')) return;
+  const earnedBadgeIds = appState.earnedBadges;
+  const totalBadges = BADGES.length;
+  const earnedCount = earnedBadgeIds.length;
+
+  const badgeCategories = [
+    { title: '习惯养成 · 连续打卡', shape: 'shield', badges: BADGES.filter(b => b.id.startsWith('streak') || (b.description && b.description.includes('连续'))) },
+    { title: '课程里程碑', shape: 'hex', badges: BADGES.filter(b => b.id.startsWith('complete') || b.id.endsWith('_complete') || (b.description && b.description.includes('完成'))) },
+    { title: '累计成就 · 经验值', shape: 'circle', badges: BADGES.filter(b => b.id.startsWith('xp') || (b.description && (b.description.includes('经验') || b.description.includes('XP')))) }
+  ];
+  const categorizedIds = badgeCategories.flatMap(c => c.badges.map(b => b.id));
+  const uncategorized = BADGES.filter(b => !categorizedIds.includes(b.id));
+  if (uncategorized.length > 0) badgeCategories.push({ title: '特殊成就', shape: 'diamond', badges: uncategorized });
+
+  let categoriesHtml = '';
+  for (const category of badgeCategories) {
+    if (category.badges.length === 0) continue;
+    let badgesHtml = '';
+    for (const badge of category.badges) {
+      const earned = earnedBadgeIds.includes(badge.id);
+      const tier = earned ? 'gold' : 'bronze';
+      badgesHtml += '<div class="bw-badge-cell' + (earned ? '' : ' unearned') + '">' +
+        '<div class="badge-frame shape-' + category.shape + ' tier-' + tier + '">' +
+          '<div class="badge-outer"></div>' +
+          '<div class="badge-inner"><img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/' + (earned ? 'Trophy' : 'Locked') + '/Color/' + (earned ? 'trophy' : 'locked') + '_color.svg" alt="' + badge.name + '"></div>' +
+        '</div>' +
+        '<span class="bw-badge-name">' + badge.name + '</span>' +
+        '<span class="bw-badge-desc">' + badge.description + '</span>' +
+        (earned ? '' : '<div class="badge-progress-wrap"><div class="badge-progress"><div class="badge-progress-fill progress-' + tier + '" style="width:30%"></div></div></div>') +
+      '</div>';
+    }
+    categoriesHtml += '<div class="category-card"><div class="category-title">' + category.title + '</div><div class="badge-grid">' + badgesHtml + '</div></div>';
+  }
+
+  const particles = Array.from({length: 12}, () => '<span class="wall-particle"></span>').join('');
+  const overlay = document.createElement('div');
+  overlay.className = 'badge-wall-overlay';
+  overlay.id = 'badgeWallOverlay';
+  overlay.innerHTML =
+    '<div class="badge-wall-container">' +
+      '<div class="wall-sticky-bar" id="wallStickyBar">' +
+        '<button class="sticky-back" onclick="closeBadgeWall()"><i data-lucide="chevron-left"></i></button>' +
+        '<div class="sticky-title">我的勋章</div>' +
+      '</div>' +
+      '<div class="wall-header-wrap">' +
+        '<div class="wall-particles">' + particles + '</div>' +
+        '<button class="wall-back-btn" onclick="closeBadgeWall()"><i data-lucide="chevron-left"></i></button>' +
+        '<div class="wall-header">' +
+          '<h2>我的勋章</h2>' +
+          '<div class="wall-stats"><span class="stat-earned">' + earnedCount + '</span><span class="stat-sep">/</span><span class="stat-total">' + totalBadges + '</span></div>' +
+          '<div class="wall-subtitle">已收集 ' + earnedCount + ' 枚勋章，继续加油！</div>' +
+        '</div>' +
+      '</div>' +
+      categoriesHtml +
+    '</div>';
+
+  document.body.appendChild(overlay);
+  refreshIcons();
+
+  const wallContainer = overlay.querySelector('.badge-wall-container');
+  const wallStickyBar = document.getElementById('wallStickyBar');
+  const wallBackBtn = overlay.querySelector('.wall-back-btn');
+  if (wallContainer && wallStickyBar && wallBackBtn) {
+    wallContainer.addEventListener('scroll', () => {
+      const btnRect = wallBackBtn.getBoundingClientRect();
+      const containerRect = wallContainer.getBoundingClientRect();
+      const backBtnBottom = btnRect.bottom - containerRect.top;
+      wallStickyBar.classList.toggle('visible', backBtnBottom < 0);
+    });
+  }
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBadgeWall(); });
+}
+
+function openBadgeWall() {
+  const existing = document.getElementById('badgeWallOverlay');
+  if (existing) existing.remove();
+  ensureBadgeWallOverlay();
+  const overlay = document.getElementById('badgeWallOverlay');
+  document.body.style.overflow = 'hidden';
+  const container = overlay.querySelector('.badge-wall-container');
+  if (container) container.scrollTop = 0;
+  const stickyBar = document.getElementById('wallStickyBar');
+  if (stickyBar) stickyBar.classList.remove('visible');
+  refreshIcons();
+  // 等浏览器渲染初始 translateX(100%) 后再触发动画
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add('active');
+    });
+  });
+}
+
+function closeBadgeWall() {
+  const overlay = document.getElementById('badgeWallOverlay');
+  if (!overlay) return;
+  const stickyBar = document.getElementById('wallStickyBar');
+  if (stickyBar) stickyBar.classList.remove('visible');
+  overlay.classList.remove('active');
+  overlay.classList.add('closing');
+  setTimeout(() => { overlay.classList.remove('closing'); document.body.style.overflow = ''; }, 200);
 }
 
 /* ============ 弹窗 ============ */
