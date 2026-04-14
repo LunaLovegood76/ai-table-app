@@ -1227,9 +1227,6 @@ function exitLesson() {
 }
 
 function showExitConfirm() {
-  const existingFeedback = document.querySelector('.feedback-bar');
-  if (existingFeedback) existingFeedback.remove();
-
   const levelColor = lessonState.levelColor || '#58CC02';
   const progressPercent = (lessonState.currentStep / lessonState.totalSteps) * 100;
 
