@@ -2354,7 +2354,7 @@ body {
 .badge-wall-overlay.closing { pointer-events: none; }
 .badge-wall-container { width: 100%; max-width: 600px; height: 100%; background: #272B44; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; transform: translateX(100%); transition: transform 200ms ease-out; }
 .badge-wall-overlay.active .badge-wall-container { transform: translateX(0); }
-.badge-wall-overlay.closing .badge-wall-container { transform: translateX(-100%); }
+.badge-wall-overlay.closing .badge-wall-container { transform: translateX(100%); }
 .wall-back-btn { position: relative; z-index: 10; display: flex; align-items: center; padding: 14px 16px; background: transparent; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; cursor: pointer; border: none; }
 .wall-back-btn svg { width: 22px; height: 22px; }
 .wall-back-btn:hover { color: rgba(255,255,255,0.9); }
