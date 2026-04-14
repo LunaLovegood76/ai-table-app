@@ -940,6 +940,7 @@ function checkAnswer() {
 }
 
 function showFeedback(isCorrect, explanation) {
+  if (isCorrect) { SoundManager.playCorrect(); } else { SoundManager.playIncorrect(); }
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
@@ -999,11 +1000,16 @@ function completeLesson() {
 
   if (isSpeed) appState.speedComplete = true;
 
+  const rankBeforeComplete = getCurrentRank(appState.totalXP - xpEarned);
   updateStreak();
   checkAndUnlockLevels();
   const newBadges = checkNewBadges();
   saveState(appState);
 
+  SoundManager.playComplete();
+  if (newBadges.length > 0) { setTimeout(() => SoundManager.playBadge(), 400); }
+  const rankAfterComplete = getCurrentRank(appState.totalXP);
+  if (rankAfterComplete.name !== rankBeforeComplete.name) { setTimeout(() => SoundManager.playLevelUp(), 800); }
   showConfetti();
   renderCompletePage(lesson, xpEarned, accuracy, newBadges);
 }
@@ -1278,6 +1284,7 @@ const STREAK_MILESTONES = [
 function checkStreakEvents() {
   if (appState.previousStreak > 1 && !appState.streakBrokenShown) {
     setTimeout(() => {
+      SoundManager.playStreakBreak();
       showStreakBrokenModal(appState.previousStreak);
       appState.streakBrokenShown = true;
       saveState(appState);
@@ -1291,6 +1298,7 @@ function checkStreakEvents() {
   );
   if (milestone) {
     setTimeout(() => {
+      SoundManager.playMilestone();
       showStreakMilestoneModal(milestone);
       appState.milestoneShown.push(milestone.days);
       saveState(appState);
@@ -1371,6 +1379,100 @@ function showStreakModal() {
     </div>`;
   document.body.appendChild(overlay);
 }
+
+
+/* ============ 音效系统 (Web Audio API) ============ */
+const SoundManager = {
+  enabled: true,
+  audioContext: null,
+
+  init() {
+    if (this.audioContext) return;
+    try {
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    } catch (e) {
+      this.enabled = false;
+    }
+  },
+
+  _playNote(freq, duration, type, startTime, gainValue) {
+    if (!this.enabled || !this.audioContext) return;
+    const ctx = this.audioContext;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(gainValue || 0.3, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  },
+
+  playCorrect() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(523, 0.15, 'sine', now, 0.25);
+    this._playNote(659, 0.2, 'sine', now + 0.12, 0.25);
+  },
+
+  playIncorrect() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(330, 0.15, 'sine', now, 0.2);
+    this._playNote(262, 0.25, 'sine', now + 0.12, 0.2);
+  },
+
+  playComplete() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(523, 0.2, 'sine', now, 0.25);
+    this._playNote(659, 0.2, 'sine', now + 0.18, 0.25);
+    this._playNote(784, 0.35, 'sine', now + 0.36, 0.3);
+  },
+
+  playBadge() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    for (let i = 0; i < 4; i++) {
+      this._playNote(1319, 0.08, 'triangle', now + i * 0.1, 0.15);
+    }
+    this._playNote(1568, 0.3, 'triangle', now + 0.4, 0.2);
+  },
+
+  playLevelUp() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(262, 0.2, 'square', now, 0.15);
+    this._playNote(330, 0.2, 'square', now + 0.2, 0.15);
+    this._playNote(392, 0.2, 'square', now + 0.4, 0.15);
+    this._playNote(523, 0.4, 'square', now + 0.6, 0.2);
+  },
+
+  playMilestone() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(392, 0.2, 'sine', now, 0.25);
+    this._playNote(494, 0.2, 'sine', now + 0.2, 0.25);
+    this._playNote(587, 0.3, 'sine', now + 0.4, 0.25);
+    this._playNote(1319, 0.4, 'triangle', now + 0.7, 0.15);
+  },
+
+  playStreakBreak() {
+    this.init();
+    if (!this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this._playNote(392, 0.25, 'sine', now, 0.2);
+    this._playNote(294, 0.35, 'sine', now + 0.2, 0.15);
+  }
+};
 
 /* ============ Lucide 图标刷新 ============ */
 function refreshIcons() {
