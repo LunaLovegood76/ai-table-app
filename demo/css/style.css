@@ -2332,10 +2332,16 @@ body.page-profile {
   margin: 0 auto 20px;
 }
 
-.exit-sheet-emoji {
-  font-size: 48px;
-  margin-bottom: 12px;
-  line-height: 1;
+.exit-sheet-savy {
+  margin: 0 auto 12px;
+  width: 100px;
+  height: 100px;
+}
+
+.exit-sheet-savy img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .exit-sheet-title {

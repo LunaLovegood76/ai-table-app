@@ -1212,6 +1212,73 @@ function navigateToNextLesson() {
 }
 
 function exitLesson() {
+  // 复习模式直接退出，不弹挽留浮层
+  if (lessonState.isReview) {
+    doExitLesson();
+    return;
+  }
+  // 已经到最后一步（完成页），直接退出
+  if (lessonState.currentStep >= lessonState.totalSteps) {
+    doExitLesson();
+    return;
+  }
+  // 弹出挽留浮层
+  showExitConfirm();
+}
+
+function showExitConfirm() {
+  const existingFeedback = document.querySelector('.feedback-bar');
+  if (existingFeedback) existingFeedback.remove();
+
+  const levelColor = lessonState.levelColor || '#58CC02';
+  const progressPercent = (lessonState.currentStep / lessonState.totalSteps) * 100;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'exit-overlay';
+  overlay.id = 'exit-confirm-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) closeExitConfirm(); };
+
+  const sheet = document.createElement('div');
+  sheet.className = 'exit-sheet';
+  sheet.innerHTML = `
+    <div class="exit-sheet-handle"></div>
+    <div class="exit-sheet-savy">
+      <img src="assets/kawaii/savy-pleading.svg" alt="savy">
+    </div>
+    <div class="exit-sheet-title">别走嘛，只差几步就完成了！</div>
+    <div class="exit-sheet-progress">
+      <span>当前进度：${lessonState.currentStep} / ${lessonState.totalSteps}</span>
+      <div class="exit-progress-bar">
+        <div class="exit-progress-fill" style="width:${progressPercent}%;background:${levelColor}"></div>
+      </div>
+    </div>
+    <div class="exit-sheet-buttons">
+      <button class="action-btn btn-primary exit-btn-continue" style="background:${levelColor};border-color:${levelColor}" onclick="closeExitConfirm()">继续努力</button>
+      <button class="action-btn exit-btn-quit" onclick="doExitLesson()">放弃本次学习</button>
+    </div>
+  `;
+
+  overlay.appendChild(sheet);
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    overlay.classList.add('show');
+    sheet.classList.add('show');
+  });
+}
+
+function closeExitConfirm() {
+  const overlay = document.getElementById('exit-confirm-overlay');
+  if (!overlay) return;
+  const sheet = overlay.querySelector('.exit-sheet');
+  overlay.classList.remove('show');
+  if (sheet) sheet.classList.remove('show');
+  setTimeout(() => overlay.remove(), 350);
+}
+
+function doExitLesson() {
+  const overlay = document.getElementById('exit-confirm-overlay');
+  if (overlay) overlay.remove();
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
   currentPage = 'path';
