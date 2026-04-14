@@ -173,8 +173,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 54px;
+  height: 54px;
   border-radius: var(--radius-sm);
   transition: var(--transition);
   text-decoration: none;
@@ -186,7 +186,7 @@ body {
 }
 
 .nav-item.active {
-  color: var(--blue);
+  color: var(--green);
 }
 
 .nav-item:hover {
@@ -2320,7 +2320,7 @@ body {
 .profile-page-v2 .avatar-circle { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg, #B8D4E8, #8BB8D4); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 500; flex-shrink: 0; }
 .profile-page-v2 .avatar-info { flex: 1; }
 .profile-page-v2 .avatar-name { font-size: 18px; font-weight: 500; color: var(--gray-600); }
-.profile-page-v2 .badge-entry { display: inline-flex; align-items: center; gap: 3px; background: linear-gradient(135deg, #5BA8D4, #4A90C4); border-radius: 20px; padding: 2px 9px 2px 5px; font-size: 11px; font-weight: 500; color: white; cursor: pointer; }
+.profile-page-v2 .badge-entry { display: inline-flex; align-items: center; gap: 3px; background: linear-gradient(135deg, var(--green), var(--green-dark)); border-radius: 20px; padding: 2px 9px 2px 5px; font-size: 11px; font-weight: 500; color: white; cursor: pointer; }
 .profile-page-v2 .badge-entry svg { width: 12px; height: 12px; }
 .profile-page-v2 .p-card { margin: 0 16px; background: var(--white); border-radius: 12px; border: 0.5px solid var(--gray-150); }
 .profile-page-v2 .p-card + .p-card, .profile-page-v2 .p-card-group + .p-card, .profile-page-v2 .p-card + .p-card-group { margin-top: 8px; }

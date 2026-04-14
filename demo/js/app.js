@@ -140,8 +140,8 @@ function render() {
 
   app.innerHTML = `
     <div class="top-bar">
-      <div class="top-bar-logo" onclick="navigateTo('path')">
-        <span class="logo-icon"><i data-lucide="table-2"></i></span> AI表格学堂
+      <div class="top-bar-logo" onclick="navigateTo('path')" style="color:#333;">
+        HappyDuck AI
       </div>
       <div class="top-bar-stats">
         <div class="stat-item" onclick="showStreakModal()">
