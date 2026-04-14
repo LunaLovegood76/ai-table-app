@@ -1779,33 +1779,412 @@ body {
   100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
-/* ============ 响应式 ============ */
-@media (max-width: 480px) {
+/* ============ 响应式 — 移动端全面适配 ============ */
+
+/* iOS 安全区支持 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  .check-area {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .feedback-bar {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
   .main-content {
-    padding: 70px 12px 80px;
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+
+  .back-to-top {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 600px) {
+  /* === 顶部导航 === */
+  .top-bar {
+    height: 52px;
+    padding: 0 12px;
+  }
+
+  .top-bar-logo {
+    font-size: 15px;
+    gap: 6px;
+  }
+
+  .top-bar-logo span {
+    font-size: 20px;
   }
 
   .top-bar-stats {
-    gap: 10px;
+    gap: 4px;
   }
 
   .stat-item {
     padding: 4px 8px;
     font-size: 13px;
+    gap: 4px;
+  }
+
+  .stat-icon svg,
+  .stat-icon i {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* === 主内容区 === */
+  .main-content {
+    padding: 62px 12px 80px;
+  }
+
+  /* === 底部导航 === */
+  .bottom-nav {
+    height: 60px;
+  }
+
+  .nav-item {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* === 课程路径页 === */
+  .path-header {
+    margin-bottom: 20px;
+  }
+
+  .path-header h2 {
+    font-size: 18px;
+  }
+
+  .path-header p {
+    font-size: 13px;
+  }
+
+  .level-header {
+    padding: 12px 14px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .level-info h3 {
+    font-size: 14px;
+  }
+
+  .level-info p {
+    font-size: 11px;
+  }
+
+  .level-progress {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .level-illustration {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* 蛇形路径节点 */
+  .lesson-path {
+    padding: 0 8px 32px;
+    gap: 6px;
   }
 
   .lesson-node {
     width: 60px;
     height: 60px;
     font-size: 24px;
+    border-width: 3px;
   }
 
-  .knowledge-card, .question-card {
-    padding: 20px 16px;
+  .lesson-node svg,
+  .lesson-node i {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lesson-check svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lock-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lesson-label {
+    font-size: 11px;
+    max-width: 72px;
+  }
+
+  /* 场景插画缩小 */
+  .scene-illustration-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .level-scene-illustration.left {
+    right: calc(100% - 44px);
+  }
+
+  .level-scene-illustration.right {
+    left: calc(100% - 44px);
+  }
+
+  /* 吸顶 level bar */
+  .sticky-level-bar {
+    top: 52px;
+    padding: 8px 14px;
+    gap: 10px;
+  }
+
+  /* 回到顶部按钮 */
+  .back-to-top {
+    bottom: 72px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* === 学习页面 === */
+  .knowledge-card,
+  .question-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .knowledge-card h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .knowledge-card .card-content {
+    font-size: 14px;
+  }
+
+  .card-mascot-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .question-card h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* 选项按钮 */
+  .option-btn {
+    padding: 13px 14px;
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .option-letter {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    border-radius: 7px;
+  }
+
+  /* 判断题 */
+  .tf-btn {
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  /* 匹配题 — 小屏改为竖排 */
+  .match-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .match-left {
+    flex: 1 1 100%;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .match-arrow {
+    display: none;
+  }
+
+  .match-trigger {
+    flex: 1 1 100%;
+    font-size: 12px;
+    padding: 10px 12px;
+    min-height: 40px;
+  }
+
+  /* 排序题 */
+  .order-item {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  /* 模拟操作题 */
+  .sim-body {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .sim-area {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .sim-instruction {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  /* 进度条 */
+  .progress-bar-container {
+    height: 12px;
+  }
+
+  /* 底部检查按钮 */
+  .check-area {
+    padding: 12px 16px;
+  }
+
+  .check-area .action-btn {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  /* 反馈栏 */
+  .feedback-bar {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .feedback-mascot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .feedback-bar .feedback-title {
+    font-size: 14px;
+  }
+
+  .feedback-bar .feedback-explanation {
+    font-size: 12px;
+  }
+
+  .btn-continue {
+    padding: 10px 18px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* === 课程完成页 === */
+  .lesson-complete {
+    padding: 24px 12px;
+  }
+
+  .lesson-complete h2 {
+    font-size: 22px;
   }
 
   .complete-stats {
-    gap: 20px;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .complete-stat .stat-number {
+    font-size: 28px;
+    height: 40px;
+  }
+
+  .complete-mascot-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* === 个人中心 === */
+  .profile-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .profile-stat-card {
+    padding: 14px 12px;
+  }
+
+  .profile-stat-card .ps-value {
+    font-size: 20px;
+  }
+
+  .badges-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .badge-cell {
+    padding: 10px 6px;
+  }
+
+  /* === 弹窗 === */
+  .modal-content {
+    padding: 24px 20px;
+    width: 92%;
+  }
+
+  .modal-content h3 {
+    font-size: 18px;
+  }
+
+  /* === 退出挽留浮层 === */
+  .exit-sheet {
+    padding: 14px 20px 28px;
+  }
+
+  .exit-sheet-title {
+    font-size: 16px;
+  }
+
+  /* === 对比表格 === */
+  .comparison-table th,
+  .comparison-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+/* 极小屏（iPhone SE 等 375px 以下）*/
+@media (max-width: 375px) {
+  .top-bar-logo {
+    font-size: 13px;
+  }
+
+  .stat-item {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+
+  .lesson-node {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
+
+  .scene-illustration-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .complete-stats {
+    gap: 10px;
+  }
+
+  .complete-stat .stat-number {
+    font-size: 24px;
   }
 
   .badges-grid {

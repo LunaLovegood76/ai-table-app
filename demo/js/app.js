@@ -247,7 +247,9 @@ function renderPathPage(container) {
       const lesson = lessons[i];
       const status = level.unlocked ? getLessonStatus(lesson.id) : 'locked';
       const statusClass = status;
-      const offsets = [0, 50, 80, 50, 0, -50, -80, -50];
+      const isMobile = window.innerWidth <= 600;
+      const baseOffsets = [0, 50, 80, 50, 0, -50, -80, -50];
+      const offsets = isMobile ? baseOffsets.map(v => Math.round(v * 0.55)) : baseOffsets;
       const offset = offsets[i % offsets.length];
 
       if (i > 0) {
