@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>勋章墙预览 V2 — 微信读书风格</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -10,17 +10,99 @@
 
 body {
   font-family: 'Nunito', -apple-system, 'PingFang SC', sans-serif;
-  background: #0B1622;
+  background: #1A1E2E;
   color: #fff;
   min-height: 100vh;
-  padding: 0 0 80px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ============ 页面容器 — 隔离滚动 ============ */
+.badge-wall-container {
+  width: 390px;
+  height: 100vh;
+  background: #272B44;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* ============ 返回按钮（在 header 内） ============ */
+.wall-back-btn {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  width: auto;
+  text-align: left;
+}
+.wall-back-btn svg { width: 22px; height: 22px; }
+.wall-back-btn:hover { color: rgba(255,255,255,0.9); }
+
+/* ============ 吸顶导航栏 — 滚动时出现 ============ */
+.wall-sticky-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 390px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  background: #272B44;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.wall-sticky-bar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.wall-sticky-bar .sticky-back {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  padding: 0;
+}
+.wall-sticky-bar .sticky-back svg { width: 20px; height: 20px; }
+.wall-sticky-bar .sticky-back:hover { color: #fff; }
+.wall-sticky-bar .sticky-title {
+  flex: 1;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin-right: 20px;
 }
 
 /* ============ 顶部统计区 ============ */
+.wall-header-wrap {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #2E3352 0%, #272B44 100%);
+}
+
 .wall-header {
   text-align: center;
-  padding: 40px 20px 28px;
-  background: linear-gradient(180deg, #162A3E 0%, #0B1622 100%);
+  padding: 0 20px 28px;
+  position: relative;
+  z-index: 1;
 }
 
 .wall-header h1 {
@@ -81,8 +163,8 @@ body {
 .category-card {
   margin: 12px 16px;
   padding: 20px 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: #353A50;
+  border: none;
   border-radius: 16px;
 }
 
@@ -387,10 +469,20 @@ body {
 }
 
 /* ============ Hover 光晕放大效果 ============ */
+/* ============ 去掉点击选中框 ============ */
+.badge-cell:focus,
+.badge-cell:active,
+.badge-cell *:focus,
+.badge-cell *:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 .badge-cell:not(.unearned) .badge-frame {
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
               filter 0.3s ease;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .badge-cell:not(.unearned):hover .badge-frame {
@@ -497,13 +589,33 @@ body {
   color: rgba(255,215,0,0.5);
   text-decoration: none;
 }
+
+/* ============ 底部安全区 ============ */
+.wall-bottom-spacer {
+  height: 40px;
+}
 </style>
 </head>
 <body>
 
-<!-- ============ 顶部统计 ============ -->
-<div class="wall-header">
-  <h1>我的勋章</h1>
+<!-- ============ 吸顶导航栏（滚动时出现） ============ -->
+<div class="wall-sticky-bar" id="wallStickyBar">
+  <button class="sticky-back" id="stickyBackBtn" onclick="history.back()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <span class="sticky-title">我的勋章</span>
+</div>
+
+<!-- ============ 页面容器 ============ -->
+<div class="badge-wall-container" id="badgeWallContainer">
+
+<!-- ============ 顶部区域（含返回按钮 + 统计） ============ -->
+<div class="wall-header-wrap" id="wallHeaderWrap">
+  <button class="wall-back-btn" id="wallBackBtn" onclick="history.back()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <div class="wall-header">
+    <h1>我的勋章</h1>
   <div class="wall-stats">
     <span class="stat-earned">12</span>
     <span class="stat-sep">/</span>
@@ -511,6 +623,7 @@ body {
   </div>
   <div class="wall-subtitle">已收集 12 枚勋章，继续加油！</div>
   <span class="tech-tag">图标：Microsoft Fluent Emoji · MIT License</span>
+  </div>
 </div>
 
 <!-- ============ 🔥 习惯养成 — 盾牌形 ============ -->
@@ -823,6 +936,29 @@ body {
   盾牌 / 六边形 / 圆形 / 八角形 — 不同分类不同外形<br>
   铜 → 银 → 金 → 紫 → 钻石 — 等级渐变色环 + 金属高光
 </div>
+
+<div class="wall-bottom-spacer"></div>
+
+</div><!-- /.badge-wall-container -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('badgeWallContainer');
+  const stickyBar = document.getElementById('wallStickyBar');
+  const backBtn = document.getElementById('wallBackBtn');
+
+  if (container && stickyBar && backBtn) {
+    container.addEventListener('scroll', () => {
+      const backBtnBottom = backBtn.offsetTop + backBtn.offsetHeight - container.scrollTop;
+      if (backBtnBottom < 0) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>

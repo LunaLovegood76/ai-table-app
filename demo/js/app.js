@@ -1476,8 +1476,15 @@ function openBadgeWall() {
   ensureBadgeWallOverlay();
   const overlay = document.getElementById('badgeWallOverlay');
   document.body.style.overflow = 'hidden';
+  // 清除关闭动画可能残留的 inline style
+  overlay.style.transition = '';
+  overlay.style.opacity = '';
   const container = overlay.querySelector('.badge-wall-container');
-  if (container) container.scrollTop = 0;
+  if (container) {
+    container.scrollTop = 0;
+    container.style.transition = '';
+    container.style.transform = '';
+  }
   const stickyBar = document.getElementById('wallStickyBar');
   if (stickyBar) stickyBar.classList.remove('visible');
   refreshIcons();
@@ -1495,15 +1502,18 @@ function closeBadgeWall() {
   const stickyBar = document.getElementById('wallStickyBar');
   if (stickyBar) stickyBar.classList.remove('visible');
   const container = overlay.querySelector('.badge-wall-container');
-  // 用 inline style 强制 container 滑出，保持 overlay.active（visibility: visible）
+  // container 滑出到右侧
   if (container) container.style.transform = 'translateX(100%)';
-  // 等 transition 结束后再隐藏 overlay
+  // 同时 overlay 背景渐变为透明（防止 container 滑走后背景色闪现）
+  overlay.style.transition = 'opacity 200ms ease-out';
+  overlay.style.opacity = '0';
+  // 等动画结束后彻底隐藏
   setTimeout(() => {
-    // 先禁用 transition，防止移除 active 后 container 有任何过渡动画
     if (container) container.style.transition = 'none';
     overlay.classList.remove('active');
+    overlay.style.transition = '';
+    overlay.style.opacity = '';
     if (container) container.style.transform = '';
-    // 下一帧恢复 transition 和 body overflow，避免布局抖动
     requestAnimationFrame(() => {
       if (container) container.style.transition = '';
       document.body.style.overflow = '';
