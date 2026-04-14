@@ -523,17 +523,13 @@ function renderLessonStep() {
   }
 
   app.innerHTML = `
-    <div class="top-bar" style="background:var(--white);border-bottom:2px solid var(--gray-100)">
-      <div class="top-bar-logo" style="visibility:hidden">.</div>
-      <div style="display:flex;align-items:center;gap:16px;flex:1;padding:0 20px">
-        <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill" style="width:${progress}%"></div>
-        </div>
+    <div class="lesson-top-nav">
+      <div class="progress-bar-container" style="flex:1">
+        <div class="progress-bar-fill ${lessonState.isReview ? 'review-fill' : ''}" style="width:${progress}%"></div>
       </div>
-      <div class="top-bar-stats" style="visibility:hidden">.</div>
+      <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
     </div>
-    <div class="main-content" style="padding-bottom:${lessonState.answered ? '140px' : '100px'}">
+    <div class="lesson-main-content" style="padding-bottom:${lessonState.answered ? '140px' : '100px'}">
       <div class="lesson-page">${contentHtml}</div>
     </div>
     ${isCard ? `

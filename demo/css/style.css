@@ -160,7 +160,7 @@ body {
   right: 0;
   height: 64px;
   background: var(--white);
-  border-top: 2px solid var(--gray-100);
+  border-top: 1px solid rgba(107, 114, 148, 0.12);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -530,6 +530,29 @@ body {
   margin-bottom: 24px;
 }
 
+/* 答题页顶部导航 */
+.lesson-top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--white);
+}
+
+/* 答题页主内容区 */
+.lesson-main-content {
+  padding-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--white);
+  min-height: 100vh;
+}
+
 .lesson-close {
   font-size: 24px;
   cursor: pointer;
@@ -538,6 +561,7 @@ body {
   border: none;
   padding: 4px;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .lesson-close:hover {
@@ -565,8 +589,8 @@ body {
   border-radius: var(--radius);
   padding: 28px 24px;
   margin-bottom: 20px;
-  box-shadow: var(--shadow);
-  border: 2px solid var(--gray-100);
+  box-shadow: none;
+  border: 1px solid rgba(107, 114, 148, 0.24);
   position: relative;
 }
 
@@ -650,8 +674,8 @@ body {
   border-radius: var(--radius);
   padding: 28px 24px;
   margin-bottom: 20px;
-  box-shadow: var(--shadow);
-  border: 2px solid var(--gray-100);
+  box-shadow: none;
+  border: 1px solid rgba(107, 114, 148, 0.24);
 }
 
 .question-card h3 {
@@ -1880,6 +1904,7 @@ body {
   /* === 底部导航 === */
   .bottom-nav {
     height: 60px;
+    border-top: 1px solid rgba(107, 114, 148, 0.12);
   }
 
   .nav-item {
@@ -1983,7 +2008,7 @@ body {
 
   /* 吸顶 level bar */
   .sticky-level-bar {
-    top: 60px;
+    top: 52px;
     left: 12px;
     right: 12px;
     max-width: calc(100% - 24px);
@@ -2539,7 +2564,7 @@ body {
 /* 吸顶 Level 条 */
 .sticky-level-bar {
   position: fixed;
-  top: 68px;
+  top: 60px;
   left: 16px;
   right: 16px;
   z-index: 90;
@@ -2766,6 +2791,8 @@ body {
   --icon-teal-bg: #E6F5F3; --icon-teal-fg: #4DA89A;
   --icon-indigo-bg: #EBF0FF; --icon-indigo-fg: #6B82C4;
   --gray-150: #E8E8E8;
+  background: rgba(107, 114, 148, 0.05);
+  min-height: 100%;
 }
 .profile-page-v2 .profile-header { padding: 20px 20px; display: flex; align-items: center; gap: 14px; }
 .profile-page-v2 .avatar-circle { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg, #B8D4E8, #8BB8D4); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 500; flex-shrink: 0; }
