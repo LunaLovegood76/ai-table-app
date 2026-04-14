@@ -189,7 +189,7 @@ body.page-profile {
 }
 
 .nav-item.active {
-  color: var(--green);
+  color: #1a1a1a;
 }
 
 .nav-item:hover {
@@ -2802,14 +2802,15 @@ body.page-profile {
 .profile-page-v2 .avatar-circle { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg, #B8D4E8, #8BB8D4); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 500; flex-shrink: 0; }
 .profile-page-v2 .avatar-info { flex: 1; }
 .profile-page-v2 .avatar-name { font-size: 18px; font-weight: 500; color: var(--gray-600); }
-.profile-page-v2 .badge-entry { display: inline-flex; align-items: center; gap: 3px; background: linear-gradient(135deg, var(--green), var(--green-dark)); border-radius: 20px; padding: 2px 9px 2px 5px; font-size: 11px; font-weight: 500; color: white; cursor: pointer; }
-.profile-page-v2 .badge-entry svg { width: 12px; height: 12px; }
+.profile-page-v2 .badge-entry { display: inline-flex; align-items: center; gap: 4px; background: rgba(0,0,0,0.06); border-radius: 20px; padding: 3px 10px 3px 7px; font-size: 12px; font-weight: 600; color: #555; cursor: pointer; }
+.profile-page-v2 .badge-entry svg { width: 13px; height: 13px; color: #888; }
 .profile-page-v2 .p-card { margin: 0 16px; background: var(--white); border-radius: 12px; border: 0.5px solid var(--gray-150); }
 .profile-page-v2 .p-card + .p-card, .profile-page-v2 .p-card-group + .p-card, .profile-page-v2 .p-card + .p-card-group { margin-top: 8px; }
 .profile-page-v2 .p-card-row { display: flex; align-items: center; padding: 16px 18px; gap: 12px; }
 .profile-page-v2 .p-card-row + .p-card-row { border-top: 0.5px solid var(--gray-100); }
-.profile-page-v2 .icon-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.profile-page-v2 .icon-circle svg { width: 18px; height: 18px; }
+.profile-page-v2 .icon-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; align-self: center; overflow: hidden; line-height: 0; }
+.profile-page-v2 .icon-circle svg { width: 18px; height: 18px; display: block; }
+.profile-page-v2 .icon-circle i { display: flex; align-items: center; justify-content: center; line-height: 0; }
 .profile-page-v2 .p-card-label { flex: 1; font-size: 13px; font-weight: 500; color: var(--gray-600); }
 .profile-page-v2 .p-card-value { text-align: right; }
 .profile-page-v2 .num-primary { font-size: 12px; font-weight: 700; color: var(--gray-500); }
@@ -2831,12 +2832,10 @@ body.page-profile {
 .profile-page-v2 .grid-cell-sub { font-size: 10px; color: var(--gray-300); margin-top: 1px; }
 
 /* ============================================ 勋章墙弹窗 ============================================ */
-.badge-wall-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; display: flex; justify-content: center; background: #272B44; pointer-events: none; visibility: hidden; }
-.badge-wall-overlay.active, .badge-wall-overlay.closing { pointer-events: auto; visibility: visible; }
-.badge-wall-overlay.closing { pointer-events: none; }
+.badge-wall-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 2000; display: flex; justify-content: center; background: transparent; pointer-events: none; visibility: hidden; }
+.badge-wall-overlay.active { pointer-events: auto; visibility: visible; }
 .badge-wall-container { width: 100%; max-width: 600px; height: 100%; background: #272B44; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; transform: translateX(100%); transition: transform 200ms ease-out; }
 .badge-wall-overlay.active .badge-wall-container { transform: translateX(0); }
-.badge-wall-overlay.closing .badge-wall-container { transform: translateX(100%); }
 .wall-back-btn { position: relative; z-index: 10; display: flex; align-items: center; padding: 14px 16px; background: transparent; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; cursor: pointer; border: none; }
 .wall-back-btn svg { width: 22px; height: 22px; }
 .wall-back-btn:hover { color: rgba(255,255,255,0.9); }

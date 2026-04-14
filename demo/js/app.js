@@ -199,8 +199,8 @@ function render() {
   app.innerHTML = `
     ${!isProfilePage ? `
     <div class="top-bar">
-      <div class="top-bar-logo" onclick="navigateTo('path')" style="color:#333;">
-        HappyDuck AI
+      <div class="top-bar-logo" onclick="navigateTo('path')">
+        <img src="img/logo/happyduck-brand-logo.png" alt="HappyDuck AI" style="height:32px;">
       </div>
       <div class="top-bar-stats">
         <div class="stat-item" onclick="showStreakModal()">
@@ -1473,8 +1473,6 @@ function ensureBadgeWallOverlay() {
 }
 
 function openBadgeWall() {
-  const existing = document.getElementById('badgeWallOverlay');
-  if (existing) existing.remove();
   ensureBadgeWallOverlay();
   const overlay = document.getElementById('badgeWallOverlay');
   document.body.style.overflow = 'hidden';
@@ -1493,12 +1491,24 @@ function openBadgeWall() {
 
 function closeBadgeWall() {
   const overlay = document.getElementById('badgeWallOverlay');
-  if (!overlay) return;
+  if (!overlay || !overlay.classList.contains('active')) return;
   const stickyBar = document.getElementById('wallStickyBar');
   if (stickyBar) stickyBar.classList.remove('visible');
-  overlay.classList.remove('active');
-  overlay.classList.add('closing');
-  setTimeout(() => { overlay.classList.remove('closing'); document.body.style.overflow = ''; }, 200);
+  const container = overlay.querySelector('.badge-wall-container');
+  // 用 inline style 强制 container 滑出，保持 overlay.active（visibility: visible）
+  if (container) container.style.transform = 'translateX(100%)';
+  // 等 transition 结束后再隐藏 overlay
+  setTimeout(() => {
+    // 先禁用 transition，防止移除 active 后 container 有任何过渡动画
+    if (container) container.style.transition = 'none';
+    overlay.classList.remove('active');
+    if (container) container.style.transform = '';
+    // 下一帧恢复 transition 和 body overflow，避免布局抖动
+    requestAnimationFrame(() => {
+      if (container) container.style.transition = '';
+      document.body.style.overflow = '';
+    });
+  }, 220);
 }
 
 /* ============ 弹窗 ============ */
