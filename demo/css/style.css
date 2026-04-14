@@ -394,7 +394,6 @@ body.page-profile {
 .lesson-node.current {
   background: var(--white);
   border-color: var(--green);
-  animation: pulse 2s infinite;
 }
 
 .lesson-node.locked {
@@ -413,10 +412,6 @@ body.page-profile {
   opacity: 0.5;
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 8px var(--node-glow, rgba(88, 204, 2, 0.15)); }
-  50% { box-shadow: 0 0 0 14px var(--node-glow-far, rgba(88, 204, 2, 0.08)); }
-}
 
 .lesson-label {
   font-size: 13px;
@@ -471,8 +466,6 @@ body.page-profile {
 
 .lesson-node.current {
   border-color: var(--green);
-  box-shadow: 0 4px 0 var(--green-dark), 0 0 0 4px rgba(88, 204, 2, 0.2);
-  animation: pulse 2s infinite;
 }
 
 .lesson-node.locked {
