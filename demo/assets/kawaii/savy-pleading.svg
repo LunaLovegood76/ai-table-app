@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Savy 撒娇表情 — 水汪汪大眼+双手合十+小爱心 -->
+  <defs>
+    <linearGradient id="savyBodyPl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 身体 -->
+  <ellipse cx="60" cy="84" rx="21" ry="15" fill="url(#savyBodyPl)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 小脚（乖乖并拢） -->
+  <ellipse cx="50" cy="101" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="70" cy="101" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 头（微微歪） -->
+  <circle cx="60" cy="46" r="28" fill="url(#savyBodyPl)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="60" cy="19" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红（更红更大） -->
+  <circle cx="36" cy="54" r="10" fill="#FFB0C1" opacity="0.85"/>
+  <circle cx="84" cy="54" r="10" fill="#FFB0C1" opacity="0.85"/>
+  <!-- 眼镜 -->
+  <circle cx="50" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="70" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="61" y1="44" x2="59" y2="44" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="39" y1="44" x2="34" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="81" y1="44" x2="86" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛 — 超大水汪汪（比 sad 更大更亮） -->
+  <circle cx="50" cy="43" r="6.5" fill="#1a1a2e"/>
+  <circle cx="70" cy="43" r="6.5" fill="#1a1a2e"/>
+  <!-- 大高光 -->
+  <circle cx="53" cy="40" r="3" fill="white"/>
+  <circle cx="73" cy="40" r="3" fill="white"/>
+  <!-- 小高光 -->
+  <circle cx="48" cy="45" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="68" cy="45" r="1.5" fill="white" opacity="0.6"/>
+  <!-- 泪光效果（底部弧形反光） -->
+  <path d="M44 47 Q50 50 56 47" stroke="white" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M64 47 Q70 50 76 47" stroke="white" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- 眉毛 — 微微上挑（可怜） -->
+  <path d="M42 35 Q47 32 55 34" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M65 34 Q73 32 78 35" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 微微嘟嘴 -->
+  <ellipse cx="60" cy="57" rx="9" ry="4.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M54 58 Q60 55 66 58" stroke="#E07030" stroke-width="1" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M43 66 Q60 74 77 66" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="71" r="3" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="71" r="1.2" fill="#A08030"/>
+  <!-- 双手合十（祈求） -->
+  <path d="M40 72 L54 64" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <path d="M80 72 L66 64" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="58" cy="62" rx="5" ry="4" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="62" cy="62" rx="5" ry="4" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 小爱心飘出（动画） -->
+  <g>
+    <path d="M14 28 C14 24, 20 24, 20 28 C20 32, 14 36, 14 36 C14 36, 8 32, 8 28 C8 24, 14 24, 14 28Z" fill="#FF6B8A" opacity="0.7" transform="scale(0.5) translate(16,40)">
+      <animateTransform attributeName="transform" type="translate" values="16,40;14,30;16,40" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <g>
+    <path d="M14 28 C14 24, 20 24, 20 28 C20 32, 14 36, 14 36 C14 36, 8 32, 8 28 C8 24, 14 24, 14 28Z" fill="#FF8FAB" opacity="0.5" transform="scale(0.4) translate(240,30)">
+      <animateTransform attributeName="transform" type="translate" values="240,30;242,18;240,30" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <g>
+    <path d="M14 28 C14 24, 20 24, 20 28 C20 32, 14 36, 14 36 C14 36, 8 32, 8 28 C8 24, 14 24, 14 28Z" fill="#FF4B4B" opacity="0.4" transform="scale(0.35) translate(170,20)">
+      <animateTransform attributeName="transform" type="translate" values="170,20;168,8;170,20" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.5;0" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>

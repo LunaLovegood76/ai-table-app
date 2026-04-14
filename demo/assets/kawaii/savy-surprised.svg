@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Savy 惊讶表情 — 眼镜弹飞+嘴巴O形+感叹号 -->
+  <defs>
+    <linearGradient id="savyBodySurp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 身体 -->
+  <ellipse cx="60" cy="84" rx="22" ry="16" fill="url(#savyBodySurp)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 小脚（惊讶后退） -->
+  <ellipse cx="46" cy="102" rx="9" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-8,46,102)"/>
+  <ellipse cx="74" cy="102" rx="9" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(8,74,102)"/>
+  <!-- 头 -->
+  <circle cx="60" cy="46" r="28" fill="url(#savyBodySurp)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛（竖起来） -->
+  <ellipse cx="60" cy="18" rx="3" ry="6" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="36" cy="54" r="9" fill="#FFB0C1" opacity="0.8"/>
+  <circle cx="84" cy="54" r="9" fill="#FFB0C1" opacity="0.8"/>
+  <!-- 眼镜弹飞到右上方（倾斜+偏移） -->
+  <g transform="translate(18,-16) rotate(25,60,30)">
+    <circle cx="50" cy="30" r="10" fill="none" stroke="#C8A850" stroke-width="1.8" opacity="0.7"/>
+    <circle cx="70" cy="30" r="10" fill="none" stroke="#C8A850" stroke-width="1.8" opacity="0.7"/>
+    <line x1="60" y1="30" x2="60" y2="30" stroke="#C8A850" stroke-width="1.8" opacity="0.7"/>
+    <animateTransform attributeName="transform" type="translate" values="18,-16;20,-20;18,-16" dur="2s" repeatCount="indefinite"/>
+  </g>
+  <!-- 眼睛 — 超大圆眼（震惊） -->
+  <circle cx="48" cy="44" r="7" fill="white" stroke="#1a1a2e" stroke-width="1.5"/>
+  <circle cx="72" cy="44" r="7" fill="white" stroke="#1a1a2e" stroke-width="1.5"/>
+  <circle cx="48" cy="44" r="4" fill="#1a1a2e"/>
+  <circle cx="72" cy="44" r="4" fill="#1a1a2e"/>
+  <circle cx="50" cy="42" r="1.8" fill="white"/>
+  <circle cx="74" cy="42" r="1.8" fill="white"/>
+  <!-- 眉毛 — 高高挑起 -->
+  <path d="M40 34 Q48 28 56 33" stroke="#D4A017" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M64 33 Q72 28 80 34" stroke="#D4A017" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — O形张大嘴 -->
+  <ellipse cx="60" cy="58" rx="8" ry="7" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <ellipse cx="60" cy="59" rx="5" ry="4.5" fill="#E07030" opacity="0.4"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M42 66 Q60 74 78 66" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="71" r="3" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="71" r="1.2" fill="#A08030"/>
+  <!-- 双手举到脸旁（惊讶姿势） -->
+  <path d="M38 72 L28 56" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="26" cy="54" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M82 72 L92 56" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="94" cy="54" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 感叹号（弹跳） -->
+  <g>
+    <rect x="10" y="8" width="4" height="14" rx="2" fill="#FF4B4B"/>
+    <circle cx="12" cy="26" r="2.5" fill="#FF4B4B"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+  </g>
+  <g>
+    <rect x="104" y="10" width="3.5" height="12" rx="1.8" fill="#FF4B4B"/>
+    <circle cx="105.75" cy="26" r="2.2" fill="#FF4B4B"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1s" repeatCount="indefinite"/>
+  </g>
+</svg>

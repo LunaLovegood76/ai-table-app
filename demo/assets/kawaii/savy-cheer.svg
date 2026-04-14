@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Savy 加油表情 — 握拳举起+头带+坚定眼神 -->
+  <defs>
+    <linearGradient id="savyBodyCh" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 身体 -->
+  <ellipse cx="60" cy="84" rx="22" ry="16" fill="url(#savyBodyCh)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 小脚（稳稳站立） -->
+  <ellipse cx="47" cy="102" rx="9" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="73" cy="102" rx="9" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 头 -->
+  <circle cx="60" cy="46" r="28" fill="url(#savyBodyCh)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头带（红色绑带） -->
+  <path d="M32 38 Q60 32 88 38" stroke="#FF4B4B" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- 头带飘带 -->
+  <path d="M88 38 Q94 36 98 42" stroke="#FF4B4B" stroke-width="3" fill="none" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" values="0 88 38;5 88 38;0 88 38;-3 88 38;0 88 38" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="M98 42 Q100 46 104 44" stroke="#FF4B4B" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <animateTransform attributeName="transform" type="rotate" values="0 98 42;8 98 42;0 98 42;-5 98 42;0 98 42" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <!-- 头顶白毛（从头带上方冒出） -->
+  <ellipse cx="60" cy="19" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="36" cy="54" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <circle cx="84" cy="54" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <!-- 眼镜 -->
+  <circle cx="50" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="70" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="61" y1="44" x2="59" y2="44" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="39" y1="44" x2="34" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="81" y1="44" x2="86" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛 — 眯眼坚定 -->
+  <path d="M44 43 Q50 38 56 43" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M64 43 Q70 38 76 43" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 眉毛 — 坚定下压 -->
+  <path d="M42 36 Q48 34 55 36" stroke="#D4A017" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M65 36 Q72 34 78 36" stroke="#D4A017" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 张嘴喊加油 -->
+  <ellipse cx="60" cy="57" rx="10" ry="6" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M53 56 Q60 64 67 56" stroke="#E07030" stroke-width="1.2" fill="#E07030" opacity="0.3"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M42 66 Q60 74 78 66" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="71" r="3" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="71" r="1.2" fill="#A08030"/>
+  <!-- 右手 — 握拳高举 -->
+  <path d="M82 72 L96 46" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <g>
+    <circle cx="97" cy="43" r="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+    <!-- 拳头线条 -->
+    <path d="M94 41 L100 41" stroke="#D4A017" stroke-width="1" stroke-linecap="round"/>
+    <path d="M94 43 L100 43" stroke="#D4A017" stroke-width="1" stroke-linecap="round"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="0.6s" repeatCount="indefinite"/>
+  </g>
+  <!-- 左手 — 也握拳（在身侧） -->
+  <path d="M38 74 L26 68" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24" cy="66" r="5.5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M21 65 L27 65" stroke="#D4A017" stroke-width="1" stroke-linecap="round"/>
+  <path d="M21 67 L27 67" stroke="#D4A017" stroke-width="1" stroke-linecap="round"/>
+  <!-- 力量线条 -->
+  <line x1="104" y1="32" x2="110" y2="28" stroke="#FF4B4B" stroke-width="2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="106" y1="38" x2="114" y2="36" stroke="#FF4B4B" stroke-width="2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0;0.8;0" dur="1s" repeatCount="indefinite"/>
+  </line>
+  <line x1="102" y1="26" x2="106" y2="20" stroke="#FF4B4B" stroke-width="1.5" stroke-linecap="round">
+    <animate attributeName="opacity" values="0;0.7;0" dur="1.2s" repeatCount="indefinite"/>
+  </line>
+</svg>

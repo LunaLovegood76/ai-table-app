@@ -216,7 +216,13 @@ function renderPathPage(container) {
     'assets/kawaii/savy-wink.svg',
     'assets/kawaii/savy-yawn.svg',
     'assets/kawaii/savy-gaze.svg',
-    'assets/kawaii/savy-angry.svg'
+    'assets/kawaii/savy-angry.svg',
+    'assets/kawaii/savy-surprised.svg',
+    'assets/kawaii/savy-cool.svg',
+    'assets/kawaii/savy-cheer.svg',
+    'assets/kawaii/savy-graduation.svg',
+    'assets/kawaii/savy-eureka.svg',
+    'assets/kawaii/savy-boss.svg'
   ];
 
   let html = `
@@ -427,7 +433,9 @@ function startLesson(lessonId, isReview) {
     startTime: Date.now(),
     matchAnswers: {},
     orderItems: null,
-    isReview: !!isReview
+    isReview: !!isReview,
+    consecutiveCorrect: 0,
+    consecutiveWrong: 0
   };
 
   currentPage = 'lesson';
@@ -926,25 +934,66 @@ function checkAnswer() {
       break;
   }
 
-  if (isCorrect) lessonState.correctCount++;
+  if (isCorrect) {
+    lessonState.correctCount++;
+    lessonState.consecutiveCorrect++;
+    lessonState.consecutiveWrong = 0;
+  } else {
+    lessonState.consecutiveWrong++;
+    lessonState.consecutiveCorrect = 0;
+  }
 
   renderLessonStep();
 
   const explanation = question.explanation || (isCorrect ? '回答正确！' : '再想想哦~');
-  showFeedback(isCorrect, explanation);
+  showFeedback(isCorrect, explanation, questionIndex);
 }
 
-function showFeedback(isCorrect, explanation) {
+function showFeedback(isCorrect, explanation, questionIndex) {
   if (isCorrect) { SoundManager.playCorrect(); } else { SoundManager.playIncorrect(); }
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
-  const mascotSrc = isCorrect ? 'assets/kawaii/savy-celebrate.svg' : 'assets/kawaii/savy-sad.svg';
+  let mascotSrc, feedbackTitle;
+  const cc = lessonState.consecutiveCorrect;
+  const cw = lessonState.consecutiveWrong;
+
+  if (isCorrect) {
+    if (cc >= 5) {
+      mascotSrc = 'assets/kawaii/savy-cool.svg';
+      feedbackTitle = '太强了鸭！闭着眼都会！😎';
+    } else if (cc >= 3) {
+      mascotSrc = 'assets/kawaii/savy-cheer.svg';
+      feedbackTitle = '冲鸭！连对 ' + cc + ' 题！🔥';
+    } else if (cw === 0 && questionIndex > 0 && lessonState.consecutiveCorrect === 1) {
+      // 刚从连错中恢复（上一轮 consecutiveWrong > 0 已被清零，但 questionIndex > 0 说明不是第一题）
+      mascotSrc = 'assets/kawaii/savy-celebrate.svg';
+      feedbackTitle = '答对了鸭！🎉';
+    } else {
+      mascotSrc = 'assets/kawaii/savy-celebrate.svg';
+      feedbackTitle = '答对了鸭！🎉';
+    }
+  } else {
+    if (questionIndex === 0) {
+      mascotSrc = 'assets/kawaii/savy-flip.svg';
+      feedbackTitle = '救命！这才第一题鸭…🍳';
+    } else if (cw >= 3) {
+      mascotSrc = 'assets/kawaii/savy-facepalm.svg';
+      feedbackTitle = '哎鸭…看看解析再试试？';
+    } else if (cw >= 2) {
+      mascotSrc = 'assets/kawaii/savy-pleading.svg';
+      feedbackTitle = '别有鸭力，你可以的！🥺';
+    } else {
+      mascotSrc = 'assets/kawaii/savy-sad.svg';
+      feedbackTitle = '没关系鸭，再来一次～';
+    }
+  }
+
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
       <img src="${mascotSrc}" class="feedback-mascot" alt="mascot">
       <div class="feedback-text">
-        <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
+        <div class="feedback-title">${feedbackTitle}</div>
         <div class="feedback-explanation">${explanation}</div>
       </div>
       <button class="btn-continue" onclick="nextStep()">继续</button>
@@ -1024,11 +1073,23 @@ function renderCompletePage(lesson, xpEarned, accuracy, newBadges) {
     badgesHtml += `</div>`;
   }
 
+  let completeTitle, completeMascot;
+  if (accuracy === 100) {
+    completeTitle = '满分通关！你是最棒的鸭！💯';
+    completeMascot = 'assets/kawaii/savy-cool.svg';
+  } else if (accuracy >= 80) {
+    completeTitle = '太棒了鸭！又学会了新技能！🎓';
+    completeMascot = 'assets/kawaii/savy-celebrate.svg';
+  } else {
+    completeTitle = '课程完成鸭！继续加油！💪';
+    completeMascot = 'assets/kawaii/savy-cheer.svg';
+  }
+
   app.innerHTML = `
     <div class="main-content" style="padding-top:100px">
       <div class="lesson-complete">
-        <div class="complete-icon"><i data-lucide="party-popper"></i></div>
-        <h2>课程完成！</h2>
+        <div class="complete-mascot" style="margin-bottom:12px"><img src="${completeMascot}" alt="savy" style="width:80px;height:80px"></div>
+        <h2>${completeTitle}</h2>
         <p class="complete-subtitle">${lesson.title}</p>
         <div class="complete-stats">
           <div class="complete-stat">
@@ -1376,13 +1437,13 @@ function showUnlockedIllustrationCheer() {
 }
 /* ============ 连续打卡情感化 ============ */
 const STREAK_MILESTONES = [
-  { days: 3,   mascot: 'savy-happy.svg',     title: '🔥 三天连续！',   subtitle: '好的开始是成功的一半！',                     confetti: false, glow: false },
-  { days: 7,   mascot: 'savy-celebrate.svg',  title: '🔥 一周达人！',   subtitle: '连续 7 天，你太棒了！',                      confetti: true,  glow: false },
-  { days: 14,  mascot: 'savy-celebrate.svg',  title: '🔥 两周坚持！',   subtitle: '习惯正在养成，继续加油！',                    confetti: true,  glow: false },
-  { days: 30,  mascot: 'savy-trophy.svg',     title: '🏆 月度传奇！',   subtitle: '连续 30 天！你是真正的学习达人！',            confetti: true,  glow: true },
-  { days: 60,  mascot: 'savy-trophy.svg',     title: '🏆 双月之星！',   subtitle: '60 天不间断，这份毅力令人敬佩！',            confetti: true,  glow: true },
-  { days: 100, mascot: 'savy-rocket.svg',     title: '🚀 百日传说！',   subtitle: '100 天连续学习！你已经超越了 99% 的人！',    confetti: true,  glow: true },
-  { days: 365, mascot: 'savy-love.svg',       title: '💎 年度王者！',   subtitle: '整整一年！你是传说中的存在！',                confetti: true,  glow: true },
+  { days: 3,   mascot: 'savy-cheer.svg',      title: '🔥 三天连续鸭！',  subtitle: '好的开始是成功的一半！冲鸭！💪',              confetti: false, glow: false },
+  { days: 7,   mascot: 'savy-celebrate.svg',   title: '🔥 一周达人鸭！',  subtitle: '连续 7 天，太棒了鸭！',                      confetti: true,  glow: false },
+  { days: 14,  mascot: 'savy-cool.svg',        title: '🔥 两周坚持鸭！',  subtitle: '习惯正在养成，继续冲鸭！',                    confetti: true,  glow: false },
+  { days: 30,  mascot: 'savy-trophy.svg',      title: '🏆 月度传奇鸭！',  subtitle: '连续 30 天！你是真正的学习达人鸭！',          confetti: true,  glow: true },
+  { days: 60,  mascot: 'savy-boss.svg',        title: '🏆 双月之星鸭！',  subtitle: '60 天不间断，这份毅力令人敬佩鸭！',          confetti: true,  glow: true },
+  { days: 100, mascot: 'savy-graduation.svg',  title: '🚀 百日传说鸭！',  subtitle: '100 天连续学习！你已经超越了 99% 的人鸭！',  confetti: true,  glow: true },
+  { days: 365, mascot: 'savy-love.svg',        title: '💎 年度王者鸭！',  subtitle: '整整一年！你就是传说鸭！',                    confetti: true,  glow: true },
 ];
 
 /** 在 app 初始化时检测断签/里程碑，延迟弹出弹窗 */
@@ -1419,16 +1480,16 @@ function showStreakBrokenModal(previousDays) {
   overlay.innerHTML = `
     <div class="streak-modal streak-broken">
       <div class="streak-modal-mascot">
-        <img src="assets/kawaii/savy-sad.svg" alt="savy sad">
+        <img src="assets/kawaii/savy-pleading.svg" alt="savy pleading">
       </div>
-      <h3 class="streak-modal-title">哎呀，连续记录断了…</h3>
+      <h3 class="streak-modal-title">哎鸭，连续记录断了…</h3>
       <p class="streak-modal-subtitle">你之前已经连续学习了 <strong>${previousDays} 天</strong>！</p>
-      <p class="streak-modal-desc">没关系，重新开始也很棒！今天学一课就能开启新的连续记录 🔥</p>
+      <p class="streak-modal-desc">没关系鸭，重新开始也很棒！今天学一课就能重新冲鸭！🔥</p>
       <div class="streak-modal-counter">
         <span class="streak-fire-icon">🔥</span>
         <span class="streak-counter-num">1</span>
       </div>
-      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">重新出发！</button>
+      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">重新冲鸭！💪</button>
     </div>`;
   document.body.appendChild(overlay);
 }

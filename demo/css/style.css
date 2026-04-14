@@ -2805,3 +2805,22 @@ body {
 .tier-gold .badge-outer::after { content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0; border-radius: inherit; clip-path: inherit; background: conic-gradient(from 0deg, transparent 0deg, transparent 340deg, rgba(255,255,255,0.35) 350deg, transparent 360deg); animation: sparkle-rotate 4s linear infinite; pointer-events: none; z-index: 3; }
 @keyframes sparkle-rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 .bw-badge-cell.unearned .badge-outer::after { display: none; }
+
+/* ============ Savy 表情专属动画 ============ */
+@keyframes savy-bounce { 0%,100%{transform:translateY(0) scale(1)} 30%{transform:translateY(-12px) scale(1.05)} 50%{transform:translateY(0) scale(0.95)} 70%{transform:translateY(-6px) scale(1.02)} }
+@keyframes savy-wave { 0%,100%{transform:rotate(0)} 25%{transform:rotate(6deg)} 75%{transform:rotate(-6deg)} }
+@keyframes savy-shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-3px)} 40%{transform:translateX(3px)} 60%{transform:translateX(-2px)} 80%{transform:translateX(2px)} }
+@keyframes savy-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes savy-slide { 0%{transform:translateX(30px);opacity:0} 100%{transform:translateX(0);opacity:1} }
+@keyframes savy-pop { 0%{transform:scale(0.3);opacity:0} 50%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
+@keyframes savy-pump { 0%,100%{transform:translateY(0) scale(1)} 40%{transform:translateY(-10px) scale(1.1)} 60%{transform:translateY(-4px) scale(1.05)} }
+@keyframes savy-glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(255,200,0,0.3))} 50%{filter:drop-shadow(0 0 12px rgba(255,200,0,0.6))} }
+@keyframes savy-spin { 0%{transform:scale(0) rotate(-180deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
+@keyframes savy-wobble { 0%,100%{transform:rotate(0)} 15%{transform:rotate(10deg)} 30%{transform:rotate(-8deg)} 45%{transform:rotate(6deg)} 60%{transform:rotate(-4deg)} 75%{transform:rotate(2deg)} }
+
+.feedback-mascot { animation: savy-pop 0.5s ease-out; }
+.correct-feedback .feedback-mascot { animation: savy-bounce 0.8s ease-out; }
+.incorrect-feedback .feedback-mascot { animation: savy-shake 0.5s ease-in-out; }
+.streak-modal-mascot img { animation: savy-float 2.5s ease-in-out infinite; }
+.streak-milestone .streak-modal-mascot img { animation: savy-bounce 0.8s ease-out; }
+.complete-mascot img { animation: savy-pop 0.6s ease-out; }
