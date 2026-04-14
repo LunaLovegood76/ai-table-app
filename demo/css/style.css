@@ -159,7 +159,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 52px;
+  height: 64px;
   background: var(--white);
   border-top: 2px solid var(--gray-100);
   display: flex;
@@ -173,8 +173,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 54px;
-  height: 54px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   transition: var(--transition);
   text-decoration: none;
@@ -195,7 +195,7 @@ body {
 
 /* ============ 主内容区 ============ */
 .main-content {
-  padding: 80px 20px 72px;
+  padding: 80px 20px 84px;
   max-width: 600px;
   margin: 0 auto;
 }
