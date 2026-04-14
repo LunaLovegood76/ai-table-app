@@ -98,7 +98,6 @@ body {
   right: 0;
   height: 60px;
   background: var(--white);
-  border-bottom: 2px solid var(--gray-100);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1923,6 +1922,15 @@ body {
     max-width: 72px;
   }
 
+  /* level 卡片和 lesson-path 左右 padding */
+  .level-section {
+    padding: 0 16px;
+  }
+
+  .lesson-path {
+    padding: 0 16px 32px;
+  }
+
   /* 场景插画缩小 */
   .scene-illustration-img {
     width: 110px;
@@ -1940,8 +1948,13 @@ body {
   /* 吸顶 level bar */
   .sticky-level-bar {
     top: 52px;
-    padding: 8px 14px;
+    left: 16px;
+    right: 16px;
+    max-width: calc(100% - 32px);
+    margin: 0;
+    padding: 10px 16px;
     gap: 10px;
+    border-radius: var(--radius);
   }
 
   /* 回到顶部按钮 */
@@ -2154,6 +2167,28 @@ body {
   .comparison-table td {
     padding: 8px 10px;
     font-size: 12px;
+  }
+
+  /* === 勋章墙保护：防止移动端规则影响勋章页内部元素 === */
+  .badge-wall-container .badge-frame {
+    width: 88px;
+    height: 88px;
+  }
+
+  .badge-wall-container .badge-inner img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .badge-wall-container .shape-circle .badge-outer,
+  .badge-wall-container .shape-circle .badge-inner {
+    width: 82px;
+    height: 82px;
+  }
+
+  .badge-wall-container .badge-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 12px;
   }
 }
 
