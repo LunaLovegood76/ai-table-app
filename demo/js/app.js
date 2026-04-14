@@ -15,8 +15,65 @@ const DEFAULT_STATE = {
   speedComplete: false,
   previousStreak: 0,
   streakBrokenShown: false,
-  milestoneShown: []
+  milestoneShown: [],
+  unlockedEmotions: []
 };
+
+/* ============ 表情稀有度系统 ============ */
+const EMOTION_RARITY = {
+  'savy-celebrate': { rarity: 'common',    label: '普通', color: '#AFAFAF', name: '庆祝' },
+  'savy-sad':       { rarity: 'common',    label: '普通', color: '#AFAFAF', name: '伤心' },
+  'savy-happy':     { rarity: 'common',    label: '普通', color: '#AFAFAF', name: '开心' },
+  'savy-thinking':  { rarity: 'common',    label: '普通', color: '#AFAFAF', name: '思考' },
+  'savy-pleading':  { rarity: 'rare',      label: '稀有', color: '#58CC02', name: '撒娇' },
+  'savy-cheer':     { rarity: 'rare',      label: '稀有', color: '#58CC02', name: '加油' },
+  'savy-facepalm':  { rarity: 'rare',      label: '稀有', color: '#58CC02', name: '无语' },
+  'savy-flip':      { rarity: 'rare',      label: '稀有', color: '#58CC02', name: '翻车' },
+  'savy-eureka':    { rarity: 'rare',      label: '稀有', color: '#58CC02', name: '灵感' },
+  'savy-surprised': { rarity: 'epic',      label: '史诗', color: '#1CB0F6', name: '惊讶' },
+  'savy-cool':      { rarity: 'epic',      label: '史诗', color: '#1CB0F6', name: '耍酷' },
+  'savy-pretend-fine': { rarity: 'epic',   label: '史诗', color: '#1CB0F6', name: '强颜欢笑' },
+  'savy-graduation':{ rarity: 'legendary', label: '传说', color: '#A560E8', name: '毕业' },
+  'savy-boss':      { rarity: 'mythic',    label: '神话', color: '#FFC800', name: '大佬' }
+};
+
+function getEmotionKeyFromSrc(src) {
+  const match = src.match(/savy-[\w-]+/);
+  return match ? match[0].replace('.svg', '') : null;
+}
+
+function checkEmotionUnlock(emotionKey) {
+  if (!emotionKey || !EMOTION_RARITY[emotionKey]) return;
+  if (EMOTION_RARITY[emotionKey].rarity === 'common') return;
+  if (!appState.unlockedEmotions) appState.unlockedEmotions = [];
+  if (appState.unlockedEmotions.includes(emotionKey)) return;
+  appState.unlockedEmotions.push(emotionKey);
+  saveState(appState);
+  setTimeout(() => showEmotionUnlockModal(emotionKey), 800);
+}
+
+function showEmotionUnlockModal(emotionKey) {
+  const info = EMOTION_RARITY[emotionKey];
+  if (!info) return;
+  SoundManager.playBadge();
+  const overlay = document.createElement('div');
+  overlay.className = 'emotion-unlock-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="emotion-unlock-modal rarity-${info.rarity}">
+      <div class="emotion-unlock-sparkle"></div>
+      <div class="emotion-unlock-badge">${info.label}</div>
+      <div class="emotion-unlock-mascot">
+        <img src="assets/kawaii/${emotionKey}.svg" alt="${info.name}">
+      </div>
+      <h3 class="emotion-unlock-title">解锁新表情！</h3>
+      <p class="emotion-unlock-name">${info.name}</p>
+      <p class="emotion-unlock-rarity" style="color:${info.color}">${info.label}表情</p>
+      <button class="streak-modal-btn" onclick="this.closest('.emotion-unlock-overlay').remove()">太棒了鸭！</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  if (info.rarity === 'legendary' || info.rarity === 'mythic') showConfetti();
+}
 
 function loadState() {
   try {
@@ -989,8 +1046,12 @@ function showFeedback(isCorrect, explanation, questionIndex) {
     }
   }
 
+  const emotionKey = getEmotionKeyFromSrc(mascotSrc);
+  const rarityInfo = emotionKey ? EMOTION_RARITY[emotionKey] : null;
+  const rarityClass = rarityInfo ? ' rarity-' + rarityInfo.rarity : '';
+
   const feedbackHtml = `
-    <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
+    <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}${rarityClass}">
       <img src="${mascotSrc}" class="feedback-mascot" alt="mascot">
       <div class="feedback-text">
         <div class="feedback-title">${feedbackTitle}</div>
@@ -1000,6 +1061,7 @@ function showFeedback(isCorrect, explanation, questionIndex) {
     </div>`;
 
   document.body.insertAdjacentHTML('beforeend', feedbackHtml);
+  checkEmotionUnlock(emotionKey);
 }
 
 function nextStep() {

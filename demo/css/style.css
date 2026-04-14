@@ -2818,9 +2818,43 @@ body {
 @keyframes savy-spin { 0%{transform:scale(0) rotate(-180deg);opacity:0} 100%{transform:scale(1) rotate(0);opacity:1} }
 @keyframes savy-wobble { 0%,100%{transform:rotate(0)} 15%{transform:rotate(10deg)} 30%{transform:rotate(-8deg)} 45%{transform:rotate(6deg)} 60%{transform:rotate(-4deg)} 75%{transform:rotate(2deg)} }
 
+/* 普通(common) — 基础动画 */
 .feedback-mascot { animation: savy-pop 0.5s ease-out; }
 .correct-feedback .feedback-mascot { animation: savy-bounce 0.8s ease-out; }
 .incorrect-feedback .feedback-mascot { animation: savy-shake 0.5s ease-in-out; }
+
+/* 稀有(rare) — 加弹跳 + 微光 */
+.rarity-rare .feedback-mascot { animation: savy-pump 0.8s ease-out; filter: drop-shadow(0 0 4px rgba(88,204,2,0.3)); }
+
+/* 史诗(epic) — 滑入 + 蓝色光晕 */
+.rarity-epic .feedback-mascot { animation: savy-slide 0.6s ease-out, savy-glow 2s ease-in-out 0.6s infinite; filter: drop-shadow(0 0 8px rgba(28,176,246,0.4)); }
+
+/* 传说(legendary) — 旋转登场 + 紫色光晕 + 放大 */
+.rarity-legendary .feedback-mascot { animation: savy-spin 0.8s ease-out; filter: drop-shadow(0 0 12px rgba(165,96,232,0.5)); transform-origin: center; }
+
+/* 神话(mythic) — 旋转 + 金色脉冲光晕 + 持续发光 */
+.rarity-mythic .feedback-mascot { animation: savy-spin 0.8s ease-out, savy-glow 1.5s ease-in-out 0.8s infinite; filter: drop-shadow(0 0 16px rgba(255,200,0,0.6)); }
+
 .streak-modal-mascot img { animation: savy-float 2.5s ease-in-out infinite; }
 .streak-milestone .streak-modal-mascot img { animation: savy-bounce 0.8s ease-out; }
 .complete-mascot img { animation: savy-pop 0.6s ease-out; }
+
+/* ============ 表情解锁弹窗 ============ */
+.emotion-unlock-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 10000; animation: fadeIn 0.3s ease; }
+.emotion-unlock-modal { background: #fff; border-radius: 20px; padding: 32px 28px; text-align: center; max-width: 320px; width: 90%; position: relative; overflow: hidden; animation: savy-pop 0.5s ease-out; }
+.emotion-unlock-sparkle { position: absolute; inset: 0; pointer-events: none; }
+.emotion-unlock-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.rarity-rare .emotion-unlock-badge { background: linear-gradient(135deg, #58CC02, #46A302); }
+.rarity-epic .emotion-unlock-badge { background: linear-gradient(135deg, #1CB0F6, #1899D6); }
+.rarity-legendary .emotion-unlock-badge { background: linear-gradient(135deg, #A560E8, #8A40D0); }
+.rarity-mythic .emotion-unlock-badge { background: linear-gradient(135deg, #FFC800, #FF9600); }
+.emotion-unlock-mascot { margin: 16px auto; width: 100px; height: 100px; }
+.emotion-unlock-mascot img { width: 100%; height: 100%; }
+.rarity-rare .emotion-unlock-mascot img { animation: savy-bounce 0.8s ease-out; }
+.rarity-epic .emotion-unlock-mascot img { animation: savy-slide 0.6s ease-out, savy-glow 2s ease-in-out 0.6s infinite; filter: drop-shadow(0 0 8px rgba(28,176,246,0.4)); }
+.rarity-legendary .emotion-unlock-mascot img { animation: savy-spin 0.8s ease-out; filter: drop-shadow(0 0 12px rgba(165,96,232,0.5)); }
+.rarity-mythic .emotion-unlock-mascot img { animation: savy-spin 0.8s ease-out, savy-glow 1.5s ease-in-out 0.8s infinite; filter: drop-shadow(0 0 16px rgba(255,200,0,0.6)); }
+.emotion-unlock-title { font-size: 20px; font-weight: 800; color: #333; margin: 8px 0 4px; }
+.emotion-unlock-name { font-size: 16px; font-weight: 600; color: #555; margin: 0; }
+.emotion-unlock-rarity { font-size: 13px; font-weight: 700; margin: 4px 0 16px; }
+.emotion-unlock-modal .streak-modal-btn { width: 100%; }
