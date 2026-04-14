@@ -39,10 +39,27 @@
 
 body {
   font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  background: var(--bg-light);
+  background: #E8E8E8;
   color: var(--gray-600);
   min-height: 100vh;
   overflow-x: clip;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ============ 手机外框 ============ */
+.phone-frame {
+  width: 390px;
+  min-height: 100vh;
+  background: var(--bg-light);
+  position: relative;
+  box-shadow: 0 0 40px rgba(0,0,0,0.12);
+}
+.phone-screen {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 /* ============ Lucide 图标基础样式 ============ */
@@ -92,10 +109,8 @@ body {
 
 /* ============ 顶部导航栏 ============ */
 .top-bar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   height: 60px;
   background: var(--white);
   border-bottom: 2px solid var(--gray-100);
@@ -103,7 +118,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .top-bar-logo {
@@ -155,17 +170,15 @@ body {
 
 /* ============ 底部导航栏 ============ */
 .bottom-nav {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
+  height: 56px;
   background: var(--white);
-  border-top: 2px solid var(--gray-100);
+  border-top: 0.5px solid var(--gray-100);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .nav-item {
@@ -197,15 +210,15 @@ body {
 
 /* ============ 主内容区 ============ */
 .main-content {
-  padding: 80px 20px 90px;
-  max-width: 600px;
-  margin: 0 auto;
+  padding: 0 0 0;
+  min-height: calc(100vh - 60px - 56px);
 }
 
 /* ============ 课程路径页 ============ */
 .path-header {
   text-align: center;
   margin-bottom: 32px;
+  padding: 20px 20px 0;
 }
 
 .path-header h2 {
@@ -1243,8 +1256,9 @@ body {
 .feedback-bar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 390px;
   padding: 20px 24px;
   display: flex;
   align-items: center;
@@ -1356,21 +1370,19 @@ body {
 
 /* 底部检查按钮 */
 .check-area {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  right: 0;
   padding: 16px 24px;
   background: var(--white);
   border-top: 2px solid var(--gray-100);
   display: flex;
   justify-content: center;
-  z-index: 998;
+  z-index: 98;
 }
 
 .check-area .action-btn {
   width: 100%;
-  max-width: 560px;
+  max-width: 390px;
   padding: 16px;
   font-size: 16px;
 }
@@ -2025,7 +2037,7 @@ body {
 .back-to-top {
   position: fixed;
   bottom: 80px;
-  right: 20px;
+  left: calc(50% + 195px - 64px);
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -2090,27 +2102,25 @@ body {
 /* 吸顶 Level 条 */
 .sticky-level-bar {
   position: fixed;
-  top: 56px;
-  left: 0;
-  right: 0;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: 390px;
   z-index: 90;
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 10px 20px;
   color: var(--white);
-  max-width: 640px;
-  margin: 0 auto;
   border-radius: 0 0 var(--radius) var(--radius);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transform: translateY(-100%);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
   pointer-events: none;
 }
 
 .sticky-level-bar.visible {
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   opacity: 1;
   pointer-events: auto;
 }
