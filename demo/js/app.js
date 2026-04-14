@@ -295,12 +295,13 @@ function renderPathPage(container) {
 
     html += `<div class="level-section">`;
     html += `
-      <div class="level-header" style="background: ${level.color}">
-        <div class="level-info" style="padding-left:4px">
-          <h3>${level.title}</h3>
-          <p>${level.subtitle} · ${totalCount} 课</p>
+      <div class="level-divider-header">
+        <div class="level-divider-line"></div>
+        <div class="level-divider-title" style="color: ${level.color}">
+          <span class="level-divider-name">${level.title}</span>
+          <span class="level-divider-sub">${level.subtitle} · ${totalCount} 课</span>
         </div>
-        <span class="level-progress">${completedCount}/${totalCount}</span>
+        <div class="level-divider-line"></div>
       </div>
     `;
 
@@ -378,7 +379,7 @@ function renderPathPage(container) {
   }
 
   const levelSections = container.querySelectorAll('.level-section');
-  const levelHeaders = container.querySelectorAll('.level-header');
+  const levelDividers = container.querySelectorAll('.level-divider-header');
 
   const stickyObserver = new IntersectionObserver((entries) => {
     let currentVisible = null;
@@ -390,13 +391,15 @@ function renderPathPage(container) {
     });
 
     if (currentVisible !== null) {
-      const header = levelHeaders[currentVisible];
-      const bg = header.style.background;
-      const info = header.querySelector('.level-info');
-      const progress = header.querySelector('.level-progress');
-      stickyBar.style.background = bg;
-      stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
-        '<span class="level-progress">' + progress.textContent + '</span>';
+      const level = COURSES.levels[currentVisible];
+      const divider = levelDividers[currentVisible];
+      const nameEl = divider ? divider.querySelector('.level-divider-name') : null;
+      const subEl = divider ? divider.querySelector('.level-divider-sub') : null;
+      const completedCount = level ? level.lessons.filter(l => appState.completedLessons.includes(l.id)).length : 0;
+      const totalCount = level ? level.lessons.length : 0;
+      stickyBar.style.background = level ? level.color : '#58CC02';
+      stickyBar.innerHTML = '<div class="level-info"><h3>' + (nameEl ? nameEl.textContent : '') + '</h3><p>' + (subEl ? subEl.textContent : '') + '</p></div>' +
+        '<span class="level-progress">' + completedCount + '/' + totalCount + '</span>';
       stickyBar.classList.add('visible');
     } else {
       stickyBar.classList.remove('visible');
@@ -439,7 +442,7 @@ function handleStickyScroll() {
   const stickyBar = document.getElementById('sticky-level-bar');
   if (!stickyBar) return;
   const sections = document.querySelectorAll('.level-section');
-  const headers = document.querySelectorAll('.level-header');
+  const dividers = document.querySelectorAll('.level-divider-header');
   let currentVisible = null;
 
   sections.forEach((section, idx) => {
@@ -449,14 +452,16 @@ function handleStickyScroll() {
     }
   });
 
-  if (currentVisible !== null && headers[currentVisible]) {
-    const header = headers[currentVisible];
-    const bg = header.style.background;
-    const info = header.querySelector('.level-info');
-    const progress = header.querySelector('.level-progress');
-    stickyBar.style.background = bg;
-    stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
-      '<span class="level-progress">' + progress.textContent + '</span>';
+  if (currentVisible !== null) {
+    const level = COURSES.levels[currentVisible];
+    const divider = dividers[currentVisible];
+    const nameEl = divider ? divider.querySelector('.level-divider-name') : null;
+    const subEl = divider ? divider.querySelector('.level-divider-sub') : null;
+    const completedCount = level ? level.lessons.filter(l => appState.completedLessons.includes(l.id)).length : 0;
+    const totalCount = level ? level.lessons.length : 0;
+    stickyBar.style.background = level ? level.color : '#58CC02';
+    stickyBar.innerHTML = '<div class="level-info"><h3>' + (nameEl ? nameEl.textContent : '') + '</h3><p>' + (subEl ? subEl.textContent : '') + '</p></div>' +
+      '<span class="level-progress">' + completedCount + '/' + totalCount + '</span>';
     stickyBar.classList.add('visible');
   } else {
     stickyBar.classList.remove('visible');
@@ -1322,10 +1327,13 @@ function ensureBadgeWallOverlay() {
     for (const badge of category.badges) {
       const earned = earnedBadgeIds.includes(badge.id);
       const tier = earned ? 'gold' : 'bronze';
+      const iconHtml = earned
+        ? '<i data-lucide="' + badge.icon + '" style="width:36px;height:36px;"></i>'
+        : '<i data-lucide="lock" style="width:28px;height:28px;opacity:0.5;"></i>';
       badgesHtml += '<div class="bw-badge-cell' + (earned ? '' : ' unearned') + '">' +
         '<div class="badge-frame shape-' + category.shape + ' tier-' + tier + '">' +
           '<div class="badge-outer"></div>' +
-          '<div class="badge-inner"><img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/' + (earned ? 'Trophy' : 'Locked') + '/Color/' + (earned ? 'trophy' : 'locked') + '_color.svg" alt="' + badge.name + '"></div>' +
+          '<div class="badge-inner">' + iconHtml + '</div>' +
         '</div>' +
         '<span class="bw-badge-name">' + badge.name + '</span>' +
         '<span class="bw-badge-desc">' + badge.description + '</span>' +

@@ -231,6 +231,42 @@ body {
   margin-bottom: 20px;
 }
 
+/* 分割线式 level 标题 */
+.level-divider-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.level-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gray-200);
+  border-radius: 1px;
+}
+
+.level-divider-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.level-divider-name {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.level-divider-sub {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-300);
+}
+
 .level-icon {
   font-size: 32px;
 }
@@ -1948,13 +1984,13 @@ body {
   /* 吸顶 level bar */
   .sticky-level-bar {
     top: 52px;
-    left: 16px;
-    right: 16px;
-    max-width: calc(100% - 32px);
+    left: 0;
+    right: 0;
+    max-width: 100%;
     margin: 0;
     padding: 10px 16px;
     gap: 10px;
-    border-radius: var(--radius);
+    border-radius: 0;
   }
 
   /* 回到顶部按钮 */
@@ -2822,6 +2858,10 @@ body {
 .tier-gold .badge-outer { background: linear-gradient(160deg, #FFF0A0, #FFD700 30%, #B8860B 60%, #FFE87A); box-shadow: 0 0 10px rgba(255,215,0,0.25); }
 .tier-gold .badge-inner { background: linear-gradient(145deg, #3A3220, #2A2416); }
 .badge-inner img { width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
+/* lucide 图标在 badge-inner 中的颜色 */
+.tier-bronze .badge-inner svg, .tier-bronze .badge-inner i { color: #E8C896; }
+.tier-gold .badge-inner svg, .tier-gold .badge-inner i { color: #FFD700; }
+.bw-badge-cell.unearned .badge-inner svg, .bw-badge-cell.unearned .badge-inner i { color: rgba(255,255,255,0.25); }
 .bw-badge-cell.unearned .badge-outer { background: linear-gradient(160deg, #3A3E45, #2A2E35, #3A3E45) !important; box-shadow: none !important; }
 .bw-badge-cell.unearned .badge-inner { background: linear-gradient(145deg, #1A1D22, #15171C) !important; }
 .bw-badge-cell.unearned .badge-inner img { filter: grayscale(1) brightness(0.35) contrast(0.7); opacity: 0.6; }
