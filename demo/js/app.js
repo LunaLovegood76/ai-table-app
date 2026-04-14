@@ -238,6 +238,7 @@ function render() {
 
 function navigateTo(page, scrollToLessonId) {
   currentPage = page;
+  document.body.classList.toggle('page-profile', page === 'profile');
   render();
   if (scrollToLessonId) {
     // 延迟一帧等 DOM 渲染完成后滚动
@@ -354,9 +355,9 @@ function renderPathPage(container) {
       }
 
       if (status === 'completed') {
-        html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
+        html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)" style="background:${level.color};box-shadow:0 4px 0 ${level.color}99"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
       } else if (status === 'current') {
-        html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')"><i data-lucide="${lesson.icon}"></i></div>`;
+        html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')" style="background:${level.color};box-shadow:0 4px 0 ${level.color}99"><i data-lucide="${lesson.icon}"></i></div>`;
       } else {
         html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}" onclick="showLockedLessonTooltip('${lesson.id}')"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
       }
@@ -486,6 +487,7 @@ function startLesson(lessonId, isReview) {
   lessonState = {
     lessonId,
     lesson,
+    levelColor: level.color || '#58CC02',
     currentStep: 0,
     totalSteps: lesson.cards.length + lesson.questions.length,
     correctCount: 0,
@@ -522,23 +524,24 @@ function renderLessonStep() {
     contentHtml = renderQuestion(cardOrQuestion, currentStep - lesson.cards.length);
   }
 
+  const levelColor = lessonState.levelColor || '#58CC02';
   app.innerHTML = `
     <div class="lesson-top-nav">
       <div class="progress-bar-container" style="flex:1">
-        <div class="progress-bar-fill ${lessonState.isReview ? 'review-fill' : ''}" style="width:${progress}%"></div>
+        <div class="progress-bar-fill ${lessonState.isReview ? 'review-fill' : ''}" style="width:${progress}%;background:${levelColor}"></div>
       </div>
       <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
     </div>
-    <div class="lesson-main-content" style="padding-bottom:${lessonState.answered ? '140px' : '100px'}">
+    <div class="lesson-main-content" style="padding-bottom:${lessonState.answered ? '140px' : '100px'};--level-color:${levelColor}">
       <div class="lesson-page">${contentHtml}</div>
     </div>
     ${isCard ? `
-      <div class="check-area">
+      <div class="check-area" style="--level-color:${levelColor}">
         <button class="action-btn btn-primary" onclick="nextStep()">继续</button>
       </div>
     ` : ''}
     ${!isCard && !lessonState.answered ? `
-      <div class="check-area">
+      <div class="check-area" style="--level-color:${levelColor}">
         <button class="action-btn ${lessonState.selectedAnswer !== null ? 'btn-check' : 'btn-disabled'}"
                 onclick="${lessonState.selectedAnswer !== null ? 'checkAnswer()' : ''}"
                 ${lessonState.selectedAnswer === null ? 'disabled' : ''}>
