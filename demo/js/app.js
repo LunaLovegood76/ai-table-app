@@ -1,4 +1,4 @@
-/**
+z/**
  * 钉钉 AI 表格学习产品 — 主应用逻辑
  * 包含路由、状态管理、UI 渲染、游戏化系统
  */
@@ -12,10 +12,7 @@ const DEFAULT_STATE = {
   completedLessons: [],
   perfectLessons: [],
   earnedBadges: [],
-  speedComplete: false,
-  previousStreak: 0,
-  streakBrokenShown: false,
-  milestoneShown: []
+  speedComplete: false
 };
 
 function loadState() {
@@ -71,9 +68,7 @@ function updateStreak() {
     if (diffDays === 1) {
       appState.streak += 1;
     } else if (diffDays > 1) {
-      appState.previousStreak = appState.streak;
       appState.streak = 1;
-      appState.streakBrokenShown = false;
     }
     appState.lastStudyDate = today;
     saveState(appState);
@@ -199,28 +194,6 @@ function navigateTo(page, scrollToLessonId) {
 
 /* ============ 课程路径页 ============ */
 function renderPathPage(container) {
-  // 插画数据
-  let sceneIlluIndex = 0;
-  const levelIllustrations = {
-    'L1': 'assets/kawaii/level-l1-sprout.svg',
-    'L2': 'assets/kawaii/level-l2-wrench.svg',
-    'L3': 'assets/kawaii/level-l3-ai-bot.svg',
-    'L4': 'assets/kawaii/level-l4-lightning.svg',
-    'L5': 'assets/kawaii/level-l5-architect.svg'
-  };
-  const sceneIllustrations = [
-    'assets/kawaii/savy-love.svg',
-    'assets/kawaii/savy-reading.svg',
-    'assets/kawaii/savy-coffee.svg',
-    'assets/kawaii/savy-trophy.svg',
-    'assets/kawaii/savy-rocket.svg',
-    'assets/kawaii/savy-chart.svg',
-    'assets/kawaii/savy-wink.svg',
-    'assets/kawaii/savy-yawn.svg',
-    'assets/kawaii/savy-gaze.svg',
-    'assets/kawaii/savy-angry.svg'
-  ];
-
   let html = `
     <div class="path-header">
       <h2>钉钉 AI 表格学习之旅</h2>
@@ -235,7 +208,8 @@ function renderPathPage(container) {
     html += `<div class="level-section">`;
     html += `
       <div class="level-header" style="background: ${level.color}">
-        <div class="level-info" style="padding-left:4px">
+        <span class="level-icon"><i data-lucide="${level.icon}"></i></span>
+        <div class="level-info">
           <h3>${level.title}</h3>
           <p>${level.subtitle} · ${totalCount} 课</p>
         </div>
@@ -256,45 +230,15 @@ function renderPathPage(container) {
         /* 竖线连接器已移除 */
       }
 
-      // 插画逻辑
-      let showIllustration = false;
-      let illustrationSrc = '';
-      let illustrationSide = 'left';
-
-      if (i === 2 && levelIllustrations[level.id]) {
-        showIllustration = true;
-        illustrationSrc = levelIllustrations[level.id];
-        illustrationSide = offset >= 0 ? 'left' : 'right';
-      } else if (i >= 5 && (i - 5) % 4 === 0) {
-        showIllustration = true;
-        illustrationSrc = sceneIllustrations[sceneIlluIndex % sceneIllustrations.length];
-        illustrationSide = offset >= 0 ? 'left' : 'right';
-        sceneIlluIndex++;
-      }
-
-      // 判断当前 Level 是否已解锁
-      const isLevelUnlocked = level.unlocked;
-
-      if (showIllustration) {
-        const lockedClass = isLevelUnlocked ? '' : ' illustration-locked';
-        const clickHandler = isLevelUnlocked ? ' onclick="showUnlockedIllustrationCheer()"' : ' onclick="showLockedIllustrationHint()"';
-        const pointerStyle = 'cursor:pointer;';
-        html += `<div class="lesson-row illustration-row" style="transform: translateX(${offset}px)">
-          <div class="level-scene-illustration ${illustrationSide}${lockedClass}"${clickHandler} style="${pointerStyle}">
-            <img src="${illustrationSrc}" alt="scene" class="scene-illustration-img">
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center">`;
-      } else {
-        html += `<div class="lesson-row" style="transform: translateX(${offset}px)">`;
-        html += `<div style="display:flex;flex-direction:column;align-items:center">`;
-      }
+      html += `<div class="lesson-row" style="transform: translateX(${offset}px)">`;
+      html += `<div style="display:flex;flex-direction:column;align-items:center">`;
 
       if (status === 'completed') {
         html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
       } else if (status === 'current') {
         html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')"><i data-lucide="${lesson.icon}"></i></div>`;
       } else {
-        html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}" onclick="showLockedLessonTooltip('${lesson.id}')"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
+        html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
       }
 
       html += `<div class="lesson-label ${status === 'completed' ? 'completed-label' : ''}">${lesson.title}</div>`;
@@ -304,100 +248,6 @@ function renderPathPage(container) {
   }
 
   container.innerHTML = html;
-
-  // 吸顶 Level 条
-  let stickyBar = document.getElementById('sticky-level-bar');
-  if (!stickyBar) {
-    stickyBar = document.createElement('div');
-    stickyBar.id = 'sticky-level-bar';
-    stickyBar.className = 'sticky-level-bar';
-    document.body.appendChild(stickyBar);
-  }
-
-  const levelSections = container.querySelectorAll('.level-section');
-  const levelHeaders = container.querySelectorAll('.level-header');
-
-  const stickyObserver = new IntersectionObserver((entries) => {
-    let currentVisible = null;
-    levelSections.forEach((section, idx) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top < 80 && rect.bottom > 80) {
-        currentVisible = idx;
-      }
-    });
-
-    if (currentVisible !== null) {
-      const header = levelHeaders[currentVisible];
-      const bg = header.style.background;
-      const info = header.querySelector('.level-info');
-      const progress = header.querySelector('.level-progress');
-      stickyBar.style.background = bg;
-      stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
-        '<span class="level-progress">' + progress.textContent + '</span>';
-      stickyBar.classList.add('visible');
-    } else {
-      stickyBar.classList.remove('visible');
-    }
-  }, { threshold: [0, 0.1, 0.5, 1] });
-
-  levelSections.forEach(section => stickyObserver.observe(section));
-
-  // 也用 scroll 事件作为补充
-  window.removeEventListener('scroll', handleStickyScroll);
-  window.addEventListener('scroll', handleStickyScroll);
-
-  // 回到顶部按钮
-  let backToTopBtn = document.getElementById('back-to-top-btn');
-  if (!backToTopBtn) {
-    backToTopBtn = document.createElement('button');
-    backToTopBtn.id = 'back-to-top-btn';
-    backToTopBtn.className = 'back-to-top';
-    backToTopBtn.innerHTML = '<i data-lucide="arrow-up"></i>';
-    backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.body.appendChild(backToTopBtn);
-  }
-
-  window.removeEventListener('scroll', handleBackToTopScroll);
-  window.addEventListener('scroll', handleBackToTopScroll);
-}
-
-function handleBackToTopScroll() {
-  const btn = document.getElementById('back-to-top-btn');
-  if (!btn) return;
-  if (window.scrollY > window.innerHeight) {
-    btn.classList.add('visible');
-  } else {
-    btn.classList.remove('visible');
-  }
-  refreshIcons();
-}
-
-function handleStickyScroll() {
-  const stickyBar = document.getElementById('sticky-level-bar');
-  if (!stickyBar) return;
-  const sections = document.querySelectorAll('.level-section');
-  const headers = document.querySelectorAll('.level-header');
-  let currentVisible = null;
-
-  sections.forEach((section, idx) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < 80 && rect.bottom > 80) {
-      currentVisible = idx;
-    }
-  });
-
-  if (currentVisible !== null && headers[currentVisible]) {
-    const header = headers[currentVisible];
-    const bg = header.style.background;
-    const info = header.querySelector('.level-info');
-    const progress = header.querySelector('.level-progress');
-    stickyBar.style.background = bg;
-    stickyBar.innerHTML = '<div class="level-info">' + info.innerHTML + '</div>' +
-      '<span class="level-progress">' + progress.textContent + '</span>';
-    stickyBar.classList.add('visible');
-  } else {
-    stickyBar.classList.remove('visible');
-  }
 }
 
 /* ============ 学习页面 ============ */
@@ -484,7 +334,7 @@ function renderLessonStep() {
 }
 
 function renderKnowledgeCard(card) {
-  let html = `<div class="knowledge-card"><div class="card-mascot"><img src="assets/kawaii/savy-happy.svg" class="card-mascot-img" alt="mascot"></div><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
+  let html = `<div class="knowledge-card"><h3><i data-lucide="book-open" class="card-title-icon"></i> ${card.title}</h3>`;
 
   if (card.comparison) {
     html += `<table class="comparison-table">
@@ -935,14 +785,12 @@ function checkAnswer() {
 }
 
 function showFeedback(isCorrect, explanation) {
-  if (isCorrect) { SoundManager.playCorrect(); } else { SoundManager.playIncorrect(); }
   const existing = document.querySelector('.feedback-bar');
   if (existing) existing.remove();
 
-  const mascotSrc = isCorrect ? 'assets/kawaii/savy-celebrate.svg' : 'assets/kawaii/savy-sad.svg';
   const feedbackHtml = `
     <div class="feedback-bar ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}">
-      <img src="${mascotSrc}" class="feedback-mascot" alt="mascot">
+      <span class="feedback-icon"><i data-lucide="${isCorrect ? 'party-popper' : 'refresh-cw'}"></i></span>
       <div class="feedback-text">
         <div class="feedback-title">${isCorrect ? '太棒了！' : '没关系，继续加油！'}</div>
         <div class="feedback-explanation">${explanation}</div>
@@ -995,16 +843,11 @@ function completeLesson() {
 
   if (isSpeed) appState.speedComplete = true;
 
-  const rankBeforeComplete = getCurrentRank(appState.totalXP - xpEarned);
   updateStreak();
   checkAndUnlockLevels();
   const newBadges = checkNewBadges();
   saveState(appState);
 
-  SoundManager.playComplete();
-  if (newBadges.length > 0) { setTimeout(() => SoundManager.playBadge(), 400); }
-  const rankAfterComplete = getCurrentRank(appState.totalXP);
-  if (rankAfterComplete.name !== rankBeforeComplete.name) { setTimeout(() => SoundManager.playLevelUp(), 800); }
   showConfetti();
   renderCompletePage(lesson, xpEarned, accuracy, newBadges);
 }
@@ -1064,220 +907,6 @@ function exitLesson() {
   render();
 }
 
-/* ============ 个人中心页面 — 微信读书风格 ============ */
-function renderProfilePage(container) {
-  const rank = getCurrentRank(appState.totalXP);
-  const nextRank = getNextRank(appState.totalXP);
-  const completedCount = appState.completedLessons.length;
-  const totalLessons = COURSES.levels.reduce((sum, l) => sum + l.lessons.length, 0);
-  const perfectCount = appState.perfectLessons ? appState.perfectLessons.length : 0;
-  const earnedCount = appState.earnedBadges.length;
-
-  let progressPercent = 100;
-  if (nextRank) {
-    progressPercent = ((appState.totalXP - rank.minXP) / (nextRank.minXP - rank.minXP)) * 100;
-  }
-
-  const studyMinutes = completedCount * 12;
-  const studyHours = Math.floor(studyMinutes / 60);
-  const studyMins = studyMinutes % 60;
-
-  let currentLevel = 'L1 入门篇';
-  for (const level of COURSES.levels) {
-    if (level.unlocked) {
-      const levelCompleted = level.lessons.every(l => appState.completedLessons.includes(l.id));
-      if (!levelCompleted) { currentLevel = level.title; break; }
-    }
-  }
-
-  container.innerHTML = `
-    <div class="profile-page-v2">
-      <div class="profile-header">
-        <div class="avatar-circle">${appState.userName.charAt(0)}</div>
-        <div class="avatar-info">
-          <div class="avatar-name">${appState.userName}</div>
-          <div style="margin-top:6px;">
-            <span class="badge-entry" onclick="openBadgeWall()">
-              <i data-lucide="award"></i> <span>${earnedCount}</span>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card">
-        <div class="p-card-row">
-          <div class="icon-circle" style="background:var(--icon-gold-bg);"><i data-lucide="shield" style="color:var(--icon-gold-fg);"></i></div>
-          <div class="p-card-label">${rank.name}</div>
-          <div class="p-card-value"><div><span class="num-primary">${appState.totalXP}</span> <span class="num-unit">XP</span></div></div>
-        </div>
-        <div class="rank-progress">
-          <div class="rank-progress-bar"><div class="rank-progress-fill" style="width:${Math.min(progressPercent, 100)}%;"></div></div>
-          <div class="rank-progress-text">
-            <span>${rank.name} ${rank.minXP} XP</span>
-            <span>${nextRank ? nextRank.name + ' ' + nextRank.minXP + ' XP' : '已满级'}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card-group">
-        <div class="p-card">
-          <div class="p-card-row">
-            <div class="icon-circle" style="background:var(--icon-orange-bg);"><i data-lucide="flame" style="color:var(--icon-orange-fg);"></i></div>
-            <div><div class="p-card-label">连续打卡</div><div class="num-sub">连续 ${appState.streak} 天</div></div>
-          </div>
-        </div>
-        <div class="p-card">
-          <div class="p-card-row">
-            <div class="icon-circle" style="background:var(--icon-pink-bg);"><i data-lucide="heart" style="color:var(--icon-pink-fg);"></i></div>
-            <div><div class="p-card-label">满分课程</div><div class="num-sub">${perfectCount} 课满分</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-card" style="margin-top:8px;">
-        <div class="p-card-row">
-          <div class="icon-circle" style="background:var(--icon-pink-bg);"><i data-lucide="clock" style="color:var(--icon-pink-fg);"></i></div>
-          <div class="p-card-label">学习时长</div>
-          <div class="p-card-value"><div><span class="num-primary">${studyHours}</span> <span class="num-unit">小时</span> <span class="num-primary">${studyMins}</span> <span class="num-unit">分钟</span></div></div>
-        </div>
-      </div>
-
-      <div class="grid-2x2">
-        <div class="grid-cell">
-          <div class="icon-circle" style="background:var(--icon-green-bg);"><i data-lucide="play-circle" style="color:var(--icon-green-fg);"></i></div>
-          <div><div class="grid-cell-label">在学</div><div class="grid-cell-sub">${currentLevel}</div></div>
-        </div>
-        <div class="grid-cell">
-          <div class="icon-circle" style="background:var(--icon-blue-bg);"><i data-lucide="check-circle" style="color:var(--icon-blue-fg);"></i></div>
-          <div><div class="grid-cell-label">已完成</div><div class="grid-cell-sub">累计 ${completedCount} 课</div></div>
-        </div>
-        <div class="grid-cell">
-          <div class="icon-circle" style="background:var(--icon-purple-bg);"><i data-lucide="star" style="color:var(--icon-purple-fg);"></i></div>
-          <div><div class="grid-cell-label">总经验</div><div class="grid-cell-sub">${appState.totalXP} XP</div></div>
-        </div>
-        <div class="grid-cell">
-          <div class="icon-circle" style="background:var(--icon-teal-bg);"><i data-lucide="zap" style="color:var(--icon-teal-fg);"></i></div>
-          <div><div class="grid-cell-label">总课程</div><div class="grid-cell-sub">${totalLessons} 课</div></div>
-        </div>
-      </div>
-
-      <div class="p-card" style="margin-top:8px;">
-        <div class="p-card-row" style="cursor:pointer;" onclick="openBadgeWall()">
-          <div class="icon-circle" style="background:var(--icon-indigo-bg);"><i data-lucide="award" style="color:var(--icon-indigo-fg);"></i></div>
-          <div class="p-card-label">勋章</div>
-          <div class="p-card-value">
-            <div><span class="num-primary">${earnedCount}</span> <span class="num-unit">枚</span></div>
-            <div class="num-sub">共 ${BADGES.length} 枚可获得</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin:20px 16px 0;">
-        <button class="action-btn" style="background:var(--red);color:white;box-shadow:0 4px 0 #CC3333;width:100%"
-                onclick="resetProgress()">重置学习进度</button>
-      </div>
-    </div>`;
-
-  ensureBadgeWallOverlay();
-}
-
-/* ============ 勋章墙弹窗 ============ */
-function ensureBadgeWallOverlay() {
-  if (document.getElementById('badgeWallOverlay')) return;
-  const earnedBadgeIds = appState.earnedBadges;
-  const totalBadges = BADGES.length;
-  const earnedCount = earnedBadgeIds.length;
-
-  const badgeCategories = [
-    { title: '习惯养成 · 连续打卡', shape: 'shield', badges: BADGES.filter(b => b.id.startsWith('streak') || (b.description && b.description.includes('连续'))) },
-    { title: '课程里程碑', shape: 'hex', badges: BADGES.filter(b => b.id.startsWith('complete') || b.id.endsWith('_complete') || (b.description && b.description.includes('完成'))) },
-    { title: '累计成就 · 经验值', shape: 'circle', badges: BADGES.filter(b => b.id.startsWith('xp') || (b.description && (b.description.includes('经验') || b.description.includes('XP')))) }
-  ];
-  const categorizedIds = badgeCategories.flatMap(c => c.badges.map(b => b.id));
-  const uncategorized = BADGES.filter(b => !categorizedIds.includes(b.id));
-  if (uncategorized.length > 0) badgeCategories.push({ title: '特殊成就', shape: 'diamond', badges: uncategorized });
-
-  let categoriesHtml = '';
-  for (const category of badgeCategories) {
-    if (category.badges.length === 0) continue;
-    let badgesHtml = '';
-    for (const badge of category.badges) {
-      const earned = earnedBadgeIds.includes(badge.id);
-      const tier = earned ? 'gold' : 'bronze';
-      badgesHtml += '<div class="bw-badge-cell' + (earned ? '' : ' unearned') + '">' +
-        '<div class="badge-frame shape-' + category.shape + ' tier-' + tier + '">' +
-          '<div class="badge-outer"></div>' +
-          '<div class="badge-inner"><img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/' + (earned ? 'Trophy' : 'Locked') + '/Color/' + (earned ? 'trophy' : 'locked') + '_color.svg" alt="' + badge.name + '"></div>' +
-        '</div>' +
-        '<span class="bw-badge-name">' + badge.name + '</span>' +
-        '<span class="bw-badge-desc">' + badge.description + '</span>' +
-        (earned ? '' : '<div class="badge-progress-wrap"><div class="badge-progress"><div class="badge-progress-fill progress-' + tier + '" style="width:30%"></div></div></div>') +
-      '</div>';
-    }
-    categoriesHtml += '<div class="category-card"><div class="category-title">' + category.title + '</div><div class="badge-grid">' + badgesHtml + '</div></div>';
-  }
-
-  const particles = Array.from({length: 12}, () => '<span class="wall-particle"></span>').join('');
-  const overlay = document.createElement('div');
-  overlay.className = 'badge-wall-overlay';
-  overlay.id = 'badgeWallOverlay';
-  overlay.innerHTML =
-    '<div class="badge-wall-container">' +
-      '<div class="wall-sticky-bar" id="wallStickyBar">' +
-        '<button class="sticky-back" onclick="closeBadgeWall()"><i data-lucide="chevron-left"></i></button>' +
-        '<div class="sticky-title">我的勋章</div>' +
-      '</div>' +
-      '<div class="wall-header-wrap">' +
-        '<div class="wall-particles">' + particles + '</div>' +
-        '<button class="wall-back-btn" onclick="closeBadgeWall()"><i data-lucide="chevron-left"></i></button>' +
-        '<div class="wall-header">' +
-          '<h2>我的勋章</h2>' +
-          '<div class="wall-stats"><span class="stat-earned">' + earnedCount + '</span><span class="stat-sep">/</span><span class="stat-total">' + totalBadges + '</span></div>' +
-          '<div class="wall-subtitle">已收集 ' + earnedCount + ' 枚勋章，继续加油！</div>' +
-        '</div>' +
-      '</div>' +
-      categoriesHtml +
-    '</div>';
-
-  document.body.appendChild(overlay);
-  refreshIcons();
-
-  const wallContainer = overlay.querySelector('.badge-wall-container');
-  const wallStickyBar = document.getElementById('wallStickyBar');
-  const wallBackBtn = overlay.querySelector('.wall-back-btn');
-  if (wallContainer && wallStickyBar && wallBackBtn) {
-    wallContainer.addEventListener('scroll', () => {
-      const backBtnBottom = wallBackBtn.offsetTop + wallBackBtn.offsetHeight - wallContainer.scrollTop;
-      wallStickyBar.classList.toggle('visible', backBtnBottom < 0);
-    });
-  }
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBadgeWall(); });
-}
-
-function openBadgeWall() {
-  const existing = document.getElementById('badgeWallOverlay');
-  if (existing) existing.remove();
-  ensureBadgeWallOverlay();
-  const overlay = document.getElementById('badgeWallOverlay');
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-  const container = overlay.querySelector('.badge-wall-container');
-  if (container) container.scrollTop = 0;
-  const stickyBar = document.getElementById('wallStickyBar');
-  if (stickyBar) stickyBar.classList.remove('visible');
-  refreshIcons();
-}
-
-function closeBadgeWall() {
-  const overlay = document.getElementById('badgeWallOverlay');
-  if (!overlay) return;
-  const stickyBar = document.getElementById('wallStickyBar');
-  if (stickyBar) stickyBar.classList.remove('visible');
-  overlay.classList.remove('active');
-  overlay.classList.add('closing');
-  setTimeout(() => { overlay.classList.remove('closing'); document.body.style.overflow = ''; }, 200);
-}
-
 /* ============ 弹窗 ============ */
 function showModal(title, message) {
   const overlay = document.createElement('div');
@@ -1285,7 +914,6 @@ function showModal(title, message) {
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
   overlay.innerHTML = `
     <div class="modal-content">
-      <button class="modal-close-btn" onclick="this.closest('.modal-overlay').remove()">&times;</button>
       <h3>${title}</h3>
       <p>${message}</p>
       <button class="action-btn btn-primary" onclick="this.closest('.modal-overlay').remove()">知道了</button>
@@ -1293,289 +921,17 @@ function showModal(title, message) {
   document.body.appendChild(overlay);
 }
 
-
-function showLockedLessonTooltip(lessonId) {
-  let lessonData = null;
-  let levelData = null;
-  for (const level of COURSES.levels) {
-    for (const lesson of level.lessons) {
-      if (lesson.id === lessonId) {
-        lessonData = lesson;
-        levelData = level;
-        break;
-      }
-    }
-    if (lessonData) break;
-  }
-  if (!lessonData) return;
-
-  const firstCard = lessonData.cards && lessonData.cards[0];
-  const briefContent = firstCard
-    ? (firstCard.highlight || firstCard.content || '').replace(/<[^>]*>/g, '').substring(0, 60)
-    : '';
-
-  const overlay = document.createElement('div');
-  overlay.className = 'locked-tooltip-overlay';
-  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-  overlay.innerHTML = `
-    <div class="locked-tooltip">
-      <button class="modal-close-btn" onclick="this.closest('.locked-tooltip-overlay').remove()">&times;</button>
-      <div class="tooltip-lock"><i data-lucide="lock"></i></div>
-      <div class="tooltip-title">${lessonData.title}</div>
-      ${briefContent ? '<div class="tooltip-desc">' + briefContent + '</div>' : ''}
-      <div class="tooltip-status">\u672a\u89e3\u9501</div>
-      <div class="tooltip-hint">\u5b8c\u6210\u4ee5\u4e0a\u5168\u90e8\u7b49\u7ea7\u624d\u53ef\u4ee5\u89e3\u9501\u54e6\uff01</div>
-    </div>`;
-  document.body.appendChild(overlay);
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-}
-
-function showLockedIllustrationHint() {
-  showModal('🔒 鸭鸭还在等你', '想解锁这个可爱的鸭鸭，就在学习路线上继续前进吧 💪');
-}
-
-const DUCK_CHEER_QUOTES = [
-  '"千里之行，始于足下。" —— 你已经迈出了最重要的一步！',
-  '"生活就像一盒巧克力，你永远不知道下一颗是什么味道。" —— 《阿甘正传》',
-  '"不积跬步，无以至千里。" —— 每一次学习都在积累你的力量！',
-  '"只要你肯努力，全世界都会为你让路。"',
-  '"成功不是终点，失败也不是终结，唯有继续前行的勇气才最重要。" —— 丘吉尔',
-  '"To infinity and beyond!" —— 《玩具总动员》巴斯光年',
-  '"你比你想象的更勇敢，比你看起来更强大。" —— 《小熊维尼》',
-  '"每一个优秀的人，都有一段沉默的时光。" —— 你正在默默变强！',
-  '"星光不问赶路人，时光不负有心人。" —— 你的努力终将闪耀！',
-  '"Let it go, let it go!" —— 放下焦虑，享受学习的快乐吧！',
-  '"我不是天生的赢家，但我可以成为不断进步的人。"',
-  '"书山有路勤为径，学海无涯苦作舟。" —— 但有鸭鸭陪你就不苦啦！',
-  '"所有的努力都不会被辜负，时间会给你最好的答案。"',
-  '"After all, tomorrow is another day!" —— 《乱世佳人》斯嘉丽',
-  '"你今天的坚持，是明天的底气。" —— 继续加油！',
-  '"慢慢来，比较快。" —— 学习不急，扎实最重要！',
-  '"乘风破浪会有时，直挂云帆济沧海。" —— 李白也在为你加油！',
-  '"每个人都是自己人生的主角。" —— 你的故事正在精彩上演！',
-  '"Do, or do not. There is no try." —— 《星球大战》尤达大师',
-  '"越努力，越幸运。" —— 你的好运正在路上！',
-  '"今天的你，比昨天的你更厉害了！" —— 这就是进步的意义',
-  '"人生没有白走的路，每一步都算数。"',
-  '"破茧成蝶需要时间，但你一定会飞起来的！"',
-  '"山再高，往上攀，总能登顶；路再长，走下去，定能到达。"',
-  '"Yesterday is history, tomorrow is a mystery, but today is a gift." —— 《功夫熊猫》乌龟大师',
-  '"你的笑容就是最好的正能量，继续保持！"',
-  '"Stay hungry, stay foolish." —— 乔布斯说的，保持好奇心！',
-  '"不要因为走得太远，而忘记为什么出发。" —— 你的初心很棒！',
-  '"种一棵树最好的时间是十年前，其次是现在。" —— 你正在种下知识的种子！',
-  '"It always seems impossible until it is done." —— 曼德拉'
-];
-
-function showUnlockedIllustrationCheer() {
-  const randomQuote = DUCK_CHEER_QUOTES[Math.floor(Math.random() * DUCK_CHEER_QUOTES.length)];
-  const message = randomQuote + '<br><br>你的前进路上，欢乐鸭鸭都会一直陪伴你 💛';
-  showModal('鸭鸭想对你说', message);
-}
-/* ============ 连续打卡情感化 ============ */
-const STREAK_MILESTONES = [
-  { days: 3,   mascot: 'savy-happy.svg',     title: '🔥 三天连续！',   subtitle: '好的开始是成功的一半！',                     confetti: false, glow: false },
-  { days: 7,   mascot: 'savy-celebrate.svg',  title: '🔥 一周达人！',   subtitle: '连续 7 天，你太棒了！',                      confetti: true,  glow: false },
-  { days: 14,  mascot: 'savy-celebrate.svg',  title: '🔥 两周坚持！',   subtitle: '习惯正在养成，继续加油！',                    confetti: true,  glow: false },
-  { days: 30,  mascot: 'savy-trophy.svg',     title: '🏆 月度传奇！',   subtitle: '连续 30 天！你是真正的学习达人！',            confetti: true,  glow: true },
-  { days: 60,  mascot: 'savy-trophy.svg',     title: '🏆 双月之星！',   subtitle: '60 天不间断，这份毅力令人敬佩！',            confetti: true,  glow: true },
-  { days: 100, mascot: 'savy-rocket.svg',     title: '🚀 百日传说！',   subtitle: '100 天连续学习！你已经超越了 99% 的人！',    confetti: true,  glow: true },
-  { days: 365, mascot: 'savy-love.svg',       title: '💎 年度王者！',   subtitle: '整整一年！你是传说中的存在！',                confetti: true,  glow: true },
-];
-
-/** 在 app 初始化时检测断签/里程碑，延迟弹出弹窗 */
-function checkStreakEvents() {
-  if (appState.previousStreak > 1 && !appState.streakBrokenShown) {
-    setTimeout(() => {
-      SoundManager.playStreakBreak();
-      showStreakBrokenModal(appState.previousStreak);
-      appState.streakBrokenShown = true;
-      saveState(appState);
-    }, 600);
-    return;
-  }
-
-  if (!appState.milestoneShown) appState.milestoneShown = [];
-  const milestone = STREAK_MILESTONES.find(
-    m => appState.streak >= m.days && !appState.milestoneShown.includes(m.days)
-  );
-  if (milestone) {
-    setTimeout(() => {
-      SoundManager.playMilestone();
-      showStreakMilestoneModal(milestone);
-      appState.milestoneShown.push(milestone.days);
-      saveState(appState);
-    }, 600);
-  }
-}
-
-/** 断签弹窗 */
-function showStreakBrokenModal(previousDays) {
-  const overlay = document.createElement('div');
-  overlay.className = 'streak-modal-overlay';
-  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-  overlay.innerHTML = `
-    <div class="streak-modal streak-broken">
-      <div class="streak-modal-mascot">
-        <img src="assets/kawaii/savy-sad.svg" alt="savy sad">
-      </div>
-      <h3 class="streak-modal-title">哎呀，连续记录断了…</h3>
-      <p class="streak-modal-subtitle">你之前已经连续学习了 <strong>${previousDays} 天</strong>！</p>
-      <p class="streak-modal-desc">没关系，重新开始也很棒！今天学一课就能开启新的连续记录 🔥</p>
-      <div class="streak-modal-counter">
-        <span class="streak-fire-icon">🔥</span>
-        <span class="streak-counter-num">1</span>
-      </div>
-      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">重新出发！</button>
-    </div>`;
-  document.body.appendChild(overlay);
-}
-
-/** 里程碑庆祝弹窗 */
-function showStreakMilestoneModal(milestone) {
-  const overlay = document.createElement('div');
-  overlay.className = 'streak-modal-overlay';
-  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-  overlay.innerHTML = `
-    <div class="streak-modal streak-milestone${milestone.glow ? ' streak-glow' : ''}">
-      <div class="streak-modal-mascot">
-        <img src="assets/kawaii/${milestone.mascot}" alt="savy milestone">
-      </div>
-      <h3 class="streak-modal-title">${milestone.title}</h3>
-      <p class="streak-modal-subtitle">${milestone.subtitle}</p>
-      <div class="streak-modal-counter">
-        <span class="streak-fire-icon">🔥</span>
-        <span class="streak-counter-num">${milestone.days}</span>
-      </div>
-      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">继续学习！</button>
-    </div>`;
-  document.body.appendChild(overlay);
-  if (milestone.confetti) showConfetti();
-}
-
-/** 顶栏 streak 点击弹窗（展示当前连续天数） */
 function showStreakModal() {
-  const currentMilestone = [...STREAK_MILESTONES].reverse().find(m => appState.streak >= m.days);
-  const nextMilestone = STREAK_MILESTONES.find(m => appState.streak < m.days);
-  const mascot = currentMilestone ? currentMilestone.mascot : 'savy-happy.svg';
-  const progressText = nextMilestone
-    ? `距离下一个里程碑（${nextMilestone.days} 天）还差 ${nextMilestone.days - appState.streak} 天`
-    : '你已经达成了所有里程碑！🎉';
-
-  const overlay = document.createElement('div');
-  overlay.className = 'streak-modal-overlay';
-  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-  overlay.innerHTML = `
-    <div class="streak-modal streak-info">
-      <button class="modal-close-btn" onclick="this.closest('.streak-modal-overlay').remove()">&times;</button>
-      <div class="streak-modal-mascot">
-        <img src="assets/kawaii/${mascot}" alt="savy streak">
-      </div>
-      <h3 class="streak-modal-title">🔥 连续学习</h3>
-      <div class="streak-modal-counter streak-counter-large">
-        <span class="streak-fire-icon">🔥</span>
-        <span class="streak-counter-num">${appState.streak}</span>
-        <span class="streak-counter-label">天</span>
-      </div>
-      <p class="streak-modal-subtitle">${progressText}</p>
-      <button class="streak-modal-btn" onclick="this.closest('.streak-modal-overlay').remove()">知道了</button>
-    </div>`;
-  document.body.appendChild(overlay);
+  showModal(`连续学习 ${appState.streak} 天`, `太棒了！保持每天学习的习惯，你的连续天数会越来越长！\n\n连续 3 天 → 三日连续徽章\n连续 7 天 → 一周达人徽章`);
 }
 
-
-/* ============ 音效系统 (Web Audio API) ============ */
-const SoundManager = {
-  enabled: true,
-  audioContext: null,
-
-  init() {
-    if (this.audioContext) return;
-    try {
-      this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    } catch (e) {
-      this.enabled = false;
-    }
-  },
-
-  _playNote(freq, duration, type, startTime, gainValue) {
-    if (!this.enabled || !this.audioContext) return;
-    const ctx = this.audioContext;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = type || 'sine';
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(gainValue || 0.3, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(startTime);
-    osc.stop(startTime + duration);
-  },
-
-  playCorrect() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(523, 0.15, 'sine', now, 0.25);
-    this._playNote(659, 0.2, 'sine', now + 0.12, 0.25);
-  },
-
-  playIncorrect() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(330, 0.15, 'sine', now, 0.2);
-    this._playNote(262, 0.25, 'sine', now + 0.12, 0.2);
-  },
-
-  playComplete() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(523, 0.2, 'sine', now, 0.25);
-    this._playNote(659, 0.2, 'sine', now + 0.18, 0.25);
-    this._playNote(784, 0.35, 'sine', now + 0.36, 0.3);
-  },
-
-  playBadge() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    for (let i = 0; i < 4; i++) {
-      this._playNote(1319, 0.08, 'triangle', now + i * 0.1, 0.15);
-    }
-    this._playNote(1568, 0.3, 'triangle', now + 0.4, 0.2);
-  },
-
-  playLevelUp() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(262, 0.2, 'square', now, 0.15);
-    this._playNote(330, 0.2, 'square', now + 0.2, 0.15);
-    this._playNote(392, 0.2, 'square', now + 0.4, 0.15);
-    this._playNote(523, 0.4, 'square', now + 0.6, 0.2);
-  },
-
-  playMilestone() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(392, 0.2, 'sine', now, 0.25);
-    this._playNote(494, 0.2, 'sine', now + 0.2, 0.25);
-    this._playNote(587, 0.3, 'sine', now + 0.4, 0.25);
-    this._playNote(1319, 0.4, 'triangle', now + 0.7, 0.15);
-  },
-
-  playStreakBreak() {
-    this.init();
-    if (!this.audioContext) return;
-    const now = this.audioContext.currentTime;
-    this._playNote(392, 0.25, 'sine', now, 0.2);
-    this._playNote(294, 0.35, 'sine', now + 0.2, 0.15);
+function resetProgress() {
+  if (confirm('确定要重置所有学习进度吗？此操作不可撤销。')) {
+    localStorage.removeItem('ai_table_learn_state');
+    appState = { ...DEFAULT_STATE };
+    navigateTo('path');
   }
-};
+}
 
 /* ============ Lucide 图标刷新 ============ */
 function refreshIcons() {
@@ -1597,5 +953,4 @@ showFeedback = function(a, b) { _origShowFeedback(a, b); refreshIcons(); };
 /* ============ 初始化 ============ */
 document.addEventListener('DOMContentLoaded', () => {
   render();
-  checkStreakEvents();
 });
