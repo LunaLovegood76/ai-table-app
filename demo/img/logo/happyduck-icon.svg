@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- 圆角方形背景 -->
+  <rect width="120" height="120" rx="26" ry="26" fill="#FFF8E7"/>
+  
+  <!-- 玻尿酸鸭 - 黑色剪影风格，胖嘟嘟圆润可爱 -->
+  <!-- 身体（圆润饱满） -->
+  <ellipse cx="60" cy="75" rx="30" ry="26" fill="#1a1a1a"/>
+  
+  <!-- 头部（大圆头，玻尿酸感） -->
+  <circle cx="60" cy="46" r="22" fill="#1a1a1a"/>
+  
+  <!-- 玻尿酸嘴唇（饱满厚实的鸭嘴，核心特征） -->
+  <ellipse cx="60" cy="60" rx="13" ry="7" fill="#1a1a1a"/>
+  <!-- 嘴唇高光，体现玻尿酸感 -->
+  <ellipse cx="57" cy="57.5" rx="5" ry="2.5" fill="#fff" opacity="0.35"/>
+  
+  <!-- 鸭嘴（扁平宽嘴） -->
+  <ellipse cx="60" cy="60" rx="11" ry="5" fill="#E8A020"/>
+  <!-- 嘴唇中缝 -->
+  <line x1="49" y1="60" x2="71" y2="60" stroke="#c47a10" stroke-width="1.2"/>
+  
+  <!-- 眼睛（圆润大眼） -->
+  <circle cx="52" cy="42" r="5" fill="white"/>
+  <circle cx="68" cy="42" r="5" fill="white"/>
+  <circle cx="53" cy="42" r="3" fill="#1a1a1a"/>
+  <circle cx="69" cy="42" r="3" fill="#1a1a1a"/>
+  <!-- 眼睛高光 -->
+  <circle cx="54.5" cy="40.5" r="1.2" fill="white"/>
+  <circle cx="70.5" cy="40.5" r="1.2" fill="white"/>
+  
+  <!-- 头顶小羽毛（俏皮） -->
+  <ellipse cx="60" cy="25" rx="4" ry="7" fill="#1a1a1a" transform="rotate(-10 60 25)"/>
+  <ellipse cx="67" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(15 67 27)"/>
+  
+  <!-- 翅膀（左） -->
+  <ellipse cx="34" cy="76" rx="9" ry="14" fill="#111" transform="rotate(20 34 76)"/>
+  <!-- 翅膀（右） -->
+  <ellipse cx="86" cy="76" rx="9" ry="14" fill="#111" transform="rotate(-20 86 76)"/>
+  
+  <!-- 脚（橙色小脚） -->
+  <ellipse cx="50" cy="99" rx="9" ry="4" fill="#E8A020" transform="rotate(-15 50 99)"/>
+  <ellipse cx="70" cy="99" rx="9" ry="4" fill="#E8A020" transform="rotate(15 70 99)"/>
+  
+  <!-- AI 小标识（右下角） -->
+  <circle cx="95" cy="95" r="13" fill="#4A90E2"/>
+  <text x="95" y="99.5" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="white">AI</text>
+</svg>

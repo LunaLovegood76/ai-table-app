@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HappyDuck AI - Logo 预览</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif;
+      background: #f5f5f7;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+    .section {
+      max-width: 860px;
+      margin: 0 auto 48px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #999;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-left: 4px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .card.dark {
+      background: #1a1a1a;
+    }
+    .card.yellow {
+      background: #FFF8E7;
+    }
+    .card.blue {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .icon-row {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .icon-label {
+      font-size: 12px;
+      color: #999;
+      font-weight: 500;
+    }
+    .icon-label.light { color: rgba(255,255,255,0.6); }
+
+    /* 参考样式：图标 + 文字横排 */
+    .logo-horizontal {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .logo-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .logo-name span { color: #4A90E2; }
+    .logo-sub {
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 1.5px;
+    }
+    .logo-name.light { color: white; }
+    .logo-sub.light { color: rgba(255,255,255,0.6); }
+
+    /* 尺寸展示 */
+    .size-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .size-label {
+      font-size: 11px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🦆 HappyDuck AI · Logo 设计方案</h1>
+  <p class="subtitle">欢乐鸭 · 玻尿酸鸭形象 · AI 表格学习系统</p>
+
+  <!-- 主 Logo 横排（参考 HappyHorse 样式） -->
+  <div class="section">
+    <div class="section-title">主 Logo — 浅色背景</div>
+    <div class="card">
+      <div class="logo-horizontal">
+        <!-- 图标 -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="72" height="72">
+          <rect width="100" height="100" rx="22" ry="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+          <!-- 身体 -->
+          <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+          <!-- 头部 -->
+          <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+          <!-- 眼白 -->
+          <circle cx="41" cy="42" r="6" fill="white"/>
+          <circle cx="59" cy="42" r="6" fill="white"/>
+          <!-- 眼珠 -->
+          <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+          <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+          <!-- 眼睛高光 -->
+          <circle cx="44" cy="40" r="1.4" fill="white"/>
+          <circle cx="62" cy="40" r="1.4" fill="white"/>
+          <!-- 玻尿酸嘴唇（超饱满） -->
+          <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+          <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+          <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+          <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+          <!-- 头顶羽毛 -->
+          <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#1a1a1a" transform="rotate(-15 47 25)"/>
+          <ellipse cx="55" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(20 55 27)"/>
+          <!-- 翅膀 -->
+          <ellipse cx="27" cy="75" rx="9" ry="14" fill="#111" transform="rotate(20 27 75)"/>
+          <ellipse cx="73" cy="75" rx="9" ry="14" fill="#111" transform="rotate(-20 73 75)"/>
+          <!-- 脚 -->
+          <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+          <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+          <!-- AI 徽章 -->
+          <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+          <text x="80" y="87" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="11" fill="white">AI</text>
+        </svg>
+        <!-- 文字 -->
+        <div class="logo-text-group">
+          <div class="logo-name">HappyDuck <span>AI</span></div>
+          <div class="logo-sub">欢乐鸭 · AI 表格学习系统</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 深色背景 -->
+  <div class="section">
+    <div class="section-title">主 Logo — 深色背景</div>
+    <div class="card dark">
+      <div class="logo-horizontal">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="72" height="72">
+          <rect width="100" height="100" rx="22" ry="22" fill="#2a2a2a" stroke="#444" stroke-width="1.5"/>
+          <ellipse cx="50" cy="74" rx="26" ry="20" fill="#FFD700"/>
+          <circle cx="50" cy="46" r="22" fill="#FFD700"/>
+          <circle cx="41" cy="42" r="6" fill="white"/>
+          <circle cx="59" cy="42" r="6" fill="white"/>
+          <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+          <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+          <circle cx="44" cy="40" r="1.4" fill="white"/>
+          <circle cx="62" cy="40" r="1.4" fill="white"/>
+          <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+          <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+          <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+          <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+          <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#E8A020" transform="rotate(-15 47 25)"/>
+          <ellipse cx="55" cy="27" rx="3" ry="6" fill="#E8A020" transform="rotate(20 55 27)"/>
+          <ellipse cx="27" cy="75" rx="9" ry="14" fill="#E8C000" transform="rotate(20 27 75)"/>
+          <ellipse cx="73" cy="75" rx="9" ry="14" fill="#E8C000" transform="rotate(-20 73 75)"/>
+          <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+          <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+          <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+          <text x="80" y="87" text-anchor="middle" font-family="Arial Black, sans-serif" font-weight="900" font-size="11" fill="white">AI</text>
+        </svg>
+        <div class="logo-text-group">
+          <div class="logo-name light">HappyDuck <span>AI</span></div>
+          <div class="logo-sub light">欢乐鸭 · AI 表格学习系统</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 图标尺寸展示 -->
+  <div class="section">
+    <div class="section-title">图标尺寸 — 多场景适配</div>
+    <div class="card">
+      <div class="size-row">
+        <!-- 16px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="16" height="16">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+        <!-- 32px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <circle cx="41" cy="42" r="6" fill="white"/>
+            <circle cx="59" cy="42" r="6" fill="white"/>
+            <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+            <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <!-- 48px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <circle cx="41" cy="42" r="6" fill="white"/>
+            <circle cx="59" cy="42" r="6" fill="white"/>
+            <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="44" cy="40" r="1.4" fill="white"/>
+            <circle cx="62" cy="40" r="1.4" fill="white"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+            <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+            <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+            <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#1a1a1a" transform="rotate(-15 47 25)"/>
+            <ellipse cx="55" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(20 55 27)"/>
+            <ellipse cx="27" cy="75" rx="9" ry="14" fill="#111" transform="rotate(20 27 75)"/>
+            <ellipse cx="73" cy="75" rx="9" ry="14" fill="#111" transform="rotate(-20 73 75)"/>
+            <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+            <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+            <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+          </svg>
+          <span class="size-label">48px</span>
+        </div>
+        <!-- 72px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="72" height="72">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <circle cx="41" cy="42" r="6" fill="white"/>
+            <circle cx="59" cy="42" r="6" fill="white"/>
+            <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="44" cy="40" r="1.4" fill="white"/>
+            <circle cx="62" cy="40" r="1.4" fill="white"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+            <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+            <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+            <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#1a1a1a" transform="rotate(-15 47 25)"/>
+            <ellipse cx="55" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(20 55 27)"/>
+            <ellipse cx="27" cy="75" rx="9" ry="14" fill="#111" transform="rotate(20 27 75)"/>
+            <ellipse cx="73" cy="75" rx="9" ry="14" fill="#111" transform="rotate(-20 73 75)"/>
+            <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+            <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+            <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+          </svg>
+          <span class="size-label">72px</span>
+        </div>
+        <!-- 120px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" height="120">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <circle cx="41" cy="42" r="6" fill="white"/>
+            <circle cx="59" cy="42" r="6" fill="white"/>
+            <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="44" cy="40" r="1.4" fill="white"/>
+            <circle cx="62" cy="40" r="1.4" fill="white"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+            <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+            <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+            <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#1a1a1a" transform="rotate(-15 47 25)"/>
+            <ellipse cx="55" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(20 55 27)"/>
+            <ellipse cx="27" cy="75" rx="9" ry="14" fill="#111" transform="rotate(20 27 75)"/>
+            <ellipse cx="73" cy="75" rx="9" ry="14" fill="#111" transform="rotate(-20 73 75)"/>
+            <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+            <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+            <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+          </svg>
+          <span class="size-label">120px</span>
+        </div>
+        <!-- 200px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+            <rect width="100" height="100" rx="22" fill="#FFF8E7" stroke="#F0D080" stroke-width="1.5"/>
+            <ellipse cx="50" cy="74" rx="26" ry="20" fill="#1a1a1a"/>
+            <circle cx="50" cy="46" r="22" fill="#1a1a1a"/>
+            <circle cx="41" cy="42" r="6" fill="white"/>
+            <circle cx="59" cy="42" r="6" fill="white"/>
+            <circle cx="42.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="60.5" cy="42" r="3.5" fill="#1a1a1a"/>
+            <circle cx="44" cy="40" r="1.4" fill="white"/>
+            <circle cx="62" cy="40" r="1.4" fill="white"/>
+            <ellipse cx="50" cy="58" rx="13" ry="8" fill="#E8A020"/>
+            <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#D4900A"/>
+            <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+            <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.45"/>
+            <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="#1a1a1a" transform="rotate(-15 47 25)"/>
+            <ellipse cx="55" cy="27" rx="3" ry="6" fill="#1a1a1a" transform="rotate(20 55 27)"/>
+            <ellipse cx="27" cy="75" rx="9" ry="14" fill="#111" transform="rotate(20 27 75)"/>
+            <ellipse cx="73" cy="75" rx="9" ry="14" fill="#111" transform="rotate(-20 73 75)"/>
+            <ellipse cx="41" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(-12 41 92)"/>
+            <ellipse cx="59" cy="92" rx="9" ry="4" fill="#E8A020" transform="rotate(12 59 92)"/>
+            <circle cx="80" cy="82" r="14" fill="#4A90E2"/>
+            <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+          </svg>
+          <span class="size-label">200px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 渐变彩色版 -->
+  <div class="section">
+    <div class="section-title">彩色版 — 渐变背景</div>
+    <div class="card blue">
+      <div class="logo-horizontal">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="72" height="72">
+          <rect width="100" height="100" rx="22" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+          <ellipse cx="50" cy="74" rx="26" ry="20" fill="white"/>
+          <circle cx="50" cy="46" r="22" fill="white"/>
+          <circle cx="41" cy="42" r="6" fill="#764ba2"/>
+          <circle cx="59" cy="42" r="6" fill="#764ba2"/>
+          <circle cx="42.5" cy="42" r="3.5" fill="white"/>
+          <circle cx="60.5" cy="42" r="3.5" fill="white"/>
+          <circle cx="44" cy="40" r="1.4" fill="rgba(255,255,255,0.8)"/>
+          <circle cx="62" cy="40" r="1.4" fill="rgba(255,255,255,0.8)"/>
+          <ellipse cx="50" cy="58" rx="13" ry="8" fill="#FFD700"/>
+          <path d="M37 56 Q43.5 51 50 56 Q56.5 51 63 56" fill="#E8A020"/>
+          <line x1="37" y1="58" x2="63" y2="58" stroke="#C07810" stroke-width="1.5"/>
+          <ellipse cx="46" cy="54" rx="5" ry="2.5" fill="white" opacity="0.5"/>
+          <ellipse cx="47" cy="25" rx="3.5" ry="7" fill="white" transform="rotate(-15 47 25)"/>
+          <ellipse cx="55" cy="27" rx="3" ry="6" fill="white" transform="rotate(20 55 27)"/>
+          <ellipse cx="27" cy="75" rx="9" ry="14" fill="rgba(255,255,255,0.8)" transform="rotate(20 27 75)"/>
+          <ellipse cx="73" cy="75" rx="9" ry="14" fill="rgba(255,255,255,0.8)" transform="rotate(-20 73 75)"/>
+          <ellipse cx="41" cy="92" rx="9" ry="4" fill="#FFD700" transform="rotate(-12 41 92)"/>
+          <ellipse cx="59" cy="92" rx="9" ry="4" fill="#FFD700" transform="rotate(12 59 92)"/>
+          <circle cx="80" cy="82" r="14" fill="rgba(255,255,255,0.25)"/>
+          <text x="80" y="87" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="11" fill="white">AI</text>
+        </svg>
+        <div class="logo-text-group">
+          <div class="logo-name light">HappyDuck <span>AI</span></div>
+          <div class="logo-sub light">欢乐鸭 · AI 表格学习系统</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 设计说明 -->
+  <div class="section">
+    <div class="section-title">设计说明</div>
+    <div class="card" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%;">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px;">🦆 形象特征</div>
+          <div style="font-size: 13px; color: #666; line-height: 1.8;">
+            · 圆润大头，玻尿酸感饱满<br>
+            · 超厚嘴唇（核心特征），带高光<br>
+            · 圆眼睛带高光，表情可爱<br>
+            · 头顶俏皮小羽毛<br>
+            · 橙色鸭掌和嘴
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px;">🎨 设计规范</div>
+          <div style="font-size: 13px; color: #666; line-height: 1.8;">
+            · 图标背景：暖米白 #FFF8E7<br>
+            · 主体色：深黑 #1a1a1a<br>
+            · 嘴唇/脚：橙黄 #E8A020<br>
+            · AI 徽章：蓝色 #4A90E2<br>
+            · 圆角：22px（iOS 风格）
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

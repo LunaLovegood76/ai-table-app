@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音效试听 — AI表格学堂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', -apple-system, sans-serif;
+      background: #F0F0F0;
+      color: #3C3C3C;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      color: #58CC02;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #AFAFAF;
+      margin-bottom: 32px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 2px solid #E5E5E5;
+      transition: all 0.2s ease;
+    }
+    .card:hover { border-color: #CDCDCD; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .card-emoji {
+      font-size: 32px;
+      line-height: 1;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .card-tech {
+      font-size: 11px;
+      color: #AFAFAF;
+      margin-bottom: 16px;
+      font-family: monospace;
+      background: #F7F7F7;
+      padding: 8px 10px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+    }
+    .play-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+    }
+    .btn-correct { background: #58CC02; }
+    .btn-correct:hover { background: #46A302; }
+    .btn-incorrect { background: #FF4B4B; }
+    .btn-incorrect:hover { background: #E03E3E; }
+    .btn-complete { background: #1CB0F6; }
+    .btn-complete:hover { background: #1899D6; }
+    .btn-badge { background: #FFC800; color: #4B4B4B; }
+    .btn-badge:hover { background: #E6B400; }
+    .btn-levelup { background: #A560E8; }
+    .btn-levelup:hover { background: #8A4CC8; }
+    .btn-streak { background: #FF9600; }
+    .btn-streak:hover { background: #E08600; }
+    .btn-break { background: #777; }
+    .btn-break:hover { background: #5C5C5C; }
+
+    .volume-control {
+      max-width: 900px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 2px solid #E5E5E5;
+    }
+    .volume-control label {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .volume-control input[type="range"] {
+      flex: 1;
+      accent-color: #58CC02;
+    }
+    .volume-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #58CC02;
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .note {
+      max-width: 900px;
+      margin: 24px auto 0;
+      padding: 16px 20px;
+      background: #FFFDF0;
+      border: 2px solid #FFC800;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+    }
+    .note strong { color: #4B4B4B; }
+  </style>
+</head>
+<body>
+  <h1>🎵 音效试听面板</h1>
+  <p class="subtitle">所有音效均由 Web Audio API 实时合成，零资源文件依赖</p>
+
+  <div class="volume-control">
+    <label>🔊 音量</label>
+    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+    <span class="volume-value" id="volumeLabel">50%</span>
+  </div>
+
+  <div class="grid">
+    <!-- 答对 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">✅</span>
+        <span class="card-title">答对</span>
+      </div>
+      <div class="card-desc">清脆的上升双音，给用户正向确认感。<br>用于：选择正确答案后的即时反馈。</div>
+      <div class="card-tech">波形: sine | 音符: C5(523Hz) → E5(659Hz)<br>间隔: 100ms | 时长: ~0.3s</div>
+      <button class="play-btn btn-correct" onclick="playCorrect()">▶ 播放</button>
+    </div>
+
+    <!-- 答错 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">❌</span>
+        <span class="card-title">答错</span>
+      </div>
+      <div class="card-desc">低沉的下降双音，温和提示错误但不刺耳。<br>用于：选择错误答案后的即时反馈。</div>
+      <div class="card-tech">波形: sine | 音符: E4(330Hz) → C4(262Hz)<br>间隔: 100ms | 时长: ~0.3s</div>
+      <button class="play-btn btn-incorrect" onclick="playIncorrect()">▶ 播放</button>
+    </div>
+
+    <!-- 完成课程 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">🎉</span>
+        <span class="card-title">完成课程</span>
+      </div>
+      <div class="card-desc">欢快的三连上升音，传递成就感和喜悦。<br>用于：完成一节课程时的庆祝反馈。</div>
+      <div class="card-tech">波形: sine | 音符: C5 → E5 → G5(784Hz)<br>间隔: 150ms | 时长: ~0.8s</div>
+      <button class="play-btn btn-complete" onclick="playComplete()">▶ 播放</button>
+    </div>
+
+    <!-- 获得徽章 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">🏅</span>
+        <span class="card-title">获得徽章</span>
+      </div>
+      <div class="card-desc">闪亮的金属颤音，像解锁宝箱的感觉。<br>用于：解锁新成就徽章时。</div>
+      <div class="card-tech">波形: triangle | 音符: E6(1319Hz) 颤音<br>衰减: 0.6s | 增益: 0.25</div>
+      <button class="play-btn btn-badge" onclick="playBadge()">▶ 播放</button>
+    </div>
+
+    <!-- 升级段位 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">⬆️</span>
+        <span class="card-title">升级段位</span>
+      </div>
+      <div class="card-desc">上升的号角四连音，庄重又激动人心。<br>用于：段位从青铜→白银等升级时。</div>
+      <div class="card-tech">波形: square(0.3 gain) | 音符: C4→E4→G4→C5<br>间隔: 200ms | 时长: ~1.0s</div>
+      <button class="play-btn btn-levelup" onclick="playLevelUp()">▶ 播放</button>
+    </div>
+
+    <!-- 连续里程碑 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">🔥</span>
+        <span class="card-title">连续里程碑</span>
+      </div>
+      <div class="card-desc">温暖的上升三连音 + 尾部闪亮音，庆祝坚持。<br>用于：连续打卡 3/7/14/30/100 天时。</div>
+      <div class="card-tech">波形: sine+triangle | 音符: G4→B4→D5 + E6闪亮<br>间隔: 130ms | 时长: ~1.0s</div>
+      <button class="play-btn btn-streak" onclick="playMilestone()">▶ 播放</button>
+    </div>
+
+    <!-- 断签 -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-emoji">💔</span>
+        <span class="card-title">断签</span>
+      </div>
+      <div class="card-desc">柔和的下降音，表达遗憾但不打击用户。<br>用于：连续打卡记录中断时的弹窗。</div>
+      <div class="card-tech">波形: sine | 音符: G4(392Hz) → D4(294Hz)<br>间隔: 200ms | 衰减较长 0.8s</div>
+      <button class="play-btn btn-break" onclick="playStreakBreak()">▶ 播放</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>💡 说明：</strong>所有音效均通过 Web Audio API 的 OscillatorNode 实时合成，不需要任何 mp3/wav 文件。
+    最终集成到 demo 中时，会封装为 <code>SoundManager</code> 对象，支持一键开关。
+    音效参数（频率、波形、时长）可以随时微调。
+  </div>
+
+  <script>
+    let audioContext = null;
+    let masterGain = 0.5;
+
+    function getContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioContext;
+    }
+
+    // 音量控制
+    document.getElementById('volumeSlider').addEventListener('input', function() {
+      masterGain = this.value / 100;
+      document.getElementById('volumeLabel').textContent = this.value + '%';
+    });
+
+    // 基础工具：播放一个音符
+    function playNote(frequency, startTime, duration, waveType, gainValue) {
+      const ctx = getContext();
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.type = waveType || 'sine';
+      oscillator.frequency.setValueAtTime(frequency, startTime);
+
+      const effectiveGain = (gainValue || 0.3) * masterGain;
+      gainNode.gain.setValueAtTime(effectiveGain, startTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration);
+    }
+
+    // ✅ 答对：C5 → E5 快速上升
+    function playCorrect() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(523.25, now, 0.15, 'sine', 0.3);        // C5
+      playNote(659.25, now + 0.1, 0.2, 'sine', 0.3);   // E5
+    }
+
+    // ❌ 答错：E4 → C4 快速下降
+    function playIncorrect() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(329.63, now, 0.15, 'sine', 0.2);         // E4
+      playNote(261.63, now + 0.1, 0.25, 'sine', 0.2);   // C4
+    }
+
+    // 🎉 完成课程：C5 → E5 → G5 三连音
+    function playComplete() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(523.25, now, 0.2, 'sine', 0.3);          // C5
+      playNote(659.25, now + 0.15, 0.2, 'sine', 0.3);   // E5
+      playNote(783.99, now + 0.3, 0.35, 'sine', 0.3);   // G5
+    }
+
+    // 🏅 获得徽章：E6 闪亮颤音
+    function playBadge() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.type = 'triangle';
+      oscillator.frequency.setValueAtTime(1318.51, now); // E6
+      // 添加颤音效果
+      oscillator.frequency.setValueAtTime(1318.51, now);
+      oscillator.frequency.linearRampToValueAtTime(1396.91, now + 0.05); // F6
+      oscillator.frequency.linearRampToValueAtTime(1318.51, now + 0.1);
+      oscillator.frequency.linearRampToValueAtTime(1396.91, now + 0.15);
+      oscillator.frequency.linearRampToValueAtTime(1318.51, now + 0.2);
+
+      const effectiveGain = 0.25 * masterGain;
+      gainNode.gain.setValueAtTime(effectiveGain, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.6);
+    }
+
+    // ⬆️ 升级段位：C4 → E4 → G4 → C5 号角
+    function playLevelUp() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(261.63, now, 0.25, 'square', 0.15);       // C4
+      playNote(329.63, now + 0.2, 0.25, 'square', 0.15); // E4
+      playNote(392.00, now + 0.4, 0.25, 'square', 0.15); // G4
+      playNote(523.25, now + 0.6, 0.45, 'square', 0.2);  // C5 (更长更响)
+    }
+
+    // 🔥 连续里程碑：G4 → B4 → D5 + E6 闪亮尾音
+    function playMilestone() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(392.00, now, 0.2, 'sine', 0.3);           // G4
+      playNote(493.88, now + 0.13, 0.2, 'sine', 0.3);    // B4
+      playNote(587.33, now + 0.26, 0.3, 'sine', 0.3);    // D5
+
+      // 尾部闪亮音
+      setTimeout(() => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1318.51, ctx.currentTime);
+        const effectiveGain = 0.2 * masterGain;
+        gain.gain.setValueAtTime(effectiveGain, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.5);
+      }, 450);
+    }
+
+    // 💔 断签：G4 → D4 柔和下降
+    function playStreakBreak() {
+      const ctx = getContext();
+      const now = ctx.currentTime;
+      playNote(392.00, now, 0.3, 'sine', 0.15);          // G4
+      playNote(293.66, now + 0.2, 0.5, 'sine', 0.12);    // D4
+    }
+  </script>
+</body>
+</html>
