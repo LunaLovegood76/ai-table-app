@@ -1254,13 +1254,18 @@ function openBadgeWall() {
   if (existing) existing.remove();
   ensureBadgeWallOverlay();
   const overlay = document.getElementById('badgeWallOverlay');
-  overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
   const container = overlay.querySelector('.badge-wall-container');
   if (container) container.scrollTop = 0;
   const stickyBar = document.getElementById('wallStickyBar');
   if (stickyBar) stickyBar.classList.remove('visible');
   refreshIcons();
+  // 等浏览器渲染初始 translateX(100%) 后再触发动画
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add('active');
+    });
+  });
 }
 
 function closeBadgeWall() {
