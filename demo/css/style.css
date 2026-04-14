@@ -203,6 +203,10 @@ body.page-profile {
   margin: 0 auto;
 }
 
+.main-content.no-top-bar {
+  padding-top: 20px;
+}
+
 /* ============ 课程路径页 ============ */
 .path-header {
   text-align: center;
@@ -2795,8 +2799,6 @@ body.page-profile {
   --icon-teal-bg: #E6F5F3; --icon-teal-fg: #4DA89A;
   --icon-indigo-bg: #EBF0FF; --icon-indigo-fg: #6B82C4;
   --gray-150: #E8E8E8;
-  background: rgba(107, 114, 148, 0.05);
-  min-height: 100%;
 }
 .profile-page-v2 .profile-header { padding: 20px 20px; display: flex; align-items: center; gap: 14px; }
 .profile-page-v2 .avatar-circle { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg, #B8D4E8, #8BB8D4); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 500; flex-shrink: 0; }

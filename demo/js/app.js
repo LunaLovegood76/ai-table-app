@@ -195,7 +195,9 @@ function render() {
   const app = document.getElementById('app');
   const rank = getCurrentRank(appState.totalXP);
 
+  const isProfilePage = currentPage === 'profile';
   app.innerHTML = `
+    ${!isProfilePage ? `
     <div class="top-bar">
       <div class="top-bar-logo" onclick="navigateTo('path')" style="color:#333;">
         HappyDuck AI
@@ -214,8 +216,9 @@ function render() {
         </div>
       </div>
     </div>
+    ` : ''}
 
-    <div class="main-content" id="page-content"></div>
+    <div class="main-content ${isProfilePage ? 'no-top-bar' : ''}" id="page-content"></div>
 
     <div class="bottom-nav">
       <div class="nav-item ${currentPage === 'path' ? 'active' : ''}" onclick="navigateTo('path')">
@@ -355,14 +358,14 @@ function renderPathPage(container) {
       }
 
       if (status === 'completed') {
-        html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)" style="background:${level.color};box-shadow:0 4px 0 ${level.color}99"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
+        html += `<div class="lesson-node completed" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}', true)" style="background:${level.color};border-color:${level.color};box-shadow:0 4px 0 ${level.color}99"><span class="lesson-check"><i data-lucide="check"></i></span></div>`;
       } else if (status === 'current') {
-        html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')" style="background:${level.color};box-shadow:0 4px 0 ${level.color}99"><i data-lucide="${lesson.icon}"></i></div>`;
+        html += `<div class="lesson-node current" id="lesson-node-${lesson.id}" onclick="startLesson('${lesson.id}')" style="border-color:${level.color};box-shadow:0 0 0 8px ${level.color}26"><i data-lucide="${lesson.icon}" style="color:${level.color}"></i></div>`;
       } else {
         html += `<div class="lesson-node locked" id="lesson-node-${lesson.id}" onclick="showLockedLessonTooltip('${lesson.id}')"><span class="lock-icon"><i data-lucide="lock"></i></span></div>`;
       }
 
-      html += `<div class="lesson-label ${status === 'completed' ? 'completed-label' : ''}">${lesson.title}</div>`;
+      html += `<div class="lesson-label ${status === 'completed' ? 'completed-label' : ''}" style="${status !== 'locked' ? 'color:' + level.color : ''}">${lesson.title}</div>`;
       html += `</div></div>`;
     }
     html += `</div></div>`;
