@@ -571,6 +571,17 @@ body.page-profile {
   color: var(--gray-500);
 }
 
+.lesson-feedback-btn {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: normal;
+  color: #17181C;
+  text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 .progress-bar-container {
   flex: 1;
   height: 16px;

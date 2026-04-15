@@ -554,10 +554,11 @@ function renderLessonStep() {
   const levelColor = lessonState.levelColor || '#58CC02';
   app.innerHTML = `
     <div class="lesson-top-nav">
+      <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
       <div class="progress-bar-container" style="flex:1">
         <div class="progress-bar-fill ${lessonState.isReview ? 'review-fill' : ''}" style="width:${progress}%;background:${levelColor}"></div>
       </div>
-      <button class="lesson-close" onclick="exitLesson()"><i data-lucide="x"></i></button>
+      <a class="lesson-feedback-btn" href="https://docs.dingtalk.com/notable/share/form/v015VLqXLbgBBjoZqX1_Bwpzlpt_0HcrtIM" target="_blank">问题反馈</a>
     </div>
     <div class="lesson-main-content" style="padding-bottom:${lessonState.answered ? '140px' : '100px'};--level-color:${levelColor}">
       <div class="lesson-page">${contentHtml}</div>
