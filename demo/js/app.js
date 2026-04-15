@@ -1037,6 +1037,7 @@ function showOrderDropdown(index) {
   for (let s = 1; s <= totalSteps; s++) {
     const item = document.createElement('div');
     item.className = 'step-dropdown-item';
+    if (lessonState.orderAssignments[index] === s) item.classList.add('selected');
     item.textContent = '第' + s + '步';
     item.onclick = function(e) {
       e.stopPropagation();

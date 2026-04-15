@@ -1183,6 +1183,11 @@ body.page-profile {
   border-top: 1px solid var(--gray-50);
 }
 
+.step-dropdown-item.selected {
+  background: #E6F4FF;
+  color: var(--blue);
+  font-weight: 600;
+}
 
 /* 步骤遮罩 */
 .step-overlay {
