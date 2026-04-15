@@ -217,17 +217,17 @@ var COURSES = {
           questions: [
             {
               type: 'single',
-              question: '在 AI 表格中，"记录"指的是什么？',
-              options: ['一列数据', '一行数据', '一个单元格', '一个数据表'],
+              question: '以下哪种操作可以展开记录详情页？',
+              options: ['双击字段标题', '点击行首展开按钮', '右键单元格', '拖拽整行'],
               correctIndex: 1,
-              explanation: '在 AI 表格中，每一行数据就是一条记录。'
+              explanation: '点击行首的展开按钮即可打开记录详情页，查看该记录的所有字段信息。'
             },
             {
               type: 'single',
               question: '以下哪种方式不能添加新记录？',
-              options: ['点击 + 按钮', '通过表单收集', '拖拽文件到表格', '在记录详情页填写'],
+              options: ['点击 + 按钮', '通过表单收集', '添加一个新字段', '拖拽图片到表格'],
               correctIndex: 2,
-              explanation: '添加记录可以通过点击 + 按钮、表单收集或记录详情页填写。'
+              explanation: '添加新字段是增加列，不是添加新记录。添加记录可以通过点击 + 按钮、表单收集或拖拽图片到表格。'
             },
             {
               type: 'truefalse',
@@ -359,10 +359,10 @@ var COURSES = {
             },
             {
               type: 'single',
-              question: '在 AI 表格中，"字段"和"记录"分别对应什么？',
-              options: ['行和列', '列和行', '表和行', '视图和表'],
-              correctIndex: 1,
-              explanation: '字段 = 列（规定数据类型），记录 = 行（一条数据）。'
+              question: '以下哪种方式可以快速创建一个新的数据表？',
+              options: ['在左侧边栏点击 + 号', '在工具栏点击筛选', '在数据区域双击', '在顶部导航栏点击分享'],
+              correctIndex: 0,
+              explanation: '在左侧边栏点击 + 号可以快速创建一个新的数据表。'
             },
             {
               type: 'single',

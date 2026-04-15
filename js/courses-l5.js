@@ -37,7 +37,7 @@ var l5Nodes = [
       { type: "match", question: "将数据源类型与示例匹配：", pairs: [{ left: "钉钉内部", right: "审批数据、考勤数据" }, { left: "外部数据库", right: "MySQL、PostgreSQL" }, { left: "第三方应用", right: "通过 API 对接" }, { left: "文件导入", right: "Excel、CSV" }] },
       { type: "single", question: "连接的外部数据在表格中是什么状态？", options: ["可以自由编辑", "只读，不能直接编辑", "可以删除但不能修改", "完全不可见"], correctIndex: 1, explanation: "连接的外部数据在表格中为只读。" },
       { type: "truefalse", question: "数据连接中心支持定时自动同步。", correct: true, explanation: "支持手动同步、定时同步和实时同步三种方式。" },
-      { type: "single", question: "以下哪种同步方式数据最实时？", options: ["手动同步", "定时同步", "实时同步", "都一样"], correctIndex: 2, explanation: "实时同步在数据变更时自动同步，最为实时。" },
+      { type: "single", question: "以下哪些不是数据同步的方式？", options: ["手动同步", "按小时同步", "定时同步", "实时同步"], correctIndex: 3, explanation: "数据连接中心支持手动同步、按小时同步和定时同步三种方式，没有实时同步。" },
       { type: "single", question: "数据连接中心解决了什么问题？", options: ["表格美化", "数据孤岛问题", "权限管理", "公式计算"], correctIndex: 1, explanation: "数据连接中心打通数据孤岛，汇聚多源数据。" },
       { type: "order", question: "请按正确顺序排列数据连接的配置步骤：", items: ["选择数据源类型", "配置连接参数", "选择要同步的数据", "设置同步方式"], correctOrder: [0, 1, 2, 3] },
       { type: "single", question: "钉钉内部可以连接哪些数据？", options: ["只有审批数据", "审批、考勤、日志等多种数据", "只有考勤数据", "只有通讯录"], correctIndex: 1, explanation: "钉钉内部支持连接审批数据、考勤数据、日志数据等多种数据。" },
