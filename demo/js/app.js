@@ -1824,6 +1824,9 @@ const SoundManager = {
 function refreshIcons() {
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
+  } else {
+    // Lucide 尚未加载完成，延迟重试
+    setTimeout(refreshIcons, 200);
   }
 }
 
