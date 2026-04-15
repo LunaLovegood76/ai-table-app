@@ -815,7 +815,7 @@ function toggleMatchDropdown(questionIndex, pairIndex) {
     };
     dropdown.appendChild(item);
   }
-  row.appendChild(dropdown);
+  trigger.appendChild(dropdown);
 
   // 检测下拉框是否超出视口底部，如果超出则向上弹出
   requestAnimationFrame(() => {
