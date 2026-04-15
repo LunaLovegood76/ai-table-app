@@ -759,7 +759,7 @@ body.page-profile {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  border: 2px solid var(--gray-200);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -820,7 +820,7 @@ body.page-profile {
 .tf-btn {
   flex: 1;
   padding: 18px;
-  border: 3px solid var(--gray-200);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   border-radius: var(--radius-sm);
   background: var(--white);
   cursor: pointer;
@@ -866,7 +866,7 @@ body.page-profile {
   font-weight: 600;
   color: var(--gray-500);
   text-align: center;
-  border: 2px solid var(--gray-100);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   line-height: 1.3;
 }
 
@@ -880,7 +880,7 @@ body.page-profile {
 .match-trigger {
   flex: 1;
   padding: 12px 14px;
-  border: 2px solid var(--gray-200);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   border-radius: var(--radius-xs);
   font-size: 13px;
   background: var(--white);
@@ -945,9 +945,9 @@ body.page-profile {
   width: 200px;
   max-width: 60%;
   background: var(--white);
-  border: 2px solid var(--gray-200);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   border-radius: var(--radius-sm);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: none;
   z-index: 100;
   overflow: hidden;
   animation: dropdownIn 0.15s ease;
@@ -1060,7 +1060,7 @@ body.page-profile {
 
 .order-item:active {
   cursor: grabbing;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 
 .order-item .order-num {
