@@ -281,17 +281,17 @@ var l3Nodes = [
     xpReward: 20,
     cards: [
       { type: 'knowledge', title: '双向关联 — 自动互联', content: '<strong>双向关联</strong>会在两个数据表中同时创建关联字段。\n\n<strong>与单向关联的区别：</strong>\n\u2022 单向：只在 A 表看到 B 表的引用\n\u2022 双向：A 表和 B 表<strong>互相</strong>看到对方的引用\n\n当你在 A 表关联了 B 表的某条记录，B 表也会自动显示与 A 表的关联。', highlight: '双向关联 = 两个表自动互相引用' },
-      { type: 'knowledge', title: '查找引用 — 跨表取值', content: '<strong>查找引用</strong>可以通过已建立的关联字段，从被关联的表中取出特定字段的值。\n\n<strong>使用前提：</strong>必须先建立关联字段（单向或双向）\n\n<strong>示例：</strong>\n\u2022 订单表关联了客户表 → 用查找引用取出客户的"联系电话"\n\u2022 任务表关联了项目表 → 用查找引用取出项目的"截止日期"', highlight: '查找引用 = 通过关联跨表取值' }
+      { type: 'knowledge', title: '关联引用 — 跨表取值', content: '<strong>关联引用</strong>可以通过已建立的关联字段，从被关联的表中取出特定字段的值。\n\n<strong>使用前提：</strong>必须先建立关联字段（单向或双向）\n\n<strong>示例：</strong>\n\u2022 订单表关联了客户表 → 用关联引用取出客户的"联系电话"\n\u2022 任务表关联了项目表 → 用关联引用取出项目的"截止日期"', highlight: '关联引用 = 通过关联跨表取值' }
     ],
     questions: [
       { type: 'single', question: '双向关联和单向关联的核心区别是什么？', options: ['速度不同', '双向关联会在两个表中都自动显示关联', '双向关联更安全', '没有区别'], correctIndex: 1, explanation: '双向关联会在两个数据表中同时创建关联字段，互相看到对方的引用。' },
       { type: 'truefalse', question: '双向关联建立后，在 A 表关联 B 表的记录，B 表会自动显示与 A 表的关联。', correct: true, explanation: '这正是双向关联的核心特点 — 两个表自动互相引用。' },
-      { type: 'single', question: '查找引用的前提条件是什么？', options: ['需要有公式字段', '需要有已建立的关联字段', '需要有 AI 字段', '无需任何前提'], correctIndex: 1, explanation: '查找引用必须基于已有的关联字段（单向或双向）才能使用。' },
-      { type: 'match', question: '将关联类型与其特点匹配：', pairs: [{ left: '单向关联', right: '只在一个表显示关联' }, { left: '双向关联', right: '两个表自动互相引用' }, { left: '查找引用', right: '通过关联跨表取值' }] },
-      { type: 'single', question: '订单表关联了客户表，想在订单表中显示客户的联系电话，应该用什么？', options: ['公式字段', '查找引用', 'AI 字段', '筛选'], correctIndex: 1, explanation: '通过查找引用，可以从被关联的客户表中取出"联系电话"字段的值。' },
-      { type: 'truefalse', question: '查找引用只能用于双向关联，不能用于单向关联。', correct: false, explanation: '查找引用可以基于单向关联或双向关联使用，只要有关联字段即可。' },
+      { type: 'single', question: '关联引用的前提条件是什么？', options: ['需要有公式字段', '需要有已建立的关联字段', '需要有 AI 字段', '无需任何前提'], correctIndex: 1, explanation: '关联引用必须基于已有的关联字段（单向或双向）才能使用。' },
+      { type: 'match', question: '将关联类型与其特点匹配：', pairs: [{ left: '单向关联', right: '只在一个表显示关联' }, { left: '双向关联', right: '两个表自动互相引用' }, { left: '关联引用', right: '通过关联跨表取值' }] },
+      { type: 'single', question: '订单表关联了客户表，想在订单表中显示客户的联系电话，应该用什么？', options: ['公式字段', '关联引用', 'AI 字段', '筛选'], correctIndex: 1, explanation: '通过关联引用，可以从被关联的客户表中取出"联系电话"字段的值。' },
+      { type: 'truefalse', question: '关联引用只能用于双向关联，不能用于单向关联。', correct: false, explanation: '关联引用可以基于单向关联或双向关联使用，只要有关联字段即可。' },
       { type: 'single', question: '以下哪种场景最适合使用双向关联？', options: ['只需要在订单表看到客户信息', '需要在订单表和客户表中互相查看关联记录', '只需要统计数据', '只需要筛选数据'], correctIndex: 1, explanation: '需要在两个表中互相查看关联记录时，应使用双向关联。' },
-      { type: 'single', question: '关联字段和查找引用的关系是什么？', options: ['没有关系', '关联字段是基础，查找引用是在关联基础上跨表取值', '查找引用可以替代关联字段', '关联字段更高级'], correctIndex: 1, explanation: '关联字段建立两个表之间的引用关系，查找引用则在此基础上从被关联表中取出特定字段的值。' }
+      { type: 'single', question: '关联字段和关联引用的关系是什么？', options: ['没有关系', '关联字段是基础，关联引用是在关联基础上跨表取值', '关联引用可以替代关联字段', '关联字段更高级'], correctIndex: 1, explanation: '关联字段建立两个表之间的引用关系，关联引用则在此基础上从被关联表中取出特定字段的值。' }
     ]
   },
 
@@ -325,18 +325,18 @@ var l3Nodes = [
     xpReward: 50,
     isChallenge: true,
     cards: [
-      { type: 'knowledge', title: 'L3 毕业挑战 — 综合实战', content: '恭喜你学完了 L3 进阶篇的全部内容。\n\n<strong>L3 知识回顾：</strong>\n\u2022 <strong>AI 字段</strong> — 6 种输出类型、提示词编写、审合同、识别发票\n\u2022 <strong>AI 听记</strong> — 总结、信息提取\n\u2022 <strong>AI 生成日期</strong> — 从文本智能提取/推算日期\n\u2022 <strong>AI 助理</strong> — 对话式智能操作\n\u2022 <strong>公式</strong> — 基础语法、常用函数、排错技巧\n\u2022 <strong>关联</strong> — 单向关联、双向关联、查找引用\n\u2022 <strong>自定义详情页</strong> — 拖拽布局、标签页分组\n\n准备好了吗？挑战开始。', highlight: '综合 AI + 公式 + 关联 + 详情页的终极挑战' }
+      { type: 'knowledge', title: 'L3 毕业挑战 — 综合实战', content: '恭喜你学完了 L3 进阶篇的全部内容。\n\n<strong>L3 知识回顾：</strong>\n\u2022 <strong>AI 字段</strong> — 6 种输出类型、提示词编写、审合同、识别发票\n\u2022 <strong>AI 听记</strong> — 总结、信息提取\n\u2022 <strong>AI 生成日期</strong> — 从文本智能提取/推算日期\n\u2022 <strong>AI 助理</strong> — 对话式智能操作\n\u2022 <strong>公式</strong> — 基础语法、常用函数、排错技巧\n\u2022 <strong>关联</strong> — 单向关联、双向关联、关联引用\n\u2022 <strong>自定义详情页</strong> — 拖拽布局、标签页分组\n\n准备好了吗？挑战开始。', highlight: '综合 AI + 公式 + 关联 + 详情页的终极挑战' }
     ],
     questions: [
       { type: 'single', question: 'AI 字段支持哪 6 种输出类型？', options: ['文本、数字、日期、货币、图片、视频', '文本、数字、单选/多选、货币、图片、视频', '文本、数字、单选、多选、公式、链接', '文本、数字、日期、人员、图片、附件'], correctIndex: 1, explanation: 'AI 字段支持文本、数字、单选/多选、货币、图片、视频共 6 种输出类型。' },
       { type: 'single', question: '以下哪种 AI 能力适合"从会议录音中提取所有待办事项"？', options: ['AI 字段', 'AI 听记总结', 'AI 听记信息提取', 'AI 生成日期'], correctIndex: 2, explanation: 'AI 听记信息提取可以精准抓取特定信息，如待办事项、人名、日期等。' },
       { type: 'match', question: '将场景与最佳工具匹配：', pairs: [{ left: '批量审查合同风险', right: 'AI 字段' }, { left: '临时查询销售总额', right: 'AI 助理' }, { left: '从文本提取截止日期', right: 'AI 生成日期' }, { left: '生成会议摘要', right: 'AI 听记总结' }] },
       { type: 'single', question: '公式 IF({金额}>10000, "大额", IF({金额}>1000, "中额", "小额")) 中，金额为 500 时结果是什么？', options: ['大额', '中额', '小额', '报错'], correctIndex: 2, explanation: '500 不满足 >10000，也不满足 >1000，所以走到最后的"小额"。' },
-      { type: 'truefalse', question: '查找引用可以在没有关联字段的情况下使用。', correct: false, explanation: '查找引用必须基于已有的关联字段（单向或双向）才能使用。' },
+      { type: 'truefalse', question: '关联引用可以在没有关联字段的情况下使用。', correct: false, explanation: '关联引用必须基于已有的关联字段（单向或双向）才能使用。' },
       { type: 'single', question: '自定义详情页中，标签页最多支持多少个标签？', options: ['5 个', '10 个', '20 个', '无限制'], correctIndex: 2, explanation: '每个标签页最多支持 20 个标签。' },
       { type: 'single', question: 'AI 生成公式和 AI 字段的本质区别是什么？', options: ['没有区别', 'AI 生成公式输出确定性代码，AI 字段输出有随机性的内容', 'AI 字段更快', 'AI 生成公式更智能'], correctIndex: 1, explanation: 'AI 生成公式是帮你编写公式代码（结果确定性高），AI 字段是 AI 直接生成内容（结果有一定随机性）。' },
       { type: 'order', question: '请按正确顺序排列"用 AI 字段审查合同"的步骤：', items: ['上传合同到附件字段', '创建 AI 字段并引用附件', '编写审查提示词', 'AI 输出结构化报告'], correctOrder: [0, 1, 2, 3] },
-      { type: 'single', question: '以下哪个说法是错误的？', options: ['AI 听记总结和信息提取使用相同的数据来源', '双向关联会在两个表中都显示关联', '公式字段的结果可以手动修改', '查找引用需要先建立关联字段'], correctIndex: 2, explanation: '公式字段是只读的，结果由公式自动计算，不能手动修改。' },
+      { type: 'single', question: '以下哪个说法是错误的？', options: ['AI 听记总结和信息提取使用相同的数据来源', '双向关联会在两个表中都显示关联', '公式字段的结果可以手动修改', '关联引用需要先建立关联字段'], correctIndex: 2, explanation: '公式字段是只读的，结果由公式自动计算，不能手动修改。' },
       { type: 'single', question: '恭喜通关 L3。以下哪项最能概括 L3 的核心主题？', options: ['数据录入', 'AI 智能 + 公式计算 + 跨表关联 + 页面定制', '权限管理', '自动化工作流'], correctIndex: 1, explanation: 'L3 进阶篇的核心主题是 AI 智能能力、公式计算、跨表关联和页面定制。' }
     ]
   }
