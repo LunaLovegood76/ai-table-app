@@ -1390,7 +1390,7 @@ function renderProfilePage(container) {
 
   container.innerHTML = `
     <div class="profile-page-v2">
-      <div class="profile-header">
+      <div class="profile-header" style="display:none;">
         <div class="avatar-circle">${appState.userName.charAt(0)}</div>
         <div class="avatar-info">
           <div class="avatar-name">${appState.userName}</div>
