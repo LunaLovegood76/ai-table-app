@@ -820,36 +820,64 @@ function closeMatchDropdown() {
 }
 
 function renderOrder(question, questionIndex) {
-  if (!lessonState.orderItems) {
-    const shuffled = question.items.map((item, idx) => ({ text: item, origIdx: idx }));
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    lessonState.orderItems = shuffled;
+  // 初始化步骤分配数组
+  if (!lessonState.orderAssignments) {
+    lessonState.orderAssignments = new Array(question.items.length).fill(null);
   }
 
-  let html = `<div class="order-list" id="order-list">`;
-  for (let i = 0; i < lessonState.orderItems.length; i++) {
-    const item = lessonState.orderItems[i];
+  const assignments = lessonState.orderAssignments;
+  const color = lessonState.levelColor;
+
+  // 按步骤号排序：已分配的排前面，未分配的按原始顺序排后面
+  const displayOrder = question.items.map((_, i) => i);
+  displayOrder.sort((a, b) => {
+    const stepA = assignments[a];
+    const stepB = assignments[b];
+    if (stepA !== null && stepB !== null) return stepA - stepB;
+    if (stepA !== null) return -1;
+    if (stepB !== null) return 1;
+    return a - b;
+  });
+
+  let html = `<div class="order-hint" style="color:${color};background:${color}11;border-color:${color}33">💡 为每个选项选择对应的步骤编号</div>`;
+  html += `<div class="order-list" id="order-list">`;
+
+  for (const i of displayOrder) {
+    const text = question.items[i];
+    const assignedStep = assignments[i];
+
     let itemClass = '';
+    let rightContent = '';
+
     if (lessonState.answered) {
-      itemClass = item.origIdx === question.correctOrder[i] ? 'correct' : 'incorrect';
+      const correctStep = question.correctOrder[i] + 1;
+      const isCorrect = assignedStep === correctStep;
+      itemClass = isCorrect ? 'correct' : 'incorrect';
+      rightContent = `<div class="step-result ${isCorrect ? 'correct' : 'incorrect'}">${assignedStep}</div>`;
+    } else {
+      if (assignedStep !== null) itemClass = 'assigned';
+      rightContent = `
+        <div class="step-select-wrapper" id="step-wrapper-${i}">
+          <div class="step-trigger ${assignedStep !== null ? 'has-value' : ''}" onclick="toggleOrderDropdown(${i})" style="${assignedStep !== null ? 'border-color:' + color + ';background:' + color + '14' : ''}">
+            <span>${assignedStep !== null ? '第' + assignedStep + '步' : '选择'}</span>
+            <span class="step-arrow">▾</span>
+          </div>
+        </div>`;
     }
+
     html += `
-      <div class="order-item ${itemClass}"
-           draggable="${!lessonState.answered}"
-           ondragstart="dragStart(event, ${i})"
-           ondragover="dragOver(event)"
-           ondragenter="dragEnter(event)"
-           ondragleave="dragLeave(event)"
-           ondrop="drop(event, ${i})">
-        <span class="order-num">${i + 1}</span>
-        <span>${item.text}</span>
-        ${!lessonState.answered ? '<span class="drag-handle"><i data-lucide="grip-vertical"></i></span>' : ''}
+      <div class="order-item ${itemClass}" ${assignedStep !== null && !lessonState.answered ? 'style="border-color:' + color + '"' : ''}>
+        <span class="order-text">${text}</span>
+        ${rightContent}
       </div>`;
   }
   html += `</div>`;
+
+  // 全部分配完才允许提交
+  if (!lessonState.answered && assignments.every(v => v !== null)) {
+    lessonState.selectedAnswer = 'order';
+  }
+
   return html;
 }
 
@@ -973,20 +1001,70 @@ function selectMatchAnswer(questionIndex, pairIndex, value) {
   }
 }
 
-let draggedIndex = null;
-function dragStart(event, index) { draggedIndex = index; event.target.classList.add('dragging'); }
-function dragOver(event) { event.preventDefault(); }
-function dragEnter(event) { event.target.closest('.order-item')?.classList.add('drag-over'); }
-function dragLeave(event) { event.target.closest('.order-item')?.classList.remove('drag-over'); }
-function drop(event, targetIndex) {
-  event.preventDefault();
-  document.querySelectorAll('.order-item').forEach(el => el.classList.remove('drag-over', 'dragging'));
-  if (draggedIndex === null || draggedIndex === targetIndex) return;
-  const items = lessonState.orderItems;
-  const [moved] = items.splice(draggedIndex, 1);
-  items.splice(targetIndex, 0, moved);
-  draggedIndex = null;
-  lessonState.selectedAnswer = 'order';
+/* ============ 排序题 — 下拉选步骤交互 ============ */
+let orderDropdownOpen = null;
+
+function toggleOrderDropdown(index) {
+  if (lessonState.answered) return;
+  if (orderDropdownOpen === index) {
+    closeOrderDropdown();
+    return;
+  }
+  orderDropdownOpen = index;
+  showOrderDropdown(index);
+}
+
+function showOrderDropdown(index) {
+  closeOrderDropdown();
+
+  const wrapper = document.getElementById('step-wrapper-' + index);
+  if (!wrapper) return;
+
+  const question = lessonState.lesson.questions[lessonState.currentStep - lessonState.lesson.cards.length];
+  const totalSteps = question.items.length;
+
+  // 创建遮罩
+  const overlay = document.createElement('div');
+  overlay.className = 'step-overlay';
+  overlay.onclick = function() { closeOrderDropdown(); };
+  document.body.appendChild(overlay);
+
+  // 创建下拉
+  const dropdown = document.createElement('div');
+  dropdown.className = 'step-dropdown';
+  dropdown.id = 'active-order-dropdown';
+
+  for (let s = 1; s <= totalSteps; s++) {
+    const item = document.createElement('div');
+    item.className = 'step-dropdown-item';
+    if (lessonState.orderAssignments[index] === s) item.classList.add('selected');
+    item.textContent = '第' + s + '步';
+    item.onclick = function(e) {
+      e.stopPropagation();
+      selectOrderStep(index, s);
+    };
+    dropdown.appendChild(item);
+  }
+
+  wrapper.appendChild(dropdown);
+}
+
+function closeOrderDropdown() {
+  orderDropdownOpen = null;
+  const overlay = document.querySelector('.step-overlay');
+  if (overlay) overlay.remove();
+  const dropdown = document.getElementById('active-order-dropdown');
+  if (dropdown) dropdown.remove();
+}
+
+function selectOrderStep(itemIndex, step) {
+  // 后来的抢掉原来的
+  const existingIndex = lessonState.orderAssignments.indexOf(step);
+  if (existingIndex !== -1 && existingIndex !== itemIndex) {
+    lessonState.orderAssignments[existingIndex] = null;
+  }
+  lessonState.orderAssignments[itemIndex] = step;
+  closeOrderDropdown();
   renderLessonStep();
 }
 
@@ -1015,7 +1093,7 @@ function checkAnswer() {
       isCorrect = question.pairs.every((pair, i) => answers[i] === pair.right);
       break;
     case 'order':
-      isCorrect = lessonState.orderItems.every((item, i) => item.origIdx === question.correctOrder[i]);
+      isCorrect = question.items.every((_, i) => lessonState.orderAssignments[i] === question.correctOrder[i] + 1);
       break;
     case 'simulate':
       isCorrect = lessonState.simCorrect === true;
@@ -1103,6 +1181,7 @@ function nextStep() {
   lessonState.selectedAnswer = null;
   lessonState.answered = false;
   lessonState.orderItems = null;
+  lessonState.orderAssignments = null;
   lessonState.multiSelected = [];
   lessonState.simCorrect = null;
   lessonState.simStep = 0;

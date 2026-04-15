@@ -1036,7 +1036,16 @@ body.page-profile {
   z-index: 99;
 }
 
-/* 排序题 */
+/* 排序题 — 下拉选步骤模式 */
+.order-hint {
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: var(--radius-xs);
+  margin-bottom: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .order-list {
   display: flex;
   flex-direction: column;
@@ -1047,50 +1056,18 @@ body.page-profile {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 18px;
+  padding: 14px 16px;
   background: var(--white);
-  border: 2px solid var(--gray-200);
+  border: 1px solid rgba(107, 114, 148, 0.24);
   border-radius: var(--radius-xs);
-  cursor: grab;
-  transition: var(--transition);
   font-size: 14px;
   color: var(--gray-500);
   user-select: none;
 }
 
-.order-item:active {
-  cursor: grabbing;
-  box-shadow: none;
-}
-
-.order-item .order-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--gray-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 13px;
-  color: var(--gray-400);
-  flex-shrink: 0;
-}
-
-.order-item .drag-handle {
-  color: var(--gray-300);
-  font-size: 18px;
-  margin-left: auto;
-}
-
-.order-item.dragging {
-  opacity: 0.5;
-  border-color: var(--blue);
-}
-
-.order-item.drag-over {
-  border-color: var(--blue);
-  background: #F0F8FF;
+.order-text {
+  flex: 1;
+  line-height: 1.4;
 }
 
 .order-item.correct {
@@ -1101,6 +1078,122 @@ body.page-profile {
 .order-item.incorrect {
   border-color: var(--incorrect);
   background: #FFE6E6;
+}
+
+/* 步骤下拉选择器 */
+.step-select-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.step-trigger {
+  min-width: 76px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(107, 114, 148, 0.24);
+  border-radius: var(--radius-xs);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-400);
+  transition: var(--transition);
+  gap: 6px;
+}
+
+.step-trigger:hover {
+  border-color: var(--blue);
+  background: #F8FBFF;
+}
+
+.step-trigger .step-arrow {
+  font-size: 14px;
+  color: var(--gray-300);
+  transition: var(--transition);
+}
+
+.step-trigger.disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* 答题后的步骤结果 */
+.step-result {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.step-result.correct {
+  background: var(--correct);
+  color: var(--white);
+}
+
+.step-result.incorrect {
+  background: var(--incorrect);
+  color: var(--white);
+}
+
+/* 步骤下拉面板 */
+.step-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 76px;
+  background: var(--white);
+  border: 1px solid rgba(107, 114, 148, 0.24);
+  border-radius: var(--radius-xs);
+  z-index: 100;
+  overflow: hidden;
+  animation: stepDropIn 0.12s ease;
+}
+
+@keyframes stepDropIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-dropdown-item {
+  padding: 10px 12px;
+  text-align: center;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.step-dropdown-item:hover {
+  background: #E6F4FF;
+  color: var(--blue);
+}
+
+.step-dropdown-item + .step-dropdown-item {
+  border-top: 1px solid var(--gray-50);
+}
+
+.step-dropdown-item.selected {
+  background: #E6F4FF;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* 步骤遮罩 */
+.step-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 99;
 }
 
 /* ============ 模拟操作题 ============ */
