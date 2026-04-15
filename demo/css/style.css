@@ -562,9 +562,11 @@ body.page-profile {
   color: var(--gray-300);
   background: none;
   border: none;
-  padding: 4px 2px 4px 4px;
+  padding: 0;
   transition: var(--transition);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .lesson-close:hover {
@@ -572,11 +574,14 @@ body.page-profile {
 }
 
 .lesson-feedback-btn {
+  font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
+  font-weight: normal;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
   letter-spacing: normal;
-  color: #17181C;
+  color: #6E7286;
   text-decoration: none;
   flex-shrink: 0;
   white-space: nowrap;
