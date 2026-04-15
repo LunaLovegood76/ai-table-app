@@ -52,6 +52,7 @@ body.page-profile {
 /* ============ Lucide 图标基础样式 ============ */
 .logo-icon svg,
 .logo-icon i { width: 28px; height: 28px; }
+
 .stat-icon svg,
 .stat-icon i { width: 20px; height: 20px; }
 .streak-fire svg { color: #FF9600; }
@@ -61,14 +62,14 @@ body.page-profile {
 .level-icon svg,
 .level-icon i { width: 28px; height: 28px; }
 .lesson-node svg,
-.lesson-node i { width: 28px; height: 28px; }
+.lesson-node i { width: 28px; height: 28px; display: block; }
 .lesson-check svg { width: 28px; height: 28px; }
 .lock-icon svg { width: 22px; height: 22px; opacity: 0.5; }
-.card-title-icon { width: 20px; height: 20px; display: inline; vertical-align: -3px; color: var(--blue); margin-right: 4px; }
-.highlight-icon { width: 16px; height: 16px; display: inline; vertical-align: -2px; color: var(--xp-gold); margin-right: 4px; }
-.hint-icon { width: 16px; height: 16px; display: inline; vertical-align: -2px; color: var(--orange); margin-right: 4px; }
-.tf-icon { width: 18px; height: 18px; display: inline; vertical-align: -3px; }
-.section-title-icon { width: 22px; height: 22px; display: inline; vertical-align: -4px; margin-right: 6px; }
+.card-title-icon { width: 20px; height: 20px; display: inline-flex; vertical-align: -3px; color: var(--blue); margin-right: 4px; }
+.highlight-icon { width: 16px; height: 16px; display: inline-flex; vertical-align: -2px; color: var(--xp-gold); margin-right: 4px; }
+.hint-icon { width: 16px; height: 16px; display: inline-flex; vertical-align: -2px; color: var(--orange); margin-right: 4px; }
+.tf-icon { width: 18px; height: 18px; display: inline-flex; vertical-align: -3px; }
+.section-title-icon { width: 22px; height: 22px; display: inline-flex; vertical-align: -4px; margin-right: 6px; }
 .feedback-icon svg,
 .feedback-icon i { width: 28px; height: 28px; }
 .complete-icon svg,
@@ -1683,7 +1684,7 @@ body.page-profile {
 
 .league-badge .league-icon {
   font-size: 48px;
-  display: block;
+  display: inline-flex;
   margin-bottom: 6px;
 }
 
@@ -1788,7 +1789,7 @@ body.page-profile {
 
 .profile-stat-card .ps-icon {
   font-size: 28px;
-  display: block;
+  display: inline-flex;
   margin-bottom: 6px;
 }
 
@@ -2937,12 +2938,10 @@ body.page-profile {
 .profile-page-v2 .rank-progress-text { display: flex; justify-content: space-between; font-size: 9px; color: var(--gray-300); margin-top: 4px; }
 .profile-page-v2 .p-card-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 16px 0; }
 .profile-page-v2 .p-card-group .p-card { margin: 0; }
-.profile-page-v2 .p-card-group .p-card-row { padding: 14px; }
-.profile-page-v2 .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 8px 16px 0; background: var(--white); border-radius: 12px; border: 0.5px solid var(--gray-150); overflow: hidden; }
-.profile-page-v2 .grid-cell { display: flex; align-items: center; gap: 10px; padding: 16px 14px; }
-.profile-page-v2 .grid-cell:nth-child(1) { border-right: 0.5px solid var(--gray-100); border-bottom: 0.5px solid var(--gray-100); }
-.profile-page-v2 .grid-cell:nth-child(2) { border-bottom: 0.5px solid var(--gray-100); }
-.profile-page-v2 .grid-cell:nth-child(3) { border-right: 0.5px solid var(--gray-100); }
+.profile-page-v2 .p-card-group .p-card-row { padding: 14px 18px; }
+.profile-page-v2 .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; row-gap: 0; margin: 8px 16px 0; }
+.profile-page-v2 .grid-cell { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--white); border-radius: 12px; border: 0.5px solid var(--gray-150); }
+.profile-page-v2 .grid-cell:nth-child(1), .profile-page-v2 .grid-cell:nth-child(2) { margin-bottom: 8px; }
 .profile-page-v2 .grid-cell-label { font-size: 12px; font-weight: 500; color: var(--gray-600); }
 .profile-page-v2 .grid-cell-sub { font-size: 10px; color: var(--gray-300); margin-top: 1px; }
 
