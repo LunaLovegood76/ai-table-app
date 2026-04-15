@@ -1103,6 +1103,7 @@ body.page-profile {
   color: var(--gray-400);
   transition: var(--transition);
   gap: 6px;
+  outline: none;
 }
 
 .step-trigger:hover {
