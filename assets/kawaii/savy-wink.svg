@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- 眨眼跳跃鸭鸭 — 一只眼闭合弧线，腾空姿态，双手张开 -->
+  <defs>
+    <linearGradient id="duckBodyWink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 跳跃阴影 -->
+  <ellipse cx="70" cy="135" rx="25" ry="5" fill="#E0E0E0">
+    <animate attributeName="rx" values="25;12;25" dur="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.2s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- 小脚（腾空） -->
+  <ellipse cx="55" cy="105" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-10 55 105)"/>
+  <ellipse cx="85" cy="107" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(15 85 107)"/>
+  <!-- 鸭鸭身体（腾空微倾） -->
+  <ellipse cx="70" cy="85" rx="24" ry="18" fill="url(#duckBodyWink)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 左手张开（挥手） -->
+  <ellipse cx="35" cy="70" rx="9" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-30 35 70)"/>
+  <!-- 右手张开（挥手） -->
+  <ellipse cx="105" cy="73" rx="9" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(25 105 73)"/>
+  <!-- 鸭鸭头 -->
+  <circle cx="70" cy="48" r="27" fill="url(#duckBodyWink)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="70" cy="22" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="48" cy="54" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <circle cx="92" cy="54" r="9" fill="#FFB0C1" opacity="0.7"/>
+  <!-- 眼镜 -->
+  <circle cx="58" cy="46" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="82" cy="46" r="10" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="68" y1="46" x2="72" y2="46" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="48" y1="46" x2="43" y2="43" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="92" y1="46" x2="97" y2="43" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 左眼（眨眼弧线） -->
+  <path d="M52 45 Q58 41 64 45" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 右眼（睁开亮晶晶） -->
+  <circle cx="82" cy="45" r="4.2" fill="#1a1a2e"/>
+  <circle cx="84" cy="43.5" r="1.8" fill="white"/>
+  <circle cx="80" cy="46" r="0.8" fill="white"/>
+  <!-- 鸭嘴 — 开心大笑 -->
+  <ellipse cx="70" cy="58" rx="10" ry="6" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M62 58 Q70 65 78 58" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M48 68 Q70 76 92 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="73" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="70" cy="73" r="1.5" fill="#A08030"/>
+  <!-- 跳跃动感线 -->
+  <line x1="30" y1="90" x2="22" y2="95" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <line x1="28" y1="80" x2="18" y2="80" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <line x1="110" y1="87" x2="120" y2="92" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <line x1="112" y1="77" x2="122" y2="77" stroke="#FFC107" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- 小星星 -->
+  <polygon points="18,40 20,34 22,40 16,37 24,37" fill="#58CC02">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="120,35 122,31 124,35 120,33 124,33" fill="#FFC107">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="1.2s" repeatCount="indefinite"/>
+  </polygon>
+</svg>

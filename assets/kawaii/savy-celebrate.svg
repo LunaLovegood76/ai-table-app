@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" width="120" height="130">
+  <!-- Savy 庆祝表情 — 跳跃+眯眼笑+撒花 -->
+  <defs>
+    <linearGradient id="savyBodyC" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 跳跃阴影（弹跳缩放） -->
+  <ellipse cx="60" cy="125" rx="22" ry="4" fill="#000">
+    <animate attributeName="rx" values="22;14;22" dur="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.08;0.03;0.08" dur="1s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- 身体（跳起来） -->
+  <ellipse cx="60" cy="82" rx="22" ry="16" fill="url(#savyBodyC)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 小脚（腾空张开） -->
+  <ellipse cx="45" cy="100" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-15,45,100)"/>
+  <ellipse cx="75" cy="100" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(15,75,100)"/>
+  <!-- 头 -->
+  <circle cx="60" cy="48" r="28" fill="url(#savyBodyC)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="60" cy="21" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="36" cy="54" r="9" fill="#FFB0C1" opacity="0.75"/>
+  <circle cx="84" cy="54" r="9" fill="#FFB0C1" opacity="0.75"/>
+  <!-- 眼镜 -->
+  <circle cx="50" cy="46" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="70" cy="46" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="61" y1="46" x2="59" y2="46" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="39" y1="46" x2="34" y2="43" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="81" y1="46" x2="86" y2="43" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛 — 开心眯眯眼（弧线） -->
+  <path d="M44 44 Q50 39 56 44" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M64 44 Q70 39 76 44" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 大笑张嘴 -->
+  <ellipse cx="60" cy="58" rx="10" ry="6" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M52 57 Q60 65 68 57" stroke="#E07030" stroke-width="1.2" fill="#E07030" opacity="0.3"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M42 68 Q60 76 78 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="73" r="3" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="73" r="1.2" fill="#A08030"/>
+  <!-- 手臂 — 举起欢呼 -->
+  <path d="M38 72 L22 52" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="20" cy="50" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M82 72 L98 52" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="100" cy="50" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 撒花/彩纸装饰（飘落动画） -->
+  <rect x="10" y="28" width="5" height="3" rx="1" fill="#FF4B4B">
+    <animate attributeName="y" values="28;120" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.9;0" dur="2.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="-20 12 29;340 12 120" dur="2.5s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <rect x="105" y="32" width="5" height="3" rx="1" fill="#1CB0F6">
+    <animate attributeName="y" values="32;120" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.9;0" dur="3s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="25 107 33;-335 107 120" dur="3s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <rect x="18" y="15" width="4" height="3" rx="1" fill="#FFC107">
+    <animate attributeName="y" values="15;120" dur="2.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.8;0" dur="2.8s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="10 20 16;370 20 120" dur="2.8s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <rect x="95" y="18" width="4" height="3" rx="1" fill="#58CC02">
+    <animate attributeName="y" values="18;120" dur="3.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.8;0" dur="3.2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="-15 97 19;-375 97 120" dur="3.2s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <rect x="30" y="8" width="5" height="3" rx="1" fill="#A560E8">
+    <animate attributeName="y" values="8;120" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.7;0" dur="2.2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="30 32 9;390 32 120" dur="2.2s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <rect x="85" y="10" width="4" height="3" rx="1" fill="#FF6B8A">
+    <animate attributeName="y" values="10;120" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.7;0" dur="2.6s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="rotate" values="-25 87 11;-385 87 120" dur="2.6s" repeatCount="indefinite" additive="replace"/>
+  </rect>
+  <!-- 小星星（闪烁） -->
+  <polygon points="8,42 10,37 12,42 7,39 13,39" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="112,42 114,37 116,42 111,39 117,39" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite"/>
+  </polygon>
+</svg>

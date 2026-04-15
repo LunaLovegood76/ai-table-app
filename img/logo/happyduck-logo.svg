@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 110" width="400" height="110">
+  <defs>
+    <!-- OpenAI 风格花瓣裁剪路径 -->
+    <clipPath id="icon-clip">
+      <rect x="2" y="2" width="96" height="96" rx="20" ry="20"/>
+    </clipPath>
+  </defs>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- 图标区域：圆角矩形容器              -->
+  <!-- ═══════════════════════════════════ -->
+  <rect x="2" y="2" width="96" height="96" rx="20" ry="20" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+
+  <!-- 身体（圆润椭圆） -->
+  <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+
+  <!-- 头部（大圆头） -->
+  <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+
+  <!-- 头顶羽毛（左倾 + 右倾两根） -->
+  <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+  <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+
+  <!-- 眼镜框（圆形，白色镜片区域） -->
+  <!-- 左镜框 -->
+  <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- 右镜框 -->
+  <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- 镜框鼻梁连接 -->
+  <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+  <!-- 左侧镜腿 -->
+  <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <!-- 右侧镜腿 -->
+  <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 左眼（睁开）：眼珠 + 高光 -->
+  <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+  <circle cx="38" cy="45" r="2" fill="white"/>
+  <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+
+  <!-- 右眼（眯眼/闭合）：弯弧线 -->
+  <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- 嘴巴（扁平鸭嘴，黑色轮廓内白色） -->
+  <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+
+  <!-- OpenAI 风格标志（底部中央，花瓣形） -->
+  <!-- 外圆 -->
+  <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- 内部花瓣（6瓣旋转） -->
+  <g transform="translate(50,91)">
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+  </g>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- 文字区域                            -->
+  <!-- ═══════════════════════════════════ -->
+  <!-- HappyDuck 主标题 -->
+  <text x="114" y="56"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800"
+        font-size="34"
+        fill="#1a1a1a"
+        letter-spacing="-1">HappyDuck</text>
+  <!-- AI 后缀（同色，连续） -->
+  <text x="334" y="56"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800"
+        font-size="34"
+        fill="#1a1a1a"
+        letter-spacing="-1"> AI</text>
+
+  <!-- 中文副标题 -->
+  <text x="114" y="78"
+        font-family="'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif"
+        font-weight="400"
+        font-size="14"
+        fill="#999999"
+        letter-spacing="1.5">欢乐鸭 · AI 表格学习系统</text>
+</svg>

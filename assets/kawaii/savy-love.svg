@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- 爱心眼鸭鸭 — 眼镜后透出红色爱心，双手捧脸，满脸花痴 -->
+  <defs>
+    <linearGradient id="duckBodyLove" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 爱心飘散 -->
+  <g>
+    <path d="M18 28 Q18 22 22 22 Q26 22 26 28 Q26 22 30 22 Q34 22 34 28 Q34 36 26 38 L24 40 L22 38 Q18 36 18 28Z" fill="#FF6B8A" opacity="0.5"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;4,-12;0,0" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+  </g>
+  <g>
+    <path d="M110 18 Q110 14 113 14 Q116 14 116 18 Q116 14 119 14 Q122 14 122 18 Q122 23 119 25 L116 27 L113 25 Q110 23 110 18Z" fill="#FF6B8A" opacity="0.4"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-4,-10;0,0" dur="2.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
+  </g>
+  <path d="M8 60 Q8 57 10 57 Q12 57 12 60 Q12 57 14 57 Q16 57 16 60 Q16 63 14 64 L12 65 L10 64 Q8 63 8 60Z" fill="#FF8FAB" opacity="0.35"/>
+  <!-- 小脚 -->
+  <ellipse cx="57" cy="112" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="83" cy="112" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭身体 -->
+  <ellipse cx="70" cy="90" rx="24" ry="20" fill="url(#duckBodyLove)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 双手捧脸 -->
+  <ellipse cx="40" cy="62" rx="9" ry="7" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-15 40 68)"/>
+  <ellipse cx="100" cy="62" rx="9" ry="7" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(15 100 68)"/>
+  <!-- 鸭鸭头 -->
+  <circle cx="70" cy="50" r="28" fill="url(#duckBodyLove)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="70" cy="23" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红（更红更大，花痴状） -->
+  <circle cx="46" cy="58" r="11" fill="#FF8FAB" opacity="0.75"/>
+  <circle cx="94" cy="58" r="11" fill="#FF8FAB" opacity="0.75"/>
+  <!-- 眼镜 -->
+  <circle cx="58" cy="48" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="82" cy="48" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="69" y1="48" x2="71" y2="48" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="47" y1="48" x2="42" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="93" y1="48" x2="98" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 爱心眼（眼镜里透出红色爱心） -->
+  <path d="M53 46 Q53 42 56 42 Q58 42 58 46 Q58 42 60 42 Q63 42 63 46 Q63 50 60 52 L58 54 L56 52 Q53 50 53 46Z" fill="#FF4466"/>
+  <path d="M77 46 Q77 42 80 42 Q82 42 82 46 Q82 42 84 42 Q87 42 87 46 Q87 50 84 52 L82 54 L80 52 Q77 50 77 46Z" fill="#FF4466"/>
+  <!-- 鸭嘴 — 微笑 -->
+  <ellipse cx="70" cy="62" rx="10" ry="5.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M63 62 Q70 67 77 62" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M48 68 Q70 76 92 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="70" cy="73" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="70" cy="73" r="1.5" fill="#A08030"/>
+  <!-- 头顶大爱心（浮动） -->
+  <g>
+  <path d="M60 16 Q60 10 65 10 Q70 10 70 16 Q70 10 75 10 Q80 10 80 16 Q80 24 75 27 L70 30 L65 27 Q60 24 60 16Z" fill="#FF4466" opacity="0.8"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-10;0,0" dur="1.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </g>
+</svg>

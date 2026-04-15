@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Savy 翻车表情 — 四脚朝天+眼镜飞出+星星转圈 -->
+  <defs>
+    <linearGradient id="savyBodyFlip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 地面裂缝 -->
+  <line x1="20" y1="105" x2="100" y2="105" stroke="#D4A017" stroke-width="1.5" opacity="0.3"/>
+  <path d="M50 105 L48 110 L52 108 L50 114" stroke="#D4A017" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M70 105 L72 112 L68 109 L71 116" stroke="#D4A017" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- 身体（翻转，肚皮朝上） -->
+  <ellipse cx="60" cy="72" rx="24" ry="18" fill="url(#savyBodyFlip)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 肚皮浅色 -->
+  <ellipse cx="60" cy="72" rx="16" ry="12" fill="#FFF3CD" opacity="0.5"/>
+  <!-- 小脚（朝天翘起） -->
+  <ellipse cx="42" cy="56" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(-30,42,56)"/>
+  <ellipse cx="78" cy="56" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5" transform="rotate(30,78,56)"/>
+  <!-- 小手（朝天伸出） -->
+  <path d="M40 68 L28 52" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="26" cy="50" rx="5" ry="4" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M80 68 L92 52" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="94" cy="50" rx="5" ry="4" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 头（在下方，翻过来了） -->
+  <circle cx="60" cy="92" r="22" fill="url(#savyBodyFlip)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛（在底部） -->
+  <ellipse cx="60" cy="113" rx="3" ry="4" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红 -->
+  <circle cx="46" cy="90" r="7" fill="#FFB0C1" opacity="0.8"/>
+  <circle cx="74" cy="90" r="7" fill="#FFB0C1" opacity="0.8"/>
+  <!-- 眼睛 — 晕圈眼（X_X） -->
+  <g transform="translate(50,88)">
+    <line x1="-4" y1="-4" x2="4" y2="4" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="4" y1="-4" x2="-4" y2="4" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(70,88)">
+    <line x1="-4" y1="-4" x2="4" y2="4" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="4" y1="-4" x2="-4" y2="4" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- 鸭嘴 — 波浪线（晕了） -->
+  <ellipse cx="60" cy="98" rx="8" ry="4" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M54 98 Q57 96 60 98 Q63 100 66 98" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M46 82 Q60 78 74 82" stroke="#FF8FAB" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="80" r="2.5" fill="#C8A850" stroke="#A08030" stroke-width="0.8"/>
+  <!-- 眼镜飞出去（右上方） -->
+  <g>
+    <circle cx="92" cy="22" r="8" fill="none" stroke="#C8A850" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="106" cy="20" r="8" fill="none" stroke="#C8A850" stroke-width="1.5" opacity="0.6"/>
+    <line x1="100" y1="21" x2="92" y2="22" stroke="#C8A850" stroke-width="1.5" opacity="0.6"/>
+    <animateTransform attributeName="transform" type="rotate" values="0 99 21;15 99 21;0 99 21" dur="2s" repeatCount="indefinite"/>
+  </g>
+  <!-- 星星转圈（头顶） -->
+  <g>
+    <polygon points="30,42 32,37 34,42 29,39 35,39" fill="#FFC107"/>
+    <polygon points="50,36 52,31 54,36 49,33 55,33" fill="#FF4B4B"/>
+    <polygon points="70,38 72,33 74,38 69,35 75,35" fill="#1CB0F6"/>
+    <polygon points="88,42 90,37 92,42 87,39 93,39" fill="#58CC02"/>
+    <animateTransform attributeName="transform" type="rotate" values="0 60 40;360 60 40" dur="3s" repeatCount="indefinite"/>
+  </g>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <!-- 背景渐变：深蓝到靛蓝，让黄鸭更跳 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1C2B4A"/>
+      <stop offset="100%" style="stop-color:#0F1E35"/>
+    </linearGradient>
+    <!-- 鸭身渐变：亮黄到橙黄 -->
+    <linearGradient id="duckGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE033"/>
+      <stop offset="100%" style="stop-color:#F5B800"/>
+    </linearGradient>
+    <!-- 翅膀渐变：稍深一点 -->
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5C800"/>
+      <stop offset="100%" style="stop-color:#D4A000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 圆角方形背景（深蓝色，让黄鸭更突出） -->
+  <rect width="120" height="120" rx="26" ry="26" fill="url(#bgGrad)"/>
+
+  <!-- 身体（圆润饱满） -->
+  <ellipse cx="60" cy="80" rx="28" ry="22" fill="url(#duckGrad)"/>
+
+  <!-- 头部（大圆头，玻尿酸感） -->
+  <circle cx="60" cy="50" r="24" fill="url(#duckGrad)"/>
+
+  <!-- 头部高光（玻尿酸圆润感） -->
+  <ellipse cx="52" cy="40" rx="9" ry="6" fill="white" opacity="0.18"/>
+
+  <!-- 翅膀（左，稍深） -->
+  <ellipse cx="36" cy="80" rx="10" ry="15" fill="url(#wingGrad)" transform="rotate(22 36 80)"/>
+  <!-- 翅膀（右） -->
+  <ellipse cx="84" cy="80" rx="10" ry="15" fill="url(#wingGrad)" transform="rotate(-22 84 80)"/>
+
+  <!-- 眼睛白色 -->
+  <circle cx="52" cy="46" r="7" fill="white"/>
+  <circle cx="68" cy="46" r="7" fill="white"/>
+  <!-- 眼珠（深蓝，和背景呼应） -->
+  <circle cx="53.5" cy="46.5" r="4.5" fill="#1C2B4A"/>
+  <circle cx="69.5" cy="46.5" r="4.5" fill="#1C2B4A"/>
+  <!-- 眼睛高光 -->
+  <circle cx="55" cy="44.5" r="1.8" fill="white"/>
+  <circle cx="71" cy="44.5" r="1.8" fill="white"/>
+
+  <!-- 玻尿酸嘴唇（核心特征：超饱满厚嘴唇，橙色） -->
+  <ellipse cx="60" cy="63" rx="14" ry="9" fill="#FF8C00"/>
+  <!-- 上嘴唇弓形 -->
+  <path d="M46 61 Q53 55 60 61 Q67 55 74 61" fill="#E07000" stroke="none"/>
+  <!-- 嘴唇中缝 -->
+  <line x1="46" y1="63" x2="74" y2="63" stroke="#C05800" stroke-width="1.5"/>
+  <!-- 嘴唇高光（玻尿酸感） -->
+  <ellipse cx="55" cy="59" rx="6" ry="3" fill="white" opacity="0.4"/>
+
+  <!-- 头顶俏皮羽毛（3根，有层次） -->
+  <ellipse cx="54" cy="27" rx="3" ry="8" fill="#F5B800" transform="rotate(-20 54 27)"/>
+  <ellipse cx="61" cy="25" rx="3.5" ry="9" fill="#FFE033" transform="rotate(0 61 25)"/>
+  <ellipse cx="68" cy="28" rx="3" ry="7" fill="#F5B800" transform="rotate(18 68 28)"/>
+
+  <!-- 脚（橙色小脚） -->
+  <ellipse cx="50" cy="100" rx="10" ry="4.5" fill="#FF8C00" transform="rotate(-12 50 100)"/>
+  <ellipse cx="70" cy="100" rx="10" ry="4.5" fill="#FF8C00" transform="rotate(12 70 100)"/>
+
+  <!-- 创意点：左眼上方一颗小星星✨（AI 感、活泼感） -->
+  <path d="M40 30 L41.2 33.5 L45 33.5 L42 35.8 L43.2 39.5 L40 37.2 L36.8 39.5 L38 35.8 L35 33.5 L38.8 33.5 Z" fill="white" opacity="0.9"/>
+</svg>

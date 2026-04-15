@@ -1,8 +1,0 @@
-.DS_Store
-node_modules/
-*.pyc
-__pycache__/
-
-# 大视频文件（超过 GitHub 100MB 限制）
-钉钉AI表格帮助中心/**/video/*.mp4
-钉钉AI表格帮助中心/**/video/*.mov

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Savy 伤心表情 — 泪眼+嘟嘴+低头 -->
+  <defs>
+    <linearGradient id="savyBodyS" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 身体（微微缩） -->
+  <ellipse cx="60" cy="84" rx="21" ry="15" fill="url(#savyBodyS)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 小脚（并拢） -->
+  <ellipse cx="50" cy="101" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="70" cy="101" rx="8" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 头（微微低头） -->
+  <circle cx="60" cy="48" r="28" fill="url(#savyBodyS)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛（耷拉） -->
+  <ellipse cx="60" cy="21" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8" transform="rotate(10,60,21)"/>
+  <!-- 腮红（更红，委屈感） -->
+  <circle cx="36" cy="54" r="9" fill="#FFB0C1" opacity="0.85"/>
+  <circle cx="84" cy="54" r="9" fill="#FFB0C1" opacity="0.85"/>
+  <!-- 眼镜 -->
+  <circle cx="50" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="70" cy="44" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="61" y1="44" x2="59" y2="44" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="39" y1="44" x2="34" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="81" y1="44" x2="86" y2="41" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛 — 泪汪汪（大眼+泪珠） -->
+  <circle cx="50" cy="43" r="5" fill="#1a1a2e"/>
+  <circle cx="70" cy="43" r="5" fill="#1a1a2e"/>
+  <circle cx="52" cy="41" r="2" fill="white"/>
+  <circle cx="72" cy="41" r="2" fill="white"/>
+  <!-- 泪珠（滑落动画） -->
+  <ellipse cx="44" cy="52" rx="2.5" ry="3.5" fill="#87CEEB">
+    <animate attributeName="cy" values="52;65;52" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.5s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="76" cy="53" rx="2" ry="3" fill="#87CEEB">
+    <animate attributeName="cy" values="53;64;53" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0.7;0.7;0" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- 眉毛 — 八字眉（委屈） -->
+  <path d="M42 36 Q46 33 54 35" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M66 35 Q74 33 78 36" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 嘟嘴/撇嘴 -->
+  <ellipse cx="60" cy="57" rx="9" ry="4.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M54 58 Q60 54 66 58" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M43 68 Q60 75 77 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="72" r="3" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="72" r="1.2" fill="#A08030"/>
+  <!-- 手臂 — 垂下来（沮丧） -->
+  <path d="M39 76 L28 90" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="26" cy="92" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <path d="M81 76 L92 90" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="94" cy="92" rx="6" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 小乌云装饰（飘动） -->
+  <g>
+    <ellipse cx="22" cy="18" rx="10" ry="6" fill="#B0BEC5" opacity="0.4"/>
+    <ellipse cx="30" cy="16" rx="7" ry="5" fill="#B0BEC5" opacity="0.35"/>
+    <ellipse cx="16" cy="16" rx="6" ry="4" fill="#B0BEC5" opacity="0.3"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;4,0;0,0" dur="3s" repeatCount="indefinite"/>
+  </g>
+  <!-- 小雨滴（飘落动画） -->
+  <line x1="18" y1="25" x2="17" y2="30" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0.6;0" dur="1.5s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-1,12;0,0" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <line x1="24" y1="26" x2="23" y2="31" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.5;0.5;0" dur="1.8s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,14;0,0" dur="1.8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="30" y1="24" x2="29" y2="29" stroke="#87CEEB" stroke-width="1.2" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.4;0.4;0" dur="2s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;1,10;0,0" dur="2s" repeatCount="indefinite"/>
+  </line>
+</svg>

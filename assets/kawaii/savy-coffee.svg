@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <!-- 喝咖啡鸭鸭 — 侧身喝咖啡，杯子在头右侧不被遮挡 -->
+  <!-- 坐标体系对齐 savy-love：头 cy=50 r=28，身体 cy=90 ry=20，脚 cy=112 -->
+  <defs>
+    <linearGradient id="duckBodyCoffee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD93D"/>
+    </linearGradient>
+  </defs>
+  <!-- 小脚 -->
+  <ellipse cx="47" cy="112" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <ellipse cx="73" cy="112" rx="10" ry="5" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭身体（稍偏左，给右侧杯子留空间） -->
+  <ellipse cx="60" cy="90" rx="24" ry="20" fill="url(#duckBodyCoffee)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 左手自然放身侧 -->
+  <ellipse cx="33" cy="84" rx="9" ry="7" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 鸭鸭头（稍偏左） -->
+  <circle cx="60" cy="50" r="28" fill="url(#duckBodyCoffee)" stroke="#D4A017" stroke-width="2"/>
+  <!-- 头顶白毛 -->
+  <ellipse cx="60" cy="23" rx="4" ry="5" fill="white" stroke="#E0E0E0" stroke-width="0.8"/>
+  <!-- 腮红（享受状，更红） -->
+  <circle cx="38" cy="58" r="10" fill="#FF8FAB" opacity="0.7"/>
+  <circle cx="82" cy="58" r="10" fill="#FF8FAB" opacity="0.7"/>
+  <!-- 眼镜 -->
+  <circle cx="48" cy="48" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <circle cx="72" cy="48" r="11" fill="none" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="59" y1="48" x2="61" y2="48" stroke="#C8A850" stroke-width="1.8"/>
+  <line x1="37" y1="48" x2="32" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <line x1="83" y1="48" x2="88" y2="45" stroke="#C8A850" stroke-width="1.2"/>
+  <!-- 眼睛（眯眼享受） -->
+  <path d="M42 47 Q48 43 54 47" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M66 47 Q72 43 78 47" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- 鸭嘴 — 满足微笑，稍朝右（侧身感） -->
+  <ellipse cx="64" cy="62" rx="10" ry="5.5" fill="#FF8C42" stroke="#E07030" stroke-width="1.5"/>
+  <path d="M57 62 Q64 67 71 62" stroke="#E07030" stroke-width="1.2" fill="none"/>
+  <!-- 项圈 + 铃铛 -->
+  <path d="M38 68 Q60 76 82 68" stroke="#FF8FAB" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="73" r="3.5" fill="#C8A850" stroke="#A08030" stroke-width="1"/>
+  <circle cx="60" cy="73" r="1.5" fill="#A08030"/>
+  <!-- 右手举杯（在头的右侧外面，不会被头遮挡） -->
+  <!-- 手臂从身体伸出到杯子 -->
+  <path d="M80 78 Q92 72 96 62" stroke="#D4A017" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 手掌握杯 -->
+  <ellipse cx="97" cy="62" rx="7" ry="6" fill="#FFE566" stroke="#D4A017" stroke-width="1.5"/>
+  <!-- 小咖啡杯（在手上，头的右侧外面） -->
+  <g>
+    <!-- 杯身 -->
+    <rect x="90" y="52" width="16" height="14" rx="3" fill="#EFEBE9" stroke="#8D6E63" stroke-width="1.5"/>
+    <!-- 杯把手 -->
+    <path d="M106 55 Q112 55 112 59 Q112 63 106 63" stroke="#8D6E63" stroke-width="1.5" fill="none"/>
+    <!-- 咖啡液面 -->
+    <ellipse cx="98" cy="55" rx="6" ry="2" fill="#6D4C41" opacity="0.7"/>
+    <!-- 水汽动效（3条蒸汽线从杯口往上冒） -->
+    <path d="M94 50 Q92 44 96 40" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;-1,-10;0,0" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M98 48 Q96 42 100 38" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;0,-12;0,0" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M102 50 Q100 44 104 40" stroke="#BDBDBD" stroke-width="1.5" fill="none" stroke-linecap="round">
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;1,-10;0,0" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <!-- 咖啡豆装饰 -->
+  <ellipse cx="14" cy="108" rx="5" ry="3.5" fill="#6D4C41" opacity="0.3" transform="rotate(30 14 108)"/>
+  <line x1="12" y1="107" x2="16" y2="109" stroke="#5D4037" stroke-width="0.8" opacity="0.3"/>
+  <!-- 小星星 -->
+  <polygon points="12,30 14,24 16,30 10,27 18,27" fill="#FFC107">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+  </polygon>
+  <polygon points="120,80 122,76 124,80 120,78 124,78" fill="#8D6E63" opacity="0.3"/>
+</svg>

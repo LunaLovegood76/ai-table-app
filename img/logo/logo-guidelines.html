@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HappyDuck AI — Brand Logo Guidelines</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+      background: #F5F5F5;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ── 顶部 Hero ── */
+    .hero {
+      background: #1a1a1a;
+      color: white;
+      padding: 64px 80px 56px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .hero-left h1 {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    .hero-left h2 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    .hero-left h2 span { color: #888; }
+    .hero-left p {
+      margin-top: 16px;
+      font-size: 15px;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+    .hero-right {
+      font-size: 12px;
+      color: #555;
+      text-align: right;
+      line-height: 2;
+    }
+
+    /* ── 主内容区 ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 64px 80px; }
+
+    /* ── Section 标题 ── */
+    .section { margin-bottom: 72px; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #E0E0E0;
+    }
+    .section-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    /* ── 卡片 ── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 48px;
+      border: 1px solid #E8E8E8;
+    }
+    .card-dark {
+      background: #1a1a1a;
+      border-color: #333;
+    }
+    .card-gray {
+      background: #F0F0F0;
+      border-color: #E0E0E0;
+    }
+
+    /* ── Logo 展示区 ── */
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .logo-demo {
+      border-radius: 12px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .logo-demo.on-white { background: white; border: 1px solid #E8E8E8; }
+    .logo-demo.on-dark  { background: #1a1a1a; }
+    .logo-demo.on-gray  { background: #F5F5F5; border: 1px solid #E0E0E0; }
+    .logo-demo.on-black { background: #000000; }
+
+    .logo-combo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-name {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #1a1a1a;
+      line-height: 1;
+    }
+    .logo-name.light { color: white; }
+    .logo-sub {
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
+    }
+    .logo-sub.light { color: #666; }
+
+    .demo-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-top: 8px;
+    }
+    .demo-label.light { color: #555; }
+
+    /* ── 图标尺寸展示 ── */
+    .size-grid {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .size-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      letter-spacing: 1px;
+    }
+    .size-px {
+      font-size: 10px;
+      color: #BBB;
+    }
+
+    /* ── 色彩规范 ── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .color-swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #E8E8E8;
+    }
+    .swatch-block {
+      height: 80px;
+    }
+    .swatch-info {
+      background: white;
+      padding: 12px 14px;
+    }
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+    .swatch-hex {
+      font-size: 11px;
+      color: #999;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .swatch-role {
+      font-size: 10px;
+      color: #BBB;
+      margin-top: 2px;
+    }
+
+    /* ── 字体规范 ── */
+    .type-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      width: 160px;
+      flex-shrink: 0;
+    }
+    .type-meta-name { font-size: 12px; font-weight: 700; color: #1a1a1a; }
+    .type-meta-spec { font-size: 11px; color: #999; margin-top: 2px; font-family: 'SF Mono', monospace; }
+    .type-sample-en {
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #1a1a1a;
+    }
+    .type-sample-cn {
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .type-sample-sub {
+      font-weight: 400;
+      color: #999;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── 使用规范 ── */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .usage-card {
+      border-radius: 12px;
+      padding: 32px;
+      border: 1px solid #E8E8E8;
+    }
+    .usage-card.do { border-color: #1a1a1a; }
+    .usage-card.dont { border-color: #E0E0E0; }
+    .usage-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .usage-tag.do { background: #1a1a1a; color: white; }
+    .usage-tag.dont { background: #F0F0F0; color: #999; }
+    .usage-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .usage-list li {
+      font-size: 13px;
+      color: #555;
+      padding-left: 16px;
+      position: relative;
+    }
+    .usage-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #999;
+    }
+
+    /* ── 间距规范 ── */
+    .spacing-demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      background: #FAFAFA;
+      border-radius: 12px;
+      border: 1px solid #E8E8E8;
+      position: relative;
+    }
+    .spacing-annotation {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      font-family: 'SF Mono', monospace;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── SVG 代码展示 ── */
+    .code-block {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 32px;
+      overflow-x: auto;
+    }
+    .code-block pre {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #E0E0E0;
+      white-space: pre;
+    }
+    .code-comment { color: #666; }
+    .code-tag { color: #9CDCFE; }
+    .code-attr { color: #92D192; }
+    .code-val { color: #CE9178; }
+
+    /* ── 页脚 ── */
+    .footer {
+      background: #1a1a1a;
+      color: #555;
+      padding: 32px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    .footer-brand { color: #888; font-weight: 600; }
+
+    /* ── 核心 SVG 鸭子（内联复用） ── */
+    .duck-icon-wrapper { display: inline-block; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- HERO                                                        -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-left">
+    <h1>Brand Identity</h1>
+    <h2>HappyDuck AI<br><span>Logo Guidelines</span></h2>
+    <p>欢乐鸭 · AI 表格学习系统 · 品牌视觉规范 v1.0</p>
+  </div>
+  <div class="hero-right">
+    版本 1.0<br>
+    2025 · HappyDuck AI<br>
+    欢乐鸭品牌设计规范
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 01 · LOGO 组合展示                                         -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Logo 组合 — 标准用法</span>
+    </div>
+
+    <div class="logo-showcase">
+
+      <!-- 白底 · 横版 -->
+      <div class="logo-demo on-white">
+        <div>
+          <div class="logo-combo">
+            <!-- 鸭子图标 -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
+              <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+              <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+              <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+              <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+              <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+              <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+              <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+              <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+              <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+              <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+              <circle cx="38" cy="45" r="2" fill="white"/>
+              <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+              <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+              <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+              <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+              <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+              <g transform="translate(50,91)">
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+              </g>
+            </svg>
+            <div>
+              <div class="logo-name">HappyDuck AI</div>
+              <div class="logo-sub">欢乐鸭 · AI 表格学习系统</div>
+            </div>
+          </div>
+          <div class="demo-label" style="margin-top:20px;">横版组合 · 白底</div>
+        </div>
+
+        <!-- 纯图标 -->
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
+            <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+            <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+            <circle cx="38" cy="45" r="2" fill="white"/>
+            <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+            <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+            <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+            <g transform="translate(50,91)">
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+            </g>
+          </svg>
+          <div class="demo-label" style="margin-top:12px;">纯图标</div>
+        </div>
+      </div>
+
+      <!-- 深色底 · 横版 -->
+      <div class="logo-demo on-dark">
+        <div>
+          <div class="logo-combo">
+            <!-- 深色背景版鸭子 -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
+              <rect x="1" y="1" width="98" height="98" rx="22" fill="#1a1a1a" stroke="#444" stroke-width="1.5"/>
+              <ellipse cx="50" cy="78" rx="28" ry="22" fill="white"/>
+              <circle cx="50" cy="48" r="24" fill="white"/>
+              <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="white" transform="rotate(-20 43 27)"/>
+              <ellipse cx="53" cy="25" rx="3" ry="8" fill="white" transform="rotate(10 53 25)"/>
+              <circle cx="40" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+              <circle cx="60" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+              <line x1="49" y1="47" x2="51" y2="47" stroke="white" stroke-width="2.5"/>
+              <line x1="31" y1="44" x2="27" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="69" y1="44" x2="73" y2="42" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="40" cy="47" r="5.5" fill="white"/>
+              <circle cx="38" cy="45" r="2" fill="#1a1a1a"/>
+              <circle cx="42.5" cy="48.5" r="1" fill="#1a1a1a" opacity="0.6"/>
+              <path d="M53 47 Q60 42 67 47" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+              <ellipse cx="50" cy="62" rx="8" ry="4" fill="#1a1a1a" stroke="white" stroke-width="1.5"/>
+              <line x1="42" y1="62" x2="58" y2="62" stroke="white" stroke-width="1.2"/>
+              <circle cx="50" cy="91" r="6" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+              <g transform="translate(50,91)">
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(60)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(120)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(180)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(240)"/>
+                <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="#1a1a1a" transform="rotate(300)"/>
+              </g>
+            </svg>
+            <div>
+              <div class="logo-name light">HappyDuck AI</div>
+              <div class="logo-sub light">欢乐鸭 · AI 表格学习系统</div>
+            </div>
+          </div>
+          <div class="demo-label light" style="margin-top:20px;">横版组合 · 深色底</div>
+        </div>
+
+        <!-- 纯文字版 -->
+        <div>
+          <div class="logo-name light" style="font-size:36px;">HappyDuck AI</div>
+          <div class="logo-sub light" style="margin-top:6px;">欢乐鸭 · AI 表格学习系统</div>
+          <div class="demo-label light" style="margin-top:16px;">纯文字版</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 02 · 图标尺寸规范                                          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">图标尺寸 — 多场景适配</span>
+    </div>
+
+    <div class="card" style="background:#1a1a1a; border-color:#333;">
+      <div class="size-grid">
+
+        <!-- 16px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="16" height="16">
+            <rect width="100" height="100" rx="22" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="white"/>
+            <circle cx="50" cy="48" r="24" fill="white"/>
+          </svg>
+          <span class="size-label" style="color:#555;">16</span>
+          <span class="size-px" style="color:#444;">Favicon</span>
+        </div>
+
+        <!-- 20px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
+            <rect width="100" height="100" rx="22" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="white"/>
+            <circle cx="50" cy="48" r="24" fill="white"/>
+            <circle cx="40" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+          </svg>
+          <span class="size-label" style="color:#555;">20</span>
+          <span class="size-px" style="color:#444;">导航栏</span>
+        </div>
+
+        <!-- 32px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+            <rect width="100" height="100" rx="22" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="white"/>
+            <circle cx="50" cy="48" r="24" fill="white"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="white" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="white" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+            <circle cx="40" cy="47" r="5.5" fill="white"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+          </svg>
+          <span class="size-label" style="color:#555;">32</span>
+          <span class="size-px" style="color:#444;">工具栏</span>
+        </div>
+
+        <!-- 48px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+            <rect width="100" height="100" rx="22" fill="#1a1a1a"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="white"/>
+            <circle cx="50" cy="48" r="24" fill="white"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="white" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="white" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="#1a1a1a" stroke="white" stroke-width="2.5"/>
+            <line x1="49" y1="47" x2="51" y2="47" stroke="white" stroke-width="2.5"/>
+            <circle cx="40" cy="47" r="5.5" fill="white"/>
+            <circle cx="38" cy="45" r="2" fill="#1a1a1a"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
+            <ellipse cx="50" cy="62" rx="8" ry="4" fill="#1a1a1a" stroke="white" stroke-width="1.5"/>
+          </svg>
+          <span class="size-label" style="color:#555;">48</span>
+          <span class="size-px" style="color:#444;">列表头像</span>
+        </div>
+
+        <!-- 64px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
+            <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+            <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+            <circle cx="38" cy="45" r="2" fill="white"/>
+            <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+            <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+            <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+            <g transform="translate(50,91)">
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+            </g>
+          </svg>
+          <span class="size-label" style="color:#555;">64</span>
+          <span class="size-px" style="color:#444;">标准尺寸</span>
+        </div>
+
+        <!-- 96px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="96" height="96">
+            <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+            <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+            <circle cx="38" cy="45" r="2" fill="white"/>
+            <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+            <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+            <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+            <g transform="translate(50,91)">
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+            </g>
+          </svg>
+          <span class="size-label" style="color:#555;">96</span>
+          <span class="size-px" style="color:#444;">App 图标</span>
+        </div>
+
+        <!-- 160px -->
+        <div class="size-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="160" height="160">
+            <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+            <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+            <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+            <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+            <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+            <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+            <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+            <circle cx="38" cy="45" r="2" fill="white"/>
+            <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+            <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+            <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+            <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+            <g transform="translate(50,91)">
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+              <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+            </g>
+          </svg>
+          <span class="size-label" style="color:#555;">160</span>
+          <span class="size-px" style="color:#444;">启动页</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 03 · 色彩规范                                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">色彩规范 — 黑白极简调色板</span>
+    </div>
+
+    <div class="color-grid">
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#1a1a1a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">主体黑</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-role">鸭子主体 · 文字</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#FFFFFF; border-bottom:1px solid #E8E8E8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">纯白</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-role">眼镜镜片 · 高光 · 背景</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#CCCCCC;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">边框灰</div>
+          <div class="swatch-hex">#CCCCCC</div>
+          <div class="swatch-role">容器边框</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#999999;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">副文字灰</div>
+          <div class="swatch-hex">#999999</div>
+          <div class="swatch-role">副标题 · 说明文字</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#F5F5F5; border-bottom:1px solid #E8E8E8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">浅灰背景</div>
+          <div class="swatch-hex">#F5F5F5</div>
+          <div class="swatch-role">页面背景</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 04 · 字体规范                                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">字体规范</span>
+    </div>
+
+    <div class="card">
+      <div class="type-grid">
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">主标题</div>
+            <div class="type-meta-spec">Weight 800 · -1px</div>
+          </div>
+          <div class="type-sample-en" style="font-size:40px;">HappyDuck AI</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">中文品牌名</div>
+            <div class="type-meta-spec">Weight 900 · 0px</div>
+          </div>
+          <div class="type-sample-cn" style="font-size:40px;">欢乐鸭</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">副标题</div>
+            <div class="type-meta-spec">Weight 400 · 1.5px</div>
+          </div>
+          <div class="type-sample-sub" style="font-size:14px;">欢乐鸭 · AI 表格学习系统</div>
+        </div>
+
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">字体栈</div>
+            <div class="type-meta-spec">英文优先</div>
+          </div>
+          <div style="font-size:12px; color:#999; font-family:'SF Mono',monospace; line-height:2;">
+            -apple-system, BlinkMacSystemFont,<br>
+            'SF Pro Display', 'Helvetica Neue', Arial,<br>
+            'PingFang SC', 'Microsoft YaHei', sans-serif
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 05 · 设计元素解析                                          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">设计元素解析 — 鸭子构成</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+      <div class="card" style="display:flex; align-items:center; justify-content:center; min-height:320px; position:relative;">
+        <!-- 大图展示，带标注 -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="240" height="240">
+          <rect x="1" y="1" width="98" height="98" rx="22" fill="white" stroke="#CCCCCC" stroke-width="1.5"/>
+          <ellipse cx="50" cy="78" rx="28" ry="22" fill="#1a1a1a"/>
+          <circle cx="50" cy="48" r="24" fill="#1a1a1a"/>
+          <ellipse cx="43" cy="27" rx="3.5" ry="9" fill="#1a1a1a" transform="rotate(-20 43 27)"/>
+          <ellipse cx="53" cy="25" rx="3" ry="8" fill="#1a1a1a" transform="rotate(10 53 25)"/>
+          <circle cx="40" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+          <circle cx="60" cy="47" r="9" fill="white" stroke="#1a1a1a" stroke-width="2.5"/>
+          <line x1="49" y1="47" x2="51" y2="47" stroke="#1a1a1a" stroke-width="2.5"/>
+          <line x1="31" y1="44" x2="27" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="69" y1="44" x2="73" y2="42" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="40" cy="47" r="5.5" fill="#1a1a1a"/>
+          <circle cx="38" cy="45" r="2" fill="white"/>
+          <circle cx="42.5" cy="48.5" r="1" fill="white" opacity="0.6"/>
+          <path d="M53 47 Q60 42 67 47" fill="none" stroke="#1a1a1a" stroke-width="2.8" stroke-linecap="round"/>
+          <ellipse cx="50" cy="62" rx="8" ry="4" fill="white" stroke="#1a1a1a" stroke-width="1.5"/>
+          <line x1="42" y1="62" x2="58" y2="62" stroke="#1a1a1a" stroke-width="1.2"/>
+          <circle cx="50" cy="91" r="6" fill="none" stroke="white" stroke-width="1.5"/>
+          <g transform="translate(50,91)">
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(60)"/>
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(120)"/>
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(240)"/>
+            <ellipse cx="0" cy="-3.2" rx="1.4" ry="2.8" fill="white" transform="rotate(300)"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card" style="display:flex; flex-direction:column; justify-content:center; gap:20px;">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:32px; height:32px; background:#1a1a1a; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+              <span style="color:white; font-size:12px; font-weight:700;">①</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:2px;">头顶羽毛</div>
+              <div style="font-size:12px; color:#999;">两根俏皮羽毛，左倾 -20° / 右倾 +10°，增添活泼感</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:32px; height:32px; background:#1a1a1a; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+              <span style="color:white; font-size:12px; font-weight:700;">②</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:2px;">圆形眼镜</div>
+              <div style="font-size:12px; color:#999;">白色镜片 + 黑色镜框，鼻梁连接，两侧镜腿，知识感标志</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:32px; height:32px; background:#1a1a1a; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+              <span style="color:white; font-size:12px; font-weight:700;">③</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:2px;">不对称眼神</div>
+              <div style="font-size:12px; color:#999;">左眼睁开（眼珠+高光），右眼眯眼（弧线），俏皮个性</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:32px; height:32px; background:#1a1a1a; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+              <span style="color:white; font-size:12px; font-weight:700;">④</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:2px;">扁平鸭嘴</div>
+              <div style="font-size:12px; color:#999;">白色椭圆嘴巴，中间分缝线，简洁可爱</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px; align-items:flex-start;">
+            <div style="width:32px; height:32px; background:#1a1a1a; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+              <span style="color:white; font-size:12px; font-weight:700;">⑤</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:2px;">OpenAI 标志</div>
+              <div style="font-size:12px; color:#999;">底部六瓣花形标志，致敬 AI 技术，彰显智能属性</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 06 · 使用规范                                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">使用规范 — Do & Don't</span>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card do">
+        <span class="usage-tag do">✓ Do</span>
+        <ul class="usage-list">
+          <li>在白色或浅灰背景上使用黑色版本</li>
+          <li>在深色背景上使用白色反色版本</li>
+          <li>保持图标与文字的比例关系</li>
+          <li>最小使用尺寸不低于 16px</li>
+          <li>圆角容器统一使用 22px 圆角</li>
+          <li>使用 SVG 格式保证无损缩放</li>
+          <li>图标与文字之间保留 1/4 图标宽度的间距</li>
+        </ul>
+      </div>
+
+      <div class="usage-card dont">
+        <span class="usage-tag dont">✗ Don't</span>
+        <ul class="usage-list">
+          <li>不要随意更改鸭子的颜色</li>
+          <li>不要拉伸或压缩图标比例</li>
+          <li>不要在复杂背景图案上直接使用</li>
+          <li>不要单独修改眼镜、羽毛等局部元素</li>
+          <li>不要在低于 16px 的尺寸下显示完整细节</li>
+          <li>不要添加阴影、描边等额外效果</li>
+          <li>不要将图标旋转或镜像使用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 07 · SVG 源码                                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <span class="section-title">SVG 源码 — 核心图标（白底版）</span>
+    </div>
+
+    <div class="code-block">
+      <pre><span class="code-comment">&lt;!-- HappyDuck AI · 核心图标 SVG · 白底版 --&gt;</span>
+<span class="code-comment">&lt;!-- viewBox="0 0 100 100" · 圆角矩形容器 22px --&gt;</span>
+<span class="code-tag">&lt;svg</span> <span class="code-attr">xmlns</span>=<span class="code-val">"http://www.w3.org/2000/svg"</span>
+     <span class="code-attr">viewBox</span>=<span class="code-val">"0 0 100 100"</span>
+     <span class="code-attr">width</span>=<span class="code-val">"100"</span> <span class="code-attr">height</span>=<span class="code-val">"100"</span><span class="code-tag">&gt;</span>
+
+  <span class="code-comment">&lt;!-- 容器：圆角矩形，灰色细边框 --&gt;
+  <span class="code-tag">&lt;rect</span> <span class="code-attr">x</span>=<span class="code-val">"1"</span> <span class="code-attr">y</span>=<span class="code-val">"1"</span> <span class="code-attr">width</span>=<span class="code-val">"98"</span> <span class="code-attr">height</span>=<span class="code-val">"98"</span>
+        <span class="code-attr">rx</span>=<span class="code-val">"22"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#CCCCCC"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"1.5"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 身体 --&gt;</span>
+  <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"50"</span> <span class="code-attr">cy</span>=<span class="code-val">"78"</span> <span class="code-attr">rx</span>=<span class="code-val">"28"</span> <span class="code-attr">ry</span>=<span class="code-val">"22"</span> <span class="code-attr">fill</span>=<span class="code-val">"#1a1a1a"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 头部 --&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"50"</span> <span class="code-attr">cy</span>=<span class="code-val">"48"</span> <span class="code-attr">r</span>=<span class="code-val">"24"</span> <span class="code-attr">fill</span>=<span class="code-val">"#1a1a1a"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 头顶羽毛 --&gt;</span>
+  <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"43"</span> <span class="code-attr">cy</span>=<span class="code-val">"27"</span> <span class="code-attr">rx</span>=<span class="code-val">"3.5"</span> <span class="code-attr">ry</span>=<span class="code-val">"9"</span> <span class="code-attr">fill</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(-20 43 27)"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"53"</span> <span class="code-attr">cy</span>=<span class="code-val">"25"</span> <span class="code-attr">rx</span>=<span class="code-val">"3"</span> <span class="code-attr">ry</span>=<span class="code-val">"8"</span> <span class="code-attr">fill</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(10 53 25)"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 眼镜框 --&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"40"</span> <span class="code-attr">cy</span>=<span class="code-val">"47"</span> <span class="code-attr">r</span>=<span class="code-val">"9"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2.5"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"60"</span> <span class="code-attr">cy</span>=<span class="code-val">"47"</span> <span class="code-attr">r</span>=<span class="code-val">"9"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2.5"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;line</span> <span class="code-attr">x1</span>=<span class="code-val">"49"</span> <span class="code-attr">y1</span>=<span class="code-val">"47"</span> <span class="code-attr">x2</span>=<span class="code-val">"51"</span> <span class="code-attr">y2</span>=<span class="code-val">"47"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2.5"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;line</span> <span class="code-attr">x1</span>=<span class="code-val">"31"</span> <span class="code-attr">y1</span>=<span class="code-val">"44"</span> <span class="code-attr">x2</span>=<span class="code-val">"27"</span> <span class="code-attr">y2</span>=<span class="code-val">"42"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2"</span> <span class="code-attr">stroke-linecap</span>=<span class="code-val">"round"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;line</span> <span class="code-attr">x1</span>=<span class="code-val">"69"</span> <span class="code-attr">y1</span>=<span class="code-val">"44"</span> <span class="code-attr">x2</span>=<span class="code-val">"73"</span> <span class="code-attr">y2</span>=<span class="code-val">"42"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2"</span> <span class="code-attr">stroke-linecap</span>=<span class="code-val">"round"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 左眼（睁开）--&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"40"</span> <span class="code-attr">cy</span>=<span class="code-val">"47"</span> <span class="code-attr">r</span>=<span class="code-val">"5.5"</span> <span class="code-attr">fill</span>=<span class="code-val">"#1a1a1a"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"38"</span> <span class="code-attr">cy</span>=<span class="code-val">"45"</span> <span class="code-attr">r</span>=<span class="code-val">"2"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 右眼（眯眼）--&gt;</span>
+  <span class="code-tag">&lt;path</span> <span class="code-attr">d</span>=<span class="code-val">"M53 47 Q60 42 67 47"</span> <span class="code-attr">fill</span>=<span class="code-val">"none"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"2.8"</span> <span class="code-attr">stroke-linecap</span>=<span class="code-val">"round"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- 嘴巴 --&gt;</span>
+  <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"50"</span> <span class="code-attr">cy</span>=<span class="code-val">"62"</span> <span class="code-attr">rx</span>=<span class="code-val">"8"</span> <span class="code-attr">ry</span>=<span class="code-val">"4"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"1.5"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;line</span> <span class="code-attr">x1</span>=<span class="code-val">"42"</span> <span class="code-attr">y1</span>=<span class="code-val">"62"</span> <span class="code-attr">x2</span>=<span class="code-val">"58"</span> <span class="code-attr">y2</span>=<span class="code-val">"62"</span> <span class="code-attr">stroke</span>=<span class="code-val">"#1a1a1a"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"1.2"</span><span class="code-tag">/&gt;</span>
+
+  <span class="code-comment">&lt;!-- OpenAI 风格标志（六瓣花形） --&gt;</span>
+  <span class="code-tag">&lt;circle</span> <span class="code-attr">cx</span>=<span class="code-val">"50"</span> <span class="code-attr">cy</span>=<span class="code-val">"91"</span> <span class="code-attr">r</span>=<span class="code-val">"6"</span> <span class="code-attr">fill</span>=<span class="code-val">"none"</span> <span class="code-attr">stroke</span>=<span class="code-val">"white"</span> <span class="code-attr">stroke-width</span>=<span class="code-val">"1.5"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;g</span> <span class="code-attr">transform</span>=<span class="code-val">"translate(50,91)"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(0)"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(60)"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(120)"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(180)"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(240)"</span><span class="code-tag">/&gt;</span>
+    <span class="code-tag">&lt;ellipse</span> <span class="code-attr">cx</span>=<span class="code-val">"0"</span> <span class="code-attr">cy</span>=<span class="code-val">"-3.2"</span> <span class="code-attr">rx</span>=<span class="code-val">"1.4"</span> <span class="code-attr">ry</span>=<span class="code-val">"2.8"</span> <span class="code-attr">fill</span>=<span class="code-val">"white"</span> <span class="code-attr">transform</span>=<span class="code-val">"rotate(300)"</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;/g&gt;</span>
+
+<span class="code-tag">&lt;/svg&gt;</span></pre>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <div class="footer-brand">HappyDuck AI · 欢乐鸭</div>
+  <div>Brand Logo Guidelines v1.0 · 2025</div>
+  <div>AI 表格学习系统 · 品牌视觉规范</div>
+</div>
+
+</body>
+</html>
